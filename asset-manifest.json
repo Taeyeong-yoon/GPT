@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/GPT/static/css/main.d30e5812.css",
+    "main.css": "/GPT/static/css/main.fb6d47ad.css",
     "main.js": "/GPT/static/js/main.21f13232.js",
     "index.html": "/GPT/index.html",
-    "main.d30e5812.css.map": "/GPT/static/css/main.d30e5812.css.map",
+    "main.fb6d47ad.css.map": "/GPT/static/css/main.fb6d47ad.css.map",
     "main.21f13232.js.map": "/GPT/static/js/main.21f13232.js.map"
   },
   "entrypoints": [
-    "static/css/main.d30e5812.css",
+    "static/css/main.fb6d47ad.css",
     "static/js/main.21f13232.js"
   ]
 }
