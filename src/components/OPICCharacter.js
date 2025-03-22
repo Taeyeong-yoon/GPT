@@ -12,8 +12,7 @@ const OPICCharacter = () => {
           renderer: 'svg',
           loop: true,
           autoplay: true,
-          // 무료 Lottie 애니메이션 URL 사용
-          path: 'https://assets10.lottiefiles.com/packages/lf20_jcikwtux.json',
+          path: 'https://assets5.lottiefiles.com/packages/lf20_UJNc2t.json'
         });
 
         return () => {
@@ -27,10 +26,9 @@ const OPICCharacter = () => {
 
   return (
     <div className="character-container">
-      <div ref={container} className="lottie-character">
-        {/* 로딩 중일 때 보여줄 대체 콘텐츠 */}
-        <div className="fallback-content">
-          <h3>AI Assistant</h3>
+      <div ref={container} style={{ width: 250, height: 250 }}>
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+          <h3>OPIC Assistant</h3>
           <p>Loading animation...</p>
         </div>
       </div>
