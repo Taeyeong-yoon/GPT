@@ -1,0 +1,60 @@
+.container {
+  padding: 20px;
+}
+
+.btn {
+  padding: 10px 20px;
+  margin: 5px;
+  background-color: #007BFF;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+.submit-btn {
+  background-color: #28a745;
+}
+
+.submit-btn:hover {
+  background-color: #218838;
+}
+
+.record-btn {
+  background-color: #ff6347;
+}
+
+.stop-btn {
+  background-color: #6c757d;
+}
+
+.next-btn {
+  background-color: #17a2b8;
+}
+
+.icon {
+  margin-left: 10px;
+  cursor: pointer;
+  color: #007BFF;
+  transition: color 0.3s;
+}
+
+.icon:hover {
+  color: #0056b3;
+}
+
+.answer-icon {
+  color: #28a745;
+}
+
+.answer-icon:hover {
+  color: #218838;
+}
+
+.selected {
+  background-color: #0056b3;
+}
