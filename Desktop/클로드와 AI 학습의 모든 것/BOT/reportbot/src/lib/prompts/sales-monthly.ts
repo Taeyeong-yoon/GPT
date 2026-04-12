@@ -7,57 +7,57 @@ type PromptParams = {
   data: { headers: string[]; rows: string[][] };
 };
 
-const SYSTEM = `You are a senior Korean sales analyst. Return ONLY raw JSON — absolutely no markdown, no code fences, no explanation.
+const SYSTEM = `You are a senior Korean business analyst. Your job is to analyze ANY CSV data and produce a professional Korean monthly sales/business report.
 
-You MUST follow this EXACT output structure. Copy the field names exactly:
+IMPORTANT: The CSV columns will vary for every customer. Do NOT assume fixed column names. Read the actual headers and adapt your analysis to whatever data is provided. If the data looks like sales, analyze sales. If it looks like revenue, analyze revenue. Use the column names exactly as they appear in the CSV.
+
+Return ONLY raw JSON — absolutely no markdown, no code fences, no explanation text before or after.
+
+OUTPUT STRUCTURE (copy field names exactly, adapt content to match the actual data):
 
 {
-  "title": "2025년 4월 월간 매출 리포트",
-  "companyName": "회사명",
-  "period": "2025년 4월",
-  "generatedAt": "2025-04-30T09:00:00Z",
-  "executiveSummary": "3~5문장 한국어 요약.",
+  "title": "<적절한 리포트 제목>",
+  "companyName": "<회사명>",
+  "period": "<기간>",
+  "generatedAt": "<ISO datetime>",
+  "executiveSummary": "<전체 데이터를 3~5문장으로 요약. 핵심 지표와 특이사항 포함>",
   "sections": [
     {
       "type": "highlights",
-      "title": "핵심 지표",
+      "title": "<핵심 지표 섹션 제목>",
       "items": [
-        { "label": "총 매출", "value": "5,800만원", "change": { "direction": "up", "value": "+13.7%" } },
-        { "label": "달성률", "value": "116%", "change": { "direction": "up", "value": "+6%p" } }
+        { "label": "<지표명>", "value": "<값>", "change": { "direction": "up", "value": "<변화량>" } }
       ]
     },
     {
       "type": "table",
-      "title": "담당자별 실적",
-      "columns": ["담당자", "매출", "건수", "달성률"],
-      "rows": [
-        ["김민준", "2억 5천만원", "24건", "112%"],
-        ["박지훈", "1억 8천만원", "18건", "108%"]
-      ],
-      "summary": "김민준 담당자가 전체 매출의 35%를 차지했습니다."
+      "title": "<표 섹션 제목>",
+      "columns": ["<실제 CSV에서 가져온 컬럼명들>"],
+      "rows": [["<값>", "<값>"]],
+      "summary": "<표 요약 1문장>"
     },
     {
       "type": "insight",
-      "title": "주요 인사이트",
-      "content": "상세 분석 내용을 한국어로 작성합니다."
+      "title": "<인사이트 제목>",
+      "content": "<상세 분석 내용>"
     }
   ],
   "actionItems": [
-    { "title": "액션 제목", "description": "구체적 실행 방안", "priority": "high" },
-    { "title": "액션 제목2", "description": "구체적 실행 방안2", "priority": "medium" }
+    { "title": "<액션 제목>", "description": "<구체적 실행 방안>", "priority": "high" }
   ]
 }
 
-CRITICAL RULES:
-- "type" field in sections is REQUIRED: must be exactly "highlights", "table", or "insight"
-- "highlights" sections MUST have "items" array (NOT "content")
-- "table" sections MUST have "columns" (string[]) and "rows" (string[][])
-- "insight" sections MUST have "content" (string)
-- "actionItems" MUST be array of objects with "title", "description", "priority" — NOT plain strings
-- "priority" must be exactly "high", "medium", or "low"
-- Include at least: 1 highlights + 1 table + 2 insight sections + 3 actionItems
-- All text values must be in Korean
-- ⚠️ NUMBER ACCURACY: Always use the exact numbers from "PRE-CALCULATED STATISTICS". Never recalculate totals yourself — your arithmetic is unreliable. Use the provided sum/avg/min/max values verbatim.`;
+CRITICAL RULES — MUST FOLLOW:
+1. "type" in sections: ONLY "highlights", "table", or "insight" — no other values
+2. "highlights" → MUST have "items" array. Each item: { label, value, change(optional) }
+3. "table" → MUST have "columns" (string[]) and "rows" (string[][])
+4. "insight" → MUST have "content" (string)
+5. "actionItems" → MUST be objects { title, description, priority } — NOT plain strings
+6. "priority" → ONLY "high", "medium", or "low"
+7. MINIMUM: 1 highlights + 1 table + 2 insight sections + 3 actionItems
+8. All text in Korean
+9. ⚠️ NUMBERS: Use the exact pre-calculated statistics provided. Never recalculate — your arithmetic may be wrong.
+10. For table rows: use the top items from the data (e.g., top 10 by key metric), not all rows`;
 
 export const salesMonthlyPrompt = {
   system: SYSTEM,
@@ -65,13 +65,14 @@ export const salesMonthlyPrompt = {
     const payload = buildClaudeDataPayload(data);
     return JSON.stringify(
       {
-        task: "Generate a Korean monthly sales analysis report. Return raw JSON only — no markdown.",
+        task: "Generate a Korean monthly business/sales analysis report based on the CSV data below. Adapt your analysis to whatever columns exist in the data. Return raw JSON only.",
         companyName,
         period,
-        additionalNotes: additionalNotes ?? "",
-        "⚠️ IMPORTANT — PRE-CALCULATED STATISTICS (USE THESE EXACT NUMBERS, DO NOT RECALCULATE)": payload.fullStatistics,
+        additionalNotes: additionalNotes || "(없음)",
+        csvHeaders: data.headers,
+        "PRE_CALCULATED_STATISTICS — USE THESE EXACT NUMBERS": payload.fullStatistics,
         analysisNote: payload.analysisNote,
-        "rawData_CSV_for_pattern_analysis": payload.dataCsv,
+        csvData: payload.dataCsv,
       },
       null,
       2,
