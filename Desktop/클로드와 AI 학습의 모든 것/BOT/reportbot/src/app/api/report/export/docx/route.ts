@@ -55,6 +55,27 @@ function colorToDocxHex(color: string) {
   return color.replace("#", "").toUpperCase();
 }
 
+async function buildDocxResponse(reportId: string) {
+  const saved = await getReport(reportId);
+  const report = saved?.reportJson ?? null;
+  if (!report) return errorResponse("Report not found", 404);
+
+  // reuse POST logic by building via internal POST call
+  const fakeRequest = new Request("http://localhost/api/report/export/docx", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ reportId }),
+  });
+  return POST(fakeRequest);
+}
+
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const reportId = searchParams.get("id");
+  if (!reportId) return errorResponse("id query parameter is required", 400);
+  return buildDocxResponse(reportId);
+}
+
 export async function POST(request: Request) {
   try {
     const json = await request.json();

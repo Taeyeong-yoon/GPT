@@ -117,30 +117,11 @@ function SectionBlock({ section }: { section: Section }) {
   return null;
 }
 
-async function downloadFile(url: string, body: object, filename: string) {
-  const res = await fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-  });
-  if (!res.ok) {
-    alert("다운로드 실패: " + (await res.text().catch(() => res.statusText)));
-    return;
-  }
-  const blob = await res.blob();
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = filename;
-  link.click();
-  URL.revokeObjectURL(link.href);
-}
-
 export default function ReportDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const [report, setReport] = useState<Report | null>(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
-  const [downloading, setDownloading] = useState<"pdf" | "docx" | null>(null);
 
   useEffect(() => {
     fetch(`/api/reports/${id}`)
@@ -193,36 +174,22 @@ export default function ReportDetailPage({ params }: { params: Promise<{ id: str
           </p>
         </div>
         <div className="flex gap-2 flex-shrink-0">
-          <button
-            className="rb-btn rb-btn-secondary rb-btn-sm disabled:opacity-50"
-            disabled={downloading !== null}
-            onClick={async () => {
-              setDownloading("pdf");
-              await downloadFile(
-                "/api/report/export/pdf",
-                { reportId: report.id },
-                `${reportJson.companyName}_${reportJson.period}_리포트.pdf`,
-              );
-              setDownloading(null);
-            }}
+          <a
+            href={`/api/report/export/pdf?id=${report.id}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rb-btn rb-btn-secondary rb-btn-sm"
           >
-            {downloading === "pdf" ? "생성 중…" : "📄 PDF"}
-          </button>
-          <button
-            className="rb-btn rb-btn-secondary rb-btn-sm disabled:opacity-50"
-            disabled={downloading !== null}
-            onClick={async () => {
-              setDownloading("docx");
-              await downloadFile(
-                "/api/report/export/docx",
-                { reportId: report.id },
-                `${reportJson.companyName}_${reportJson.period}_리포트.docx`,
-              );
-              setDownloading(null);
-            }}
+            📄 PDF
+          </a>
+          <a
+            href={`/api/report/export/docx?id=${report.id}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rb-btn rb-btn-secondary rb-btn-sm"
           >
-            {downloading === "docx" ? "생성 중…" : "📝 DOCX"}
-          </button>
+            📝 DOCX
+          </a>
         </div>
       </div>
 
