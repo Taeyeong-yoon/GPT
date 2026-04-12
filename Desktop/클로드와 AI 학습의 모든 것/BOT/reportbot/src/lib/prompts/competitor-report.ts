@@ -1,3 +1,5 @@
+import { buildClaudeDataPayload } from "../data-summarizer";
+
 type PromptParams = {
   companyName: string;
   period: string;
@@ -39,27 +41,18 @@ Output schema (strictly follow this):
 }
 Include at least 3 sections and 3 actionItems.`;
 
-const MAX_ROWS = 50;
-
 export const competitorReportPrompt = {
   system: SYSTEM,
-  buildUserPrompt: ({ companyName, period, additionalNotes, data }: PromptParams) => {
-    const trimmedData = {
-      headers: data.headers,
-      rows: data.rows.slice(0, MAX_ROWS),
-      totalRows: data.rows.length,
-      note: data.rows.length > MAX_ROWS ? `(Showing first ${MAX_ROWS} of ${data.rows.length} rows)` : undefined,
-    };
-    return JSON.stringify(
+  buildUserPrompt: ({ companyName, period, additionalNotes, data }: PromptParams) =>
+    JSON.stringify(
       {
         task: "Generate a Korean competitor intelligence report. Return JSON only.",
         companyName,
         period,
         additionalNotes: additionalNotes ?? "",
-        data: trimmedData,
+        data: buildClaudeDataPayload(data),
       },
       null,
       2,
-    );
-  },
+    ),
 };
