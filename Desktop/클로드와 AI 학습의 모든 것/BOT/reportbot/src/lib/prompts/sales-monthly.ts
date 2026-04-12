@@ -56,7 +56,8 @@ CRITICAL RULES:
 - "actionItems" MUST be array of objects with "title", "description", "priority" — NOT plain strings
 - "priority" must be exactly "high", "medium", or "low"
 - Include at least: 1 highlights + 1 table + 2 insight sections + 3 actionItems
-- All text values must be in Korean`;
+- All text values must be in Korean
+- ⚠️ NUMBER ACCURACY: Always use the exact numbers from "PRE-CALCULATED STATISTICS". Never recalculate totals yourself — your arithmetic is unreliable. Use the provided sum/avg/min/max values verbatim.`;
 
 export const salesMonthlyPrompt = {
   system: SYSTEM,
@@ -68,9 +69,9 @@ export const salesMonthlyPrompt = {
         companyName,
         period,
         additionalNotes: additionalNotes ?? "",
+        "⚠️ IMPORTANT — PRE-CALCULATED STATISTICS (USE THESE EXACT NUMBERS, DO NOT RECALCULATE)": payload.fullStatistics,
         analysisNote: payload.analysisNote,
-        fullStatistics: payload.fullStatistics,
-        dataCsv: payload.dataCsv,
+        "rawData_CSV_for_pattern_analysis": payload.dataCsv,
       },
       null,
       2,
