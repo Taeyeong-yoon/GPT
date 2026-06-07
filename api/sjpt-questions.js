@@ -82,6 +82,17 @@ function pick(arr, n) {
   return [...arr].sort(() => Math.random() - 0.5).slice(0, n);
 }
 
+// 문항 텍스트 기준 중복 제거 (시트에 동일 질문이 난이도별/이미지별로 여러 행 존재)
+function dedupeByText(arr) {
+  const seen = new Set();
+  return arr.filter(q => {
+    const key = q.text.trim();
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
 // 부분별 문항수 (실제 SJPT 구성 기준)
 const PART_QUESTION_COUNTS = { 1: 4, 2: 4, 3: 5, 4: 5, 5: 4, 6: 3, 7: 1 };
 
@@ -111,12 +122,16 @@ export default async function handler(req, res) {
     if (img2.length) byPart[2] = img2;
     if (img3.length) byPart[3] = img3;
 
+    // 시트에 동일 질문 텍스트가 여러 행(난이도별/이미지별)으로 중복 존재 →
+    // 텍스트 기준으로 중복 제거한 풀에서만 추출해 같은 문제가 두 번 나오지 않도록 함
+    for (const p of Object.keys(byPart)) byPart[p] = dedupeByText(byPart[p]);
+
     const partNums = Object.keys(byPart).map(Number).sort((a,b)=>a-b);
 
     const parts = [
       // 1부: 고정 4문항 (항상 동일)
       { part: 1, questions: PART1_FIXED, fixed: true },
-      // 2~7부: 시트에서 부분별 지정 문항수만큼 랜덤 추출
+      // 2~7부: 시트에서 부분별 지정 문항수만큼 랜덤 추출 (중복 텍스트 제거된 풀에서)
       ...partNums.map(p => ({
         part: p,
         questions: pick(byPart[p], PART_QUESTION_COUNTS[p] || 2),
