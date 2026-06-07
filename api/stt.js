@@ -1,17 +1,15 @@
-// POST /api/stt — OpenAI Whisper STT (일본어)
-import OpenAI from 'openai';
-
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-
+// POST /api/stt — OpenAI Whisper STT (직접 fetch 방식)
 export default async function handler(req, res) {
   if (req.method !== 'POST')
     return res.status(405).json({ ok: false, error: { message: 'Method not allowed' } });
 
   const { audio, mimeType = 'audio/webm' } = req.body || {};
   if (!audio)
-    return res.status(400).json({ ok: false, error: { message: 'audio(base64) 필요' } });
-  if (audio.length > 13_000_000)
-    return res.status(413).json({ ok: false, error: { message: '파일이 너무 큽니다.' } });
+    return res.status(400).json({ ok: false, error: { message: 'audio 필요' } });
+
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey)
+    return res.status(500).json({ ok: false, error: { message: 'OpenAI 키 미설정' } });
 
   try {
     const buffer = Buffer.from(audio, 'base64');
@@ -19,16 +17,24 @@ export default async function handler(req, res) {
                  : mimeType.includes('ogg') ? 'ogg'
                  : 'webm';
 
-    // Node.js 18+ 내장 File 클래스 사용
-    const file = new File([buffer], `audio.${ext}`, { type: mimeType });
+    const formData = new FormData();
+    formData.append('file', new Blob([buffer], { type: mimeType }), `audio.${ext}`);
+    formData.append('model', 'whisper-1');
+    formData.append('language', 'ja');
 
-    const result = await openai.audio.transcriptions.create({
-      file,
-      model:    'whisper-1',
-      language: 'ja',
+    const response = await fetch('https://api.openai.com/v1/audio/transcriptions', {
+      method:  'POST',
+      headers: { 'Authorization': `Bearer ${apiKey}` },
+      body:    formData,
     });
 
-    return res.status(200).json({ ok: true, transcript: result.text || '' });
+    if (!response.ok) {
+      const err = await response.text();
+      return res.status(502).json({ ok: false, error: { message: `Whisper 오류: ${err}` } });
+    }
+
+    const data = await response.json();
+    return res.status(200).json({ ok: true, transcript: data.text || '' });
   } catch (e) {
     return res.status(502).json({ ok: false, error: { message: e.message } });
   }
