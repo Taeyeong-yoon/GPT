@@ -6,7 +6,7 @@ import { db } from '../../services/firebase';
 import { useJlptQuestions } from './hooks/useJlptQuestions';
 import { scoreJlpt } from '../../utils/jlptScoring';
 import { storage } from '../../utils/storage';
-import { speakJapanese } from '../../services/tts';
+import { speakListening } from '../../services/tts';
 
 const SECTION_LABELS = { vocabulary:'어휘', grammar:'문법', reading:'독해', listening:'청해' };
 const TOTAL_TIME = 60 * 60;
@@ -65,7 +65,7 @@ export default function JlptExam() {
     setTtsPlaying(true);
     setTtsError('');
     try {
-      await speakJapanese(text);
+      await speakListening(text, item.subType);
       setPlayCount(c => c + 1);
     } catch(e) {
       setTtsError('재생 실패 — 다시 눌러주세요');
