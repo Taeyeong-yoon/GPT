@@ -1,14 +1,4 @@
-// Google TTS — /api/tts 경유 재생
-// AudioContext는 사용자 제스처(클릭) 핸들러 안에서만 호출해야 iOS Safari에서 동작함
-
-let ctx = null;
-
-function getCtx() {
-  if (!ctx || ctx.state === 'closed') {
-    ctx = new (window.AudioContext || window.webkitAudioContext)();
-  }
-  return ctx;
-}
+// Google TTS — /api/tts 경유, 버튼 클릭(user gesture) 시에만 호출
 
 export async function speakJapanese(text, voice = 'ja-JP-Neural2-B') {
   const res = await fetch('/api/tts', {
@@ -17,26 +7,25 @@ export async function speakJapanese(text, voice = 'ja-JP-Neural2-B') {
     body: JSON.stringify({ text, voice }),
   });
 
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({}));
-    throw new Error(err?.error?.message || 'TTS 요청 실패');
-  }
-
+  if (!res.ok) throw new Error('TTS API 실패');
   const { audioContent } = await res.json();
+  if (!audioContent) throw new Error('오디오 없음');
+
+  // 매번 새 AudioContext 생성 (user gesture 보장)
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  const ctx = new AudioCtx();
+
   const binary = atob(audioContent);
   const bytes  = new Uint8Array(binary.length);
   for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
 
-  const audioCtx = getCtx();
-  // iOS Safari: resume은 제스처 핸들러 안에서 반드시 호출
-  if (audioCtx.state === 'suspended') await audioCtx.resume();
-
-  const buffer = await audioCtx.decodeAudioData(bytes.buffer);
-  return new Promise((resolve) => {
-    const source = audioCtx.createBufferSource();
-    source.buffer = buffer;
-    source.connect(audioCtx.destination);
-    source.onended = resolve;
-    source.start(0);
+  const buffer = await ctx.decodeAudioData(bytes.buffer);
+  return new Promise((resolve, reject) => {
+    const src = ctx.createBufferSource();
+    src.buffer = buffer;
+    src.connect(ctx.destination);
+    src.onended = () => { ctx.close(); resolve(); };
+    src.onerror  = reject;
+    src.start(0);
   });
 }

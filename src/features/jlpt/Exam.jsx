@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { useAuth } from '../../context/AuthProvider';
@@ -25,6 +25,7 @@ export default function JlptExam() {
   const [submitting, setSubmitting]= useState(false);
   const [ttsPlaying, setTtsPlaying]= useState(false);
   const [playCount,  setPlayCount] = useState(0);
+  const [ttsError,   setTtsError]  = useState('');
   const PROGRESS_KEY = `nm_jlpt_${level}`;
 
   useEffect(() => {
@@ -39,7 +40,10 @@ export default function JlptExam() {
 
   useEffect(() => {
     if (loading || examSet.length === 0) return;
-    const id = setInterval(() => setTimeLeft(t => { if (t <= 1) { clearInterval(id); handleSubmit(); return 0; } return t-1; }), 1000);
+    const id = setInterval(() => setTimeLeft(t => {
+      if (t <= 1) { clearInterval(id); handleSubmit(); return 0; }
+      return t - 1;
+    }), 1000);
     return () => clearInterval(id);
   }, [loading, examSet]);
 
@@ -49,27 +53,26 @@ export default function JlptExam() {
     return () => window.removeEventListener('beforeunload', h);
   }, []);
 
-  // 청해 문항 전환 시 자동 재생
   useEffect(() => {
-    const item = examSet[current];
-    if (item?.section === 'listening' && item.ttsText) {
+    if (examSet[current]?.section === 'listening') {
       setPlayCount(0);
-      playTts(item.ttsText);
+      setTtsError('');
     }
   }, [current, examSet]);
 
-  const playTts = async (text) => {
-    if (ttsPlaying) return;
+  const handlePlay = useCallback(async (text) => {
+    if (ttsPlaying || !text) return;
     setTtsPlaying(true);
+    setTtsError('');
     try {
       await speakJapanese(text);
       setPlayCount(c => c + 1);
     } catch(e) {
-      console.warn('TTS 오류:', e.message);
+      setTtsError('재생 실패 — 다시 눌러주세요');
     } finally {
       setTtsPlaying(false);
     }
-  };
+  }, [ttsPlaying]);
 
   const handleSelect = (id, idx) => {
     if (revealed) return;
@@ -92,7 +95,8 @@ export default function JlptExam() {
     setSubmitting(true);
     const result = scoreJlpt({ examSet, answers, level });
     try {
-      const ref = await addDoc(collection(db,'users',user.uid,'results'), { type:'jlpt', level, ...result, createdAt: serverTimestamp() });
+      const ref = await addDoc(collection(db,'users',user.uid,'results'),
+        { type:'jlpt', level, ...result, createdAt: serverTimestamp() });
       storage.remove(PROGRESS_KEY);
       navigate(`/jlpt/result/${ref.id}`, { state:{result,level} });
     } catch {
@@ -101,14 +105,25 @@ export default function JlptExam() {
     }
   }, [examSet, answers, level, user, submitting]);
 
-  if (loading) return <div className="screen" style={{alignItems:'center',justifyContent:'center'}}><p style={{fontSize:'3rem'}}>🐱</p><p>문제 준비 중...</p></div>;
-  if (error)   return <div className="screen" style={{alignItems:'center'}}><p>{error}</p><button className="btn btn--primary" onClick={()=>navigate('/jlpt')}>돌아가기</button></div>;
+  if (loading) return (
+    <div className="nm-app" style={{alignItems:'center',justifyContent:'center',gap:16}}>
+      <p style={{fontSize:'3rem'}}>🐱</p><p>문제 준비 중...</p>
+    </div>
+  );
+  if (error) return (
+    <div className="nm-app" style={{alignItems:'center',justifyContent:'center',gap:16}}>
+      <p style={{color:'var(--danger)'}}>{error}</p>
+      <button className="btn btn--primary" onClick={()=>navigate('/jlpt')}>돌아가기</button>
+    </div>
+  );
 
   const item = examSet[current];
-  const sec  = item?.section || 'vocabulary';
-  const pct  = Math.round(((current+1)/examSet.length)*100);
-  const mm   = String(Math.floor(timeLeft/60)).padStart(2,'0');
-  const ss   = String(timeLeft%60).padStart(2,'0');
+  if (!item) return null;
+
+  const sec = item.section || 'vocabulary';
+  const pct = Math.round(((current+1)/examSet.length)*100);
+  const mm  = String(Math.floor(timeLeft/60)).padStart(2,'0');
+  const ss  = String(timeLeft%60).padStart(2,'0');
 
   return (
     <div>
@@ -126,23 +141,20 @@ export default function JlptExam() {
             <span className={`chip chip--${level.toLowerCase()}`}>{level}</span>
             <span className="question-card__num">{current+1} / {examSet.length}</span>
           </div>
-          {sec==='listening' && item.ttsText && (
-            <div className={`audio ${ttsPlaying ? 'is-playing' : ''}`} style={{marginBottom:12}}>
-              <button
-                className="audio__btn"
-                onClick={() => playTts(item.ttsText)}
-                disabled={ttsPlaying}
-                title="다시 듣기"
-              >
+
+          {sec === 'listening' && item.ttsText && (
+            <div className={`audio ${ttsPlaying?'is-playing':''}`} style={{marginBottom:14}}>
+              <button className="audio__btn" onClick={() => handlePlay(item.ttsText)} disabled={ttsPlaying}>
                 {ttsPlaying ? '⏸' : '▶'}
               </button>
-              <div className="audio__wave">
-                <span/><span/><span/><span/><span/>
-              </div>
-              <span className="audio__count">{playCount}회 재생</span>
+              <div className="audio__wave"><span/><span/><span/><span/><span/></div>
+              <span className="audio__count">{playCount===0 ? '▶ 눌러서 듣기' : `${playCount}회 재생`}</span>
             </div>
           )}
+          {ttsError && <p style={{color:'var(--danger)',fontSize:'var(--fs-sm)',marginBottom:8}}>{ttsError}</p>}
+
           <p className="question-card__text">{item.question}</p>
+
           <div className="options">
             {item.choices.map((choice, idx) => {
               const sel = answers[item.id]===idx;
@@ -151,16 +163,21 @@ export default function JlptExam() {
               return (
                 <button key={idx}
                   className={`option ${sel?'is-selected':''} ${cor?'is-correct':''} ${wrg?'is-wrong':''}`}
-                  onClick={()=>handleSelect(item.id, idx)}>
+                  onClick={() => handleSelect(item.id, idx)}>
                   <span style={{fontWeight:700,marginRight:8}}>{String.fromCharCode(65+idx)}.</span>
                   {choice}
                 </button>
               );
             })}
           </div>
+
           {revealed && (
-            <div style={{marginTop:14,padding:'10px 14px',background:answers[item.id]===item.correctIndex?'var(--sage-l)':'var(--yellow-l)',borderRadius:'var(--r-md)',fontSize:'var(--fs-sm)',color:'var(--on-surface)'}}>
-              {answers[item.id]===item.correctIndex?'✅':'💡'} {item.explanation}
+            <div style={{
+              marginTop:12, padding:'10px 14px',
+              background: answers[item.id]===item.correctIndex?'var(--sage-l)':'var(--yellow-l)',
+              borderRadius:'var(--r-md)', fontSize:'var(--fs-sm)'
+            }}>
+              {answers[item.id]===item.correctIndex ? '✅' : '💡'} {item.explanation}
             </div>
           )}
         </div>

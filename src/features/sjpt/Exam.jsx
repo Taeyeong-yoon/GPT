@@ -1,200 +1,157 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { useAuth } from '../../context/AuthProvider';
-import { db } from '../../services/firebase';
-import { speakJapanese } from '../../services/tts';
-import { useSjptFlow } from './hooks/useSjptFlow';
-import { useRecorder } from './hooks/useRecorder';
-import styles from './Exam.module.css';
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { useAuth } from "../../context/AuthProvider";
+import { db } from "../../services/firebase";
+import { speakJapanese } from "../../services/tts";
+import { useSjptFlow } from "./hooks/useSjptFlow";
+import { useRecorder } from "./hooks/useRecorder";
 
-const ANSWER_TIME = 60;  // 초
-const PREP_TIME   = 15;  // Part2 준비 시간
+const PREP_TIME = 15;
+const ANSWER_TIME = 60;
 
 export default function SjptExam() {
-  const navigate   = useNavigate();
-  const { user }   = useAuth();
-  const flow       = useSjptFlow();
-  const recorder   = useRecorder();
-
-  const [phase, setPhase] = useState('question'); // question | prep | recording | done
+  const navigate = useNavigate();
+  const { user } = useAuth();
+  const flow = useSjptFlow();
+  const recorder = useRecorder();
+  const [phase, setPhase] = useState("question");
   const [countdown, setCountdown] = useState(0);
   const [ttsLoading, setTtsLoading] = useState(false);
   const timerRef = useRef(null);
+  const q = flow.currentQuestion;
+  const part = flow.currentPart?.part || 1;
 
-  const isImagePart = flow.currentPart?.part === 2;
+  useEffect(() => { setPhase("question"); setTtsLoading(false); }, [q?.id]);
+  useEffect(() => () => clearInterval(timerRef.current), []);
 
-  // 문항 로드 시 TTS 자동 재생
-  useEffect(() => {
-    if (!flow.currentQuestion || flow.loading) return;
-    setPhase('question');
-    playTts(flow.currentQuestion.text);
-  }, [flow.currentQuestion?.id]);
-
-  const playTts = async (text) => {
+  const handleSpeak = useCallback(async () => {
+    if (!q?.text || ttsLoading) return;
     setTtsLoading(true);
-    try { await speakJapanese(text); } catch {}
+    try { await speakJapanese(q.text); } catch {}
     setTtsLoading(false);
-  };
+  }, [q, ttsLoading]);
 
-  // 타이머
   const startTimer = useCallback((sec, onEnd) => {
     clearInterval(timerRef.current);
     setCountdown(sec);
     timerRef.current = setInterval(() => {
-      setCountdown(c => {
-        if (c <= 1) { clearInterval(timerRef.current); onEnd(); return 0; }
-        return c - 1;
-      });
+      setCountdown(c => { if (c <= 1) { clearInterval(timerRef.current); onEnd(); return 0; } return c - 1; });
     }, 1000);
   }, []);
 
-  useEffect(() => () => clearInterval(timerRef.current), []);
-
-  const handleStartAnswer = useCallback(() => {
-    if (isImagePart) {
-      setPhase('prep');
-      startTimer(PREP_TIME, () => {
-        setPhase('recording');
-        recorder.startRecording();
-        startTimer(ANSWER_TIME, handleFinishAnswer);
-      });
-    } else {
-      setPhase('recording');
-      recorder.startRecording();
-      startTimer(ANSWER_TIME, handleFinishAnswer);
-    }
-  }, [isImagePart, recorder, startTimer]);
-
-  const handleFinishAnswer = useCallback(() => {
+  const handleFinish = useCallback(() => {
     clearInterval(timerRef.current);
     recorder.stopRecording();
-    setPhase('done');
+    setPhase("done");
   }, [recorder]);
+
+  const handleStartAnswer = useCallback(() => {
+    if (part === 2) {
+      setPhase("prep");
+      startTimer(PREP_TIME, () => {
+        setPhase("recording");
+        recorder.startRecording();
+        startTimer(ANSWER_TIME, handleFinish);
+      });
+    } else {
+      setPhase("recording");
+      recorder.startRecording();
+      startTimer(ANSWER_TIME, handleFinish);
+    }
+  }, [part, recorder, startTimer, handleFinish]);
 
   const handleNext = useCallback(() => {
     flow.submitAnswer(recorder.transcript);
   }, [flow, recorder.transcript]);
 
-  // 전 문항 완료 시 결과 저장 후 이동
   useEffect(() => {
     if (!flow.isDone || flow.answers.length === 0) return;
-
-    const save = async () => {
+    (async () => {
       try {
-        const docRef = await addDoc(
-          collection(db, 'users', user.uid, 'results'),
-          {
-            type: 'sjpt', level: 'N3',
-            answers: flow.answers,
-            createdAt: serverTimestamp(),
-          }
-        );
-        navigate(`/sjpt/result/${docRef.id}`, {
-          state: { answers: flow.answers }
+        const ref = await addDoc(collection(db, "users", user.uid, "results"), {
+          type: "sjpt", level: "N3", answers: flow.answers, createdAt: serverTimestamp()
         });
+        navigate("/sjpt/result/" + ref.id, { state: { answers: flow.answers } });
       } catch {
-        navigate('/sjpt/result/local', { state: { answers: flow.answers } });
+        navigate("/sjpt/result/local", { state: { answers: flow.answers } });
       }
-    };
-    save();
+    })();
   }, [flow.isDone]);
 
   if (flow.loading) return (
-    <div className="splash-screen"><div className="splash-cat">🐱</div><p>문제 불러오는 중...</p></div>
-  );
-  if (flow.error) return (
-    <div className="splash-screen">
-      <p>문제를 불러오지 못했습니다: {flow.error}</p>
-      <button className="btn btn--primary" onClick={() => navigate('/sjpt')}>돌아가기</button>
+    <div className="nm-app" style={{alignItems:"center",justifyContent:"center",gap:16}}>
+      <p style={{fontSize:"3rem"}}>🐱</p><p>문제 불러오는 중...</p>
     </div>
   );
-
-  const q = flow.currentQuestion;
+  if (flow.error) return (
+    <div className="nm-app" style={{alignItems:"center",justifyContent:"center",gap:16,padding:24}}>
+      <p style={{color:"var(--danger)"}}>{flow.error}</p>
+      <button className="btn btn--primary" onClick={() => navigate("/sjpt")}>돌아가기</button>
+    </div>
+  );
   if (!q) return null;
 
-  const progressText = `Part ${flow.currentPart?.part} · ${flow.totalAnswered + 1}/${flow.totalQuestions}`;
+  const pct = Math.round((flow.totalAnswered / flow.totalQuestions) * 100);
 
   return (
-    <div className={styles.screen}>
-      {/* 진행률 */}
-      <header className="exam-header">
-        <span className={styles.progress}>{progressText}</span>
-        <div className="progress-bar">
-          <div className="progress-bar__fill"
-            style={{ width: `${(flow.totalAnswered / flow.totalQuestions) * 100}%` }} />
+    <div>
+      <div className="exam-header">
+        <span className="exam-header__section">Part {part} · {flow.totalAnswered + 1}/{flow.totalQuestions}</span>
+        <div className="exam-header__progress">
+          <div className="progress"><div className="progress__fill" style={{width: pct + "%"}}/></div>
         </div>
-      </header>
-
-      <div className={styles.body}>
-        {/* 질문 카드 */}
-        <div className={`card ${styles.questionCard}`}>
-          {/* Part 2 이미지 */}
-          {isImagePart && q.imageUrl && (
-            <img src={q.imageUrl} alt="문제 이미지" className={styles.image} />
-          )}
-
-          <p className={styles.question}>{q.text}</p>
-
-          {/* TTS 다시 듣기 */}
-          <button
-            className={`btn btn--secondary ${styles.ttsBtn}`}
-            onClick={() => playTts(q.text)}
-            disabled={ttsLoading || recorder.isRecording}
-          >
-            {ttsLoading ? '재생 중...' : '🔊 다시 듣기'}
+      </div>
+      <div className="screen">
+        <div className="question-card">
+          {part === 2 && q.imageUrl && <img src={q.imageUrl} alt="문제 이미지" className="sjpt-image"/>}
+          <p className="question-card__text" style={{marginBottom:12}}>{q.text}</p>
+          <button className="btn btn--secondary btn--block" onClick={handleSpeak} disabled={ttsLoading}>
+            {ttsLoading ? "재생 중..." : "🔊 문제 듣기"}
           </button>
         </div>
 
-        {/* 준비 카운트다운 (Part2) */}
-        {phase === 'prep' && (
-          <div className={`card ${styles.countdownCard}`}>
-            <p className={styles.countdownLabel}>준비 시간</p>
-            <p className={styles.countdownNum}>{countdown}</p>
-          </div>
-        )}
-
-        {/* 녹음 인터페이스 */}
-        {phase === 'recording' && (
-          <div className={`card ${styles.recCard}`}>
-            <div className={styles.recMeter}>
-              {[...Array(5)].map((_, i) => (
-                <div key={i} className={styles.recBar}
-                  style={{ height: `${12 + Math.random() * 24}px` }} />
-              ))}
+        {phase === "prep" && (
+          <div className="card" style={{textAlign:"center",padding:"var(--sp-6)"}}>
+            <p style={{marginBottom:8,color:"var(--on-surface-2)"}}>준비 시간</p>
+            <div className="countdown">
+              <div className="countdown__ring"/>
+              <span className="countdown__num">{countdown}</span>
             </div>
-            <p className={styles.recTimer}>{countdown}초 남음</p>
-            {recorder.transcript && (
-              <p className={styles.sttPreview}>{recorder.transcript}</p>
-            )}
-            <button className="btn btn--primary" onClick={handleFinishAnswer}>
-              답변 완료
-            </button>
           </div>
         )}
 
-        {/* 완료 후 다음 버튼 */}
-        {phase === 'done' && (
-          <div className={`card ${styles.doneCard}`}>
-            {recorder.transcript
-              ? <p className={styles.sttResult}>인식된 답변: {recorder.transcript}</p>
-              : <p className={styles.sttResult}>답변이 인식되지 않았습니다.</p>
-            }
-            <button className="btn btn--primary" onClick={handleNext}>
-              {flow.totalAnswered + 1 >= flow.totalQuestions ? '채점 요청' : '다음 문항'}
-            </button>
+        {phase === "recording" && (
+          <div className="card" style={{padding:"var(--sp-6)"}}>
+            <div className="recorder">
+              <div className="rec-meter">
+                <span className="rec-meter__dot"/>
+                <div className="rec-meter__wave"><span/><span/><span/><span/></div>
+              </div>
+              <p style={{fontVariantNumeric:"tabular-nums",fontWeight:"var(--fw-extra)",color:"var(--danger)"}}>{countdown}초 남음</p>
+              {recorder.transcript && <p style={{fontSize:"var(--fs-sm)",color:"var(--on-surface-2)",textAlign:"center"}}>{recorder.transcript}</p>}
+              <button className="btn btn--primary btn--block" onClick={handleFinish}>답변 완료</button>
+            </div>
           </div>
         )}
 
-        {/* 시작 버튼 */}
-        {phase === 'question' && (
-          <div className="cta-bar">
-            <button className="btn btn--primary" onClick={handleStartAnswer} disabled={ttsLoading}>
-              {isImagePart ? '사진 보고 답변 시작' : '답변 시작'}
+        {phase === "done" && (
+          <div className="card" style={{padding:"var(--sp-5)"}}>
+            <p style={{marginBottom:12,fontSize:"var(--fs-sm)",color:"var(--on-surface-2)"}}>{recorder.transcript || "(답변이 인식되지 않았습니다)"}</p>
+            <button className="btn btn--primary btn--block" onClick={handleNext}>
+              {flow.totalAnswered + 1 >= flow.totalQuestions ? "채점 요청" : "다음 문항"}
             </button>
           </div>
         )}
       </div>
+
+      {phase === "question" && (
+        <div className="cta-bar">
+          <button className="btn btn--primary btn--block" onClick={handleStartAnswer}>
+            {part === 2 ? "사진 보고 답변 시작" : "답변 시작"}
+          </button>
+        </div>
+      )}
     </div>
   );
 }
