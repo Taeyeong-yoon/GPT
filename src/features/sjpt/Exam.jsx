@@ -139,7 +139,7 @@ export default function SjptExam() {
       </div>
       <div className="screen">
         <div className="question-card">
-          {part === 2 && q.imageUrl && <img src={q.imageUrl} alt="문제 이미지" className="sjpt-image"/>}
+          {q.imageUrl && <img src={q.imageUrl} alt="문제 이미지" className="sjpt-image"/>}
           <p className="question-card__text" style={{marginBottom:12}}>{q.text}</p>
           {phase === "question" && (
             <button className="btn btn--secondary btn--block" onClick={handleSpeak} disabled={ttsLoading}>
