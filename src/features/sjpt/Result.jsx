@@ -75,7 +75,7 @@ export default function SjptResult() {
             <div key={pf.part} className={styles.partItem}>
               <button className={styles.partToggle}
                 onClick={() => setOpenPart(openPart === pf.part ? null : pf.part)}>
-                <span className={`chip chip--n3`}>Part {pf.part}</span>
+                <span className={`chip chip--n3`}>제{pf.part}부분</span>
                 <span className={styles.toggleArrow}>{openPart === pf.part ? '▲' : '▼'}</span>
               </button>
               {openPart === pf.part && <p className={styles.partComment}>{pf.comment}</p>}

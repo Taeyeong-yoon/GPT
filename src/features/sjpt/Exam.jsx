@@ -97,7 +97,7 @@ export default function SjptExam() {
   return (
     <div>
       <div className="exam-header">
-        <span className="exam-header__section">Part {part} · {flow.totalAnswered + 1}/{flow.totalQuestions}</span>
+        <span className="exam-header__section">제{part}부분 · {flow.totalAnswered + 1}/{flow.totalQuestions}</span>
         <div className="exam-header__progress">
           <div className="progress"><div className="progress__fill" style={{width: pct + "%"}}/></div>
         </div>

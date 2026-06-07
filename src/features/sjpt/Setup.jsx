@@ -2,13 +2,13 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const PART_INFO = {
-  1: { icon:'👤', label:'자기소개·기본 질문' },
-  2: { icon:'🖼️', label:'사진 묘사 (이미지)' },
-  3: { icon:'🎭', label:'상황 대응 (이미지)' },
-  4: { icon:'💬', label:'일상 대화·의견' },
-  5: { icon:'💡', label:'의견 제시' },
-  6: { icon:'🎯', label:'롤플레이·상황극' },
-  7: { icon:'📖', label:'스토리텔링' },
+  1: { icon:'👤', label:'자기소개·기본 질문', note:'고정 4문항' },
+  2: { icon:'🖼️', label:'사진 묘사', note:'이미지' },
+  3: { icon:'🎭', label:'상황 대응', note:'이미지' },
+  4: { icon:'💬', label:'일상 대화·의견', note:'' },
+  5: { icon:'💡', label:'의견 제시', note:'' },
+  6: { icon:'🎯', label:'롤플레이', note:'' },
+  7: { icon:'📖', label:'스토리텔링', note:'' },
 };
 
 export default function SjptSetup() {
@@ -17,7 +17,6 @@ export default function SjptSetup() {
   const [testing, setTesting] = useState(false);
   const [parts,   setParts]   = useState([]);
 
-  // 실제 파트 목록 로드
   useEffect(() => {
     fetch('/api/sjpt-questions')
       .then(r => r.json())
@@ -31,45 +30,35 @@ export default function SjptSetup() {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       stream.getTracks().forEach(t => t.stop());
       setMicOk(true);
-    } catch {
-      setMicOk(false);
-    } finally {
-      setTesting(false);
-    }
+    } catch { setMicOk(false); }
+    finally   { setTesting(false); }
   }, []);
 
   return (
     <div className="screen screen--cta-pad">
       <div>
         <h2 className="screen__title">SJPT 모의고사</h2>
-        <p className="screen__sub">일본어 말하기 시험 · {parts.length > 0 ? `${parts.length}개 파트` : '로딩 중...'}</p>
+        <p className="screen__sub">
+          {parts.length > 0 ? `${parts.length}개 부분 · L1~L9` : '로딩 중...'}
+        </p>
       </div>
 
-      {/* 실제 파트 목록 */}
       <div className="part-preview">
-        {parts.length > 0
-          ? parts.map(p => {
-              const info = PART_INFO[p.part] || { icon:'📝', label:`Part ${p.part}` };
-              const hasImg = p.questions?.some(q => q.imageUrl);
-              return (
-                <div key={p.part} className="part-tile">
-                  <span className="part-tile__ico">{info.icon}</span>
-                  <p className="part-tile__name">Part {p.part}</p>
-                  <p className="part-tile__count">{info.label}{hasImg ? ' 🖼️' : ''}</p>
-                </div>
-              );
-            })
-          : [1,2,3,4,5,6,7].map(n => (
-              <div key={n} className="part-tile">
-                <span className="part-tile__ico">{PART_INFO[n]?.icon || '📝'}</span>
-                <p className="part-tile__name">Part {n}</p>
-                <p className="part-tile__count">{PART_INFO[n]?.label || ''}</p>
-              </div>
-            ))
-        }
+        {(parts.length > 0 ? parts : Object.keys(PART_INFO).map(n=>({part:+n}))).map(p => {
+          const info = PART_INFO[p.part] || { icon:'📝', label:`${p.part}부분` };
+          const hasImg = p.questions?.some(q => q.imageUrl);
+          return (
+            <div key={p.part} className="part-tile">
+              <span className="part-tile__ico">{info.icon}</span>
+              <p className="part-tile__name">제{p.part}부분</p>
+              <p className="part-tile__count">
+                {info.label}{hasImg ? ' 🖼️' : ''}{info.note ? ` (${info.note})` : ''}
+              </p>
+            </div>
+          );
+        })}
       </div>
 
-      {/* 마이크 확인 */}
       <div className={`mic-status ${micOk===true?'is-on':micOk===false?'is-off':''}`}>
         <span className="dot"/>
         <span>
@@ -86,7 +75,7 @@ export default function SjptSetup() {
       <div className="stack gap-2">
         <p className="env-tip">🎧 이어폰 착용 권장</p>
         <p className="env-tip">🤫 조용한 환경에서 응시하세요</p>
-        <p className="env-tip">⏱️ 파트별 60초 답변 시간</p>
+        <p className="env-tip">⏱️ 부분별 60초 답변 시간</p>
       </div>
 
       <div className="cta-bar">
