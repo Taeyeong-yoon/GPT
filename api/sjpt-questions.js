@@ -42,7 +42,9 @@ const FILE_ID_MAP = {
 
 function getImageUrl(imageNo) {
   const id = FILE_ID_MAP[imageNo];
-  return id ? `https://drive.google.com/uc?export=view&id=${id}` : null;
+  // drive.google.com/uc?export=view는 Cross-Origin-Resource-Policy: same-site를 반환해
+  // 외부 도메인의 <img>에서 차단됨 → CORS 허용되는 lh3 CDN 사용 (크기도 축소되어 더 빠름)
+  return id ? `https://lh3.googleusercontent.com/d/${id}=w1000` : null;
 }
 
 function parsePart(cell) {
