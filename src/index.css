@@ -281,22 +281,17 @@ img { max-width: 100%; display: block; }
   transition: transform var(--dur-fast) var(--ease);
 }
 .entry-card:active { transform: scale(0.97); }
-.entry-card__icon {
-  font-size: 2rem;
-  width: 56px; height: 56px;
-  display: grid; place-items: center;
-  background: rgba(255,255,255,0.55);
-  border-radius: var(--r-md);
+.entry-card__cat {
   flex-shrink: 0;
+  background: rgba(255,255,255,0.6) !important;
+  box-shadow: none;
 }
-.entry-card__title { font-size: var(--fs-xl); font-weight: var(--fw-extra); margin: 0; }
+.entry-card__title { font-size: var(--fs-lg); font-weight: var(--fw-extra); margin: 0; color: #7A4A2E; letter-spacing: -0.01em; white-space: nowrap; }
 .entry-card__meta  { font-size: var(--fs-sm); color: var(--on-surface-2); margin-top: 2px; }
 .entry-card__arrow { margin-left: auto; font-size: 1.5rem; opacity: 0.5; }
 
-.entry-card--jlpt { background: linear-gradient(135deg, var(--pink-l), var(--pink)); }
-.entry-card--jlpt .entry-card__title { color: #7A2E47; }
-.entry-card--sjpt { background: linear-gradient(135deg, var(--sage-l), var(--sage)); }
-.entry-card--sjpt .entry-card__title { color: #2F5A3E; }
+.entry-card--jlpt { background: linear-gradient(135deg, var(--yellow-l), var(--pink-l)); }
+.entry-card--sjpt { background: linear-gradient(135deg, var(--lav-l), var(--pink-l)); }
 
 /* ---------- Level Chip -------------------------------------- */
 .chip {
@@ -498,9 +493,63 @@ img { max-width: 100%; display: block; }
 /* ============================================================
    2. 메인 홈 (/)
    ============================================================ */
-.home__header { display: flex; align-items: center; justify-content: space-between; }
-.home__greeting { font-size: var(--fs-xl); font-weight: var(--fw-extra); margin: 0; }
+.home__topbar { display: flex; align-items: center; justify-content: space-between; min-height: 32px; }
 .home__entries { display: flex; flex-direction: column; gap: var(--sp-4); }
+
+/* ---------- 네코짱 히어로 (홈 상단 인사) -------------------- */
+.neko-hero {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  gap: 6px;
+  padding: var(--sp-2) 0 var(--sp-4);
+}
+.neko-hero__stage {
+  position: relative;
+  width: 124px; height: 124px;
+  display: grid; place-items: center;
+  margin-bottom: var(--sp-2);
+}
+.neko-hero__cat {
+  position: relative; z-index: 2;
+  width: 108px; height: 108px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(160deg, var(--pink-l) 0%, var(--yellow-l) 100%);
+  box-shadow: var(--shadow-card);
+}
+.neko-hero__petal {
+  position: absolute; border-radius: 50%; z-index: 1;
+}
+.neko-hero__petal--a {
+  width: 30px; height: 30px; top: -6px; left: 6px;
+  background: var(--pink-l); opacity: 0.7;
+}
+.neko-hero__petal--b {
+  width: 18px; height: 18px; bottom: 2px; right: 4px;
+  background: var(--sage-l); opacity: 0.7;
+}
+.neko-hero__butterfly {
+  position: absolute; top: 50%; left: 50%;
+  margin: -10px 0 0 -10px;
+  width: 20px; height: 20px;
+  display: grid; place-items: center;
+  font-size: 1.05rem;
+  z-index: 3;
+  animation: neko-orbit 9s linear infinite;
+}
+.neko-hero__butterfly--a { animation-duration: 8s; }
+.neko-hero__butterfly--b { animation-duration: 11s; animation-direction: reverse; font-size: 0.85rem; opacity: 0.85; }
+@keyframes neko-orbit {
+  from { transform: rotate(0deg) translateX(58px) rotate(0deg); }
+  to   { transform: rotate(360deg) translateX(58px) rotate(-360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .neko-hero__butterfly { animation: none; }
+}
+.neko-hero__name { margin: 0; font-size: var(--fs-lg); font-weight: var(--fw-extra); }
+.neko-hero__cheer {
+  margin: 0; font-size: var(--fs-sm); color: var(--on-surface-2); line-height: 1.5;
+}
+.neko-hero__cheer-jp { font-family: var(--font-jp); color: var(--pink-d); font-weight: var(--fw-bold); }
 
 .recent {
   display: flex; align-items: center; gap: var(--sp-3);
