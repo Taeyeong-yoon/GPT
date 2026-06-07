@@ -1,14 +1,15 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+// 구성 · 준비/답변 시간(초) · 문항수 — 실제 SJPT 기준 (Exam.jsx의 PART_CONFIG와 동일)
 const PART_INFO = {
-  1: { icon:'👤', label:'자기소개·기본 질문', note:'고정 4문항' },
-  2: { icon:'🖼️', label:'사진 묘사', note:'이미지' },
-  3: { icon:'🎭', label:'상황 대응', note:'이미지' },
-  4: { icon:'💬', label:'일상 대화·의견', note:'' },
-  5: { icon:'💡', label:'의견 제시', note:'' },
-  6: { icon:'🎯', label:'롤플레이', note:'' },
-  7: { icon:'📖', label:'스토리텔링', note:'' },
+  1: { icon:'👤', name:'자기소개',             kanji:'自己紹介',   prep:0,  answer:10, count:4 },
+  2: { icon:'🖼️', name:'그림 보고 답하기',       kanji:'簡単な応答', prep:3,  answer:6,  count:4 },
+  3: { icon:'🎭', name:'대화 완성',             kanji:'敏速な応答', prep:2,  answer:15, count:5 },
+  4: { icon:'💬', name:'일상 화제에 대해 설명하기', kanji:'短い応答',  prep:15, answer:25, count:5 },
+  5: { icon:'💡', name:'의견 제시',             kanji:'長い応答',   prep:30, answer:50, count:4 },
+  6: { icon:'🎯', name:'상황 대응',             kanji:'場面設定',   prep:30, answer:40, count:3 },
+  7: { icon:'📖', name:'스토리 구성',           kanji:'連続した絵', prep:30, answer:90, count:1 },
 };
 
 export default function SjptSetup() {
@@ -45,15 +46,17 @@ export default function SjptSetup() {
 
       <div className="part-preview">
         {(parts.length > 0 ? parts : Object.keys(PART_INFO).map(n=>({part:+n}))).map(p => {
-          const info = PART_INFO[p.part] || { icon:'📝', label:`${p.part}부분` };
+          const info = PART_INFO[p.part] || { icon:'📝', name:`${p.part}부`, kanji:'', prep:0, answer:60, count:p.questions?.length || 0 };
           const hasImg = p.questions?.some(q => q.imageUrl);
           return (
             <div key={p.part} className="part-tile">
-              <span className="part-tile__ico">{info.icon}</span>
-              <p className="part-tile__name">제{p.part}부분</p>
-              <p className="part-tile__count">
-                {info.label}{hasImg ? ' 🖼️' : ''}{info.note ? ` (${info.note})` : ''}
-              </p>
+              <span className="part-tile__ico">{info.icon}{hasImg ? ' 🖼️' : ''}</span>
+              <div className="stack" style={{gap:2}}>
+                <p className="part-tile__name">제{p.part}부 · {info.name}{info.kanji ? `(${info.kanji})` : ''}</p>
+                <p className="part-tile__count">
+                  준비 {info.prep}초 · 답변 {info.answer}초 · {info.count}문항
+                </p>
+              </div>
             </div>
           );
         })}
@@ -75,7 +78,7 @@ export default function SjptSetup() {
       <div className="stack gap-2">
         <p className="env-tip">🎧 이어폰 착용 권장</p>
         <p className="env-tip">🤫 조용한 환경에서 응시하세요</p>
-        <p className="env-tip">⏱️ 부분별 60초 답변 시간</p>
+        <p className="env-tip">⏱️ 부분마다 준비·답변 시간이 다릅니다 (위 카드 참고)</p>
       </div>
 
       <div className="cta-bar">

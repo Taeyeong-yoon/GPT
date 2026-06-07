@@ -80,6 +80,9 @@ function pick(arr, n) {
   return [...arr].sort(() => Math.random() - 0.5).slice(0, n);
 }
 
+// 부분별 문항수 (실제 SJPT 구성 기준)
+const PART_QUESTION_COUNTS = { 1: 4, 2: 4, 3: 5, 4: 5, 5: 4, 6: 3, 7: 1 };
+
 export default async function handler(req, res) {
   if (req.method !== 'GET') return res.status(405).json({ ok: false });
 
@@ -111,10 +114,10 @@ export default async function handler(req, res) {
     const parts = [
       // 1부: 고정 4문항 (항상 동일)
       { part: 1, questions: PART1_FIXED, fixed: true },
-      // 2~7부: 시트에서 랜덤 2문항
+      // 2~7부: 시트에서 부분별 지정 문항수만큼 랜덤 추출
       ...partNums.map(p => ({
         part: p,
-        questions: pick(byPart[p], 2),
+        questions: pick(byPart[p], PART_QUESTION_COUNTS[p] || 2),
       })).filter(p => p.questions.length > 0),
     ];
 

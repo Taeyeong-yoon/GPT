@@ -639,14 +639,14 @@ img { max-width: 100%; display: block; }
 /* ============================================================
    6. SJPT 안내 (/sjpt)
    ============================================================ */
-.part-preview { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-3); }
+.part-preview { display: grid; grid-template-columns: 1fr; gap: var(--sp-3); }
 .part-tile {
   background: var(--surface); border-radius: var(--r-md);
   box-shadow: var(--shadow-card); padding: var(--sp-4);
-  display: flex; flex-direction: column; gap: 4px;
+  display: flex; flex-direction: row; align-items: center; gap: var(--sp-3);
 }
-.part-tile__ico { font-size: 1.6rem; }
-.part-tile__name { font-weight: var(--fw-extra); font-size: var(--fs-md); }
+.part-tile__ico { font-size: 1.6rem; flex-shrink: 0; }
+.part-tile__name { font-weight: var(--fw-extra); font-size: var(--fs-sm); line-height: 1.3; }
 .part-tile__count { font-size: var(--fs-xs); color: var(--on-surface-2); }
 
 .mic-status {

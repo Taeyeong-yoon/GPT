@@ -7,34 +7,60 @@ import { speakJapanese } from "../../services/tts";
 import { useSjptFlow } from "./hooks/useSjptFlow";
 import { useRecorder } from "./hooks/useRecorder";
 
-const PREP_TIME = 15;
-const ANSWER_TIME = 60;
+// 부분별 구성 · 준비 시간(초) · 답변 시간(초) — 실제 SJPT 기준
+const PART_CONFIG = {
+  1: { name: "자기소개",             kanji: "自己紹介",   prep: 0,  answer: 10 },
+  2: { name: "그림 보고 답하기",       kanji: "簡単な応答", prep: 3,  answer: 6  },
+  3: { name: "대화 완성",             kanji: "敏速な応答", prep: 2,  answer: 15 },
+  4: { name: "일상 화제에 대해 설명하기", kanji: "短い応答",  prep: 15, answer: 25 },
+  5: { name: "의견 제시",             kanji: "長い応答",   prep: 30, answer: 50 },
+  6: { name: "상황 대응",             kanji: "場面設定",   prep: 30, answer: 40 },
+  7: { name: "스토리 구성",           kanji: "連続した絵", prep: 30, answer: 90 },
+};
+
+function getPartConfig(part) {
+  return PART_CONFIG[part] || { name: "", kanji: "", prep: 0, answer: 60 };
+}
+
+// 답변 시작 신호음 (삐 — Web Audio API, 별도 파일 불필요)
+function playBeep() {
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    const ctx = new AudioCtx();
+    const osc  = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.frequency.value = 880;
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.25, ctx.currentTime + 0.01);
+    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.35);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.35);
+    osc.onended = () => ctx.close();
+  } catch {}
+}
 
 export default function SjptExam() {
   const navigate = useNavigate();
   const { user } = useAuth();
   const flow = useSjptFlow();
   const recorder = useRecorder();
-  const [phase, setPhase] = useState("question");
+  const [phase, setPhase] = useState("question"); // question -> prep -> recording -> done
   const [countdown, setCountdown] = useState(0);
   const [ttsLoading, setTtsLoading] = useState(false);
   const timerRef = useRef(null);
   const q = flow.currentQuestion;
   const part = flow.currentPart?.part || 1;
+  const cfg = getPartConfig(part);
 
   useEffect(() => { setPhase("question"); setTtsLoading(false); }, [q?.id]);
   useEffect(() => () => clearInterval(timerRef.current), []);
 
-  const handleSpeak = useCallback(async () => {
-    if (!q?.text || ttsLoading) return;
-    setTtsLoading(true);
-    try { await speakJapanese(q.text, 'ja-JP-Neural2-C'); } catch {}
-    setTtsLoading(false);
-  }, [q, ttsLoading]);
-
   const startTimer = useCallback((sec, onEnd) => {
     clearInterval(timerRef.current);
     setCountdown(sec);
+    if (sec <= 0) { onEnd(); return; }
     timerRef.current = setInterval(() => {
       setCountdown(c => { if (c <= 1) { clearInterval(timerRef.current); onEnd(); return 0; } return c - 1; });
     }, 1000);
@@ -46,20 +72,27 @@ export default function SjptExam() {
     setPhase("done");
   }, [recorder]);
 
-  const handleStartAnswer = useCallback(() => {
-    if (part === 2) {
+  const beginRecording = useCallback(() => {
+    playBeep();
+    setPhase("recording");
+    recorder.startRecording();
+    startTimer(cfg.answer, handleFinish);
+  }, [cfg.answer, recorder, startTimer, handleFinish]);
+
+  // 문제 음성 재생 → (준비 시간) → 신호음 → 답변 녹음 자동 시작 (실제 시험과 동일한 흐름)
+  const handleSpeak = useCallback(async () => {
+    if (!q?.text || ttsLoading || phase !== "question") return;
+    setTtsLoading(true);
+    try { await speakJapanese(q.text, 'ja-JP-Neural2-C'); } catch {}
+    setTtsLoading(false);
+
+    if (cfg.prep > 0) {
       setPhase("prep");
-      startTimer(PREP_TIME, () => {
-        setPhase("recording");
-        recorder.startRecording();
-        startTimer(ANSWER_TIME, handleFinish);
-      });
+      startTimer(cfg.prep, beginRecording);
     } else {
-      setPhase("recording");
-      recorder.startRecording();
-      startTimer(ANSWER_TIME, handleFinish);
+      beginRecording();
     }
-  }, [part, recorder, startTimer, handleFinish]);
+  }, [q, ttsLoading, phase, cfg.prep, startTimer, beginRecording]);
 
   const handleNext = useCallback(() => {
     flow.submitAnswer(recorder.transcript);
@@ -97,7 +130,9 @@ export default function SjptExam() {
   return (
     <div>
       <div className="exam-header">
-        <span className="exam-header__section">제{part}부분 · {flow.totalAnswered + 1}/{flow.totalQuestions}</span>
+        <span className="exam-header__section">
+          제{part}부 · {cfg.name}{cfg.kanji ? `(${cfg.kanji})` : ""} · {flow.totalAnswered + 1}/{flow.totalQuestions}
+        </span>
         <div className="exam-header__progress">
           <div className="progress"><div className="progress__fill" style={{width: pct + "%"}}/></div>
         </div>
@@ -106,14 +141,21 @@ export default function SjptExam() {
         <div className="question-card">
           {part === 2 && q.imageUrl && <img src={q.imageUrl} alt="문제 이미지" className="sjpt-image"/>}
           <p className="question-card__text" style={{marginBottom:12}}>{q.text}</p>
-          <button className="btn btn--secondary btn--block" onClick={handleSpeak} disabled={ttsLoading}>
-            {ttsLoading ? "재생 중..." : "🔊 문제 듣기"}
-          </button>
+          {phase === "question" && (
+            <button className="btn btn--secondary btn--block" onClick={handleSpeak} disabled={ttsLoading}>
+              {ttsLoading ? "재생 중..." : "🔊 문제 듣기"}
+            </button>
+          )}
+          {phase === "question" && (
+            <p style={{marginTop:8,fontSize:"var(--fs-xs)",color:"var(--on-surface-3)",textAlign:"center"}}>
+              버튼을 눌러 문제를 들으면, 준비 시간 후 신호음과 함께 답변이 자동으로 시작됩니다
+            </p>
+          )}
         </div>
 
         {phase === "prep" && (
           <div className="card" style={{textAlign:"center",padding:"var(--sp-6)"}}>
-            <p style={{marginBottom:8,color:"var(--on-surface-2)"}}>준비 시간</p>
+            <p style={{marginBottom:8,color:"var(--on-surface-2)"}}>준비 시간 — 곧 신호음과 함께 답변이 시작됩니다</p>
             <div className="countdown">
               <div className="countdown__ring"/>
               <span className="countdown__num">{countdown}</span>
@@ -137,21 +179,13 @@ export default function SjptExam() {
 
         {phase === "done" && (
           <div className="card" style={{padding:"var(--sp-5)"}}>
-            <p style={{marginBottom:12,fontSize:"var(--fs-sm)",color:"var(--on-surface-2)"}}>{recorder.transcript || "(답변이 인식되지 않았습니다)"}</p>
+            <p style={{marginBottom:12,fontSize:"var(--fs-sm)",color:"var(--on-surface-2)"}}>{recorder.transcript || "답변을 등록하고 있습니다..."}</p>
             <button className="btn btn--primary btn--block" onClick={handleNext}>
               {flow.totalAnswered + 1 >= flow.totalQuestions ? "채점 요청" : "다음 문항"}
             </button>
           </div>
         )}
       </div>
-
-      {phase === "question" && (
-        <div className="cta-bar">
-          <button className="btn btn--primary btn--block" onClick={handleStartAnswer}>
-            {part === 2 ? "사진 보고 답변 시작" : "답변 시작"}
-          </button>
-        </div>
-      )}
     </div>
   );
 }
