@@ -1,0 +1,19 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // 네코짱 사용자 문서: 읽기만 허용 (쓰기는 앱에서만)
+    match /users/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow write: if false;
+
+      // 응시 결과: 본인 create + read만 허용, update/delete 차단
+      match /results/{resultId} {
+        allow create: if request.auth != null && request.auth.uid == uid;
+        allow read:   if request.auth != null && request.auth.uid == uid;
+        allow update: if false;
+        allow delete: if false;
+      }
+    }
+  }
+}

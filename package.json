@@ -1,0 +1,21 @@
+{
+  "name": "nekomaster",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2",
+    "firebase": "^10.13.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.4.8"
+  },
+  "scripts": {
+    "start": "node_modules/.bin/vite",
+    "build": "node_modules/.bin/vite build",
+    "preview": "node_modules/.bin/vite preview"
+  }
+}

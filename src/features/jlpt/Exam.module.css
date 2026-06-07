@@ -1,0 +1,15 @@
+.screen  { display: flex; flex-direction: column; min-height: 100vh; background: var(--cream); }
+.sectionLabel { font-size: 12px; font-weight: 700; color: var(--text-mid); }
+.timer   { font-size: 13px; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; }
+.timerWarn { color: #e53e3e; }
+.body    { flex: 1; padding: 16px 16px 120px; }
+.questionCard { padding: 20px; }
+.questionMeta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.questionNum  { font-size: 12px; color: var(--text-light); }
+.question { font-family: var(--font-jp); font-size: 18px; font-weight: 700; line-height: 1.6; color: var(--text); margin-bottom: 16px; }
+.choices  { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.ttsBox   { display: flex; align-items: flex-start; gap: 10px; background: var(--lav-l); border-radius: var(--r-md); padding: 12px 14px; margin-bottom: 14px; }
+.ttsText  { font-family: var(--font-jp); font-size: 15px; color: var(--text); }
+.explanation { margin-top: 14px; padding: 12px 14px; border-radius: var(--r-md); font-size: 13px; line-height: 1.6; }
+.explanation.correct { background: var(--sage-l); border: 1px solid var(--sage); }
+.explanation.wrong   { background: var(--yellow-l); border: 1px solid var(--yellow); }

@@ -1,0 +1,25 @@
+# 민감 파일
+.env.local
+.env
+api_keys.json
+
+# 빌드
+build/
+dist/
+
+# 의존성
+node_modules/
+
+# 기타
+.DS_Store
+*.log
+.claude/
+
+.vercel
+server/
+JLPT-SJPT/
+node_modules/
+build/
+css/
+js/
+output/
