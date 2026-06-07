@@ -5,32 +5,22 @@ import { useAuth } from '../context/AuthProvider';
 export default function Profile() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
-
-  const handleLogout = async () => {
-    await logout();
-    navigate('/login', { replace: true });
-  };
+  const handleLogout = async () => { await logout(); navigate('/login',{replace:true}); };
 
   return (
-    <div className="profile-screen">
-      <header className="screen-header">
-        <button onClick={() => navigate('/')}>←</button>
-        <h1>프로필</h1>
-      </header>
-
-      <div className="card profile-card">
-        <div className="profile-avatar">
-          {user?.photoURL
-            ? <img src={user.photoURL} alt="avatar" className="profile-avatar__img" />
-            : <span>🐱</span>}
-        </div>
-        <p className="profile-name">{user?.displayName || '학습자'}</p>
-        <p className="profile-email">{user?.email}</p>
+    <div className="screen">
+      <div style={{display:'flex',alignItems:'center',gap:12}}>
+        <button className="btn btn--ghost" onClick={()=>navigate('/')}>←</button>
+        <h2 className="screen__title">프로필</h2>
       </div>
-
-      <button className="btn btn--danger" onClick={handleLogout}>
-        로그아웃
-      </button>
+      <div className="card" style={{textAlign:'center',padding:'var(--sp-6)'}}>
+        {user?.photoURL
+          ? <img src={user.photoURL} alt="avatar" style={{width:72,height:72,borderRadius:'50%',marginBottom:12}}/>
+          : <div style={{fontSize:'3rem',marginBottom:12}}>🐱</div>}
+        <p style={{fontWeight:'var(--fw-extra)',fontSize:'var(--fs-xl)'}}>{user?.displayName||'학습자'}</p>
+        <p style={{color:'var(--on-surface-2)',fontSize:'var(--fs-sm)',marginTop:4}}>{user?.email}</p>
+      </div>
+      <button className="btn btn--danger btn--block" onClick={handleLogout}>로그아웃</button>
     </div>
   );
 }

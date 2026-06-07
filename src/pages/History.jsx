@@ -12,49 +12,37 @@ export default function History() {
 
   useEffect(() => {
     if (!user) return;
-    const q = query(
-      collection(db, 'users', user.uid, 'results'),
-      orderBy('createdAt', 'desc')
-    );
-    getDocs(q)
-      .then(snap => setResults(snap.docs.map(d => ({ id: d.id, ...d.data() }))))
-      .catch(() => {})
-      .finally(() => setLoading(false));
+    getDocs(query(collection(db,'users',user.uid,'results'), orderBy('createdAt','desc')))
+      .then(snap => setResults(snap.docs.map(d=>({id:d.id,...d.data()}))))
+      .catch(()=>{}).finally(()=>setLoading(false));
   }, [user]);
 
   return (
-    <div className="history-screen">
-      <header className="screen-header">
-        <button onClick={() => navigate('/')}>←</button>
-        <h1>응시 기록</h1>
-      </header>
-
-      {loading && <p className="history-loading">불러오는 중...</p>}
-
-      {!loading && results.length === 0 && (
-        <div className="history-empty">
-          <p>아직 응시 기록이 없어요.</p>
-          <button className="btn btn--primary" onClick={() => navigate('/jlpt')}>
-            JLPT 모의고사 시작
-          </button>
+    <div className="screen">
+      <div style={{display:'flex',alignItems:'center',gap:12}}>
+        <button className="btn btn--ghost" onClick={()=>navigate('/')}>←</button>
+        <h2 className="screen__title">응시 기록</h2>
+      </div>
+      {loading && <p style={{color:'var(--on-surface-2)'}}>불러오는 중...</p>}
+      {!loading && results.length===0 && (
+        <div style={{textAlign:'center',padding:'var(--sp-8) 0'}}>
+          <p style={{marginBottom:16}}>아직 응시 기록이 없어요.</p>
+          <button className="btn btn--primary" onClick={()=>navigate('/jlpt')}>JLPT 시작</button>
         </div>
       )}
-
-      <ul className="history-list">
+      <div className="stack gap-3">
         {results.map(r => (
-          <li key={r.id} className="history-item card"
-              onClick={() => navigate(`/${r.type}/result/${r.id}`)}>
-            <span className={`chip chip--${r.level?.toLowerCase()}`}>
-              {r.type?.toUpperCase()} {r.level}
+          <div key={r.id} className="card" style={{display:'flex',alignItems:'center',gap:12,cursor:'pointer'}}
+               onClick={()=>navigate(`/${r.type}/result/${r.id}`,{state:r})}>
+            <span className={`chip chip--${r.level?.toLowerCase()}`}>{r.type?.toUpperCase()} {r.level}</span>
+            <span style={{flex:1,fontWeight:'var(--fw-extra)'}}>{r.totalScore}점</span>
+            <span style={{fontSize:'var(--fs-sm)',color:'var(--on-surface-2)'}}>
+              {r.createdAt?.toDate?.().toLocaleDateString('ko-KR')??''}
             </span>
-            <span className="history-item__score">{r.totalScore}점</span>
-            <span className="history-item__date">
-              {r.createdAt?.toDate?.().toLocaleDateString('ko-KR') ?? ''}
-            </span>
-            <span className="history-item__arrow">›</span>
-          </li>
+            <span>›</span>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
