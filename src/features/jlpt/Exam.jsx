@@ -6,6 +6,7 @@ import { db } from '../../services/firebase';
 import { useJlptQuestions } from './hooks/useJlptQuestions';
 import { scoreJlpt } from '../../utils/jlptScoring';
 import { storage } from '../../utils/storage';
+import { speakJapanese } from '../../services/tts';
 
 const SECTION_LABELS = { vocabulary:'어휘', grammar:'문법', reading:'독해', listening:'청해' };
 const TOTAL_TIME = 60 * 60;
@@ -17,11 +18,13 @@ export default function JlptExam() {
   const level     = location.state?.level || 'N5';
   const { examSet, loading, error } = useJlptQuestions(level);
 
-  const [current,   setCurrent]   = useState(0);
-  const [answers,   setAnswers]   = useState({});
-  const [revealed,  setRevealed]  = useState(false);
-  const [timeLeft,  setTimeLeft]  = useState(TOTAL_TIME);
-  const [submitting,setSubmitting]= useState(false);
+  const [current,    setCurrent]   = useState(0);
+  const [answers,    setAnswers]   = useState({});
+  const [revealed,   setRevealed]  = useState(false);
+  const [timeLeft,   setTimeLeft]  = useState(TOTAL_TIME);
+  const [submitting, setSubmitting]= useState(false);
+  const [ttsPlaying, setTtsPlaying]= useState(false);
+  const [playCount,  setPlayCount] = useState(0);
   const PROGRESS_KEY = `nm_jlpt_${level}`;
 
   useEffect(() => {
@@ -45,6 +48,28 @@ export default function JlptExam() {
     window.addEventListener('beforeunload', h);
     return () => window.removeEventListener('beforeunload', h);
   }, []);
+
+  // 청해 문항 전환 시 자동 재생
+  useEffect(() => {
+    const item = examSet[current];
+    if (item?.section === 'listening' && item.ttsText) {
+      setPlayCount(0);
+      playTts(item.ttsText);
+    }
+  }, [current, examSet]);
+
+  const playTts = async (text) => {
+    if (ttsPlaying) return;
+    setTtsPlaying(true);
+    try {
+      await speakJapanese(text);
+      setPlayCount(c => c + 1);
+    } catch(e) {
+      console.warn('TTS 오류:', e.message);
+    } finally {
+      setTtsPlaying(false);
+    }
+  };
 
   const handleSelect = (id, idx) => {
     if (revealed) return;
@@ -102,9 +127,19 @@ export default function JlptExam() {
             <span className="question-card__num">{current+1} / {examSet.length}</span>
           </div>
           {sec==='listening' && item.ttsText && (
-            <div className="audio" style={{marginBottom:12}}>
-              <span>🔊</span>
-              <p style={{fontFamily:'var(--font-jp)',fontSize:'var(--fs-md)',marginLeft:8}}>{item.ttsText}</p>
+            <div className={`audio ${ttsPlaying ? 'is-playing' : ''}`} style={{marginBottom:12}}>
+              <button
+                className="audio__btn"
+                onClick={() => playTts(item.ttsText)}
+                disabled={ttsPlaying}
+                title="다시 듣기"
+              >
+                {ttsPlaying ? '⏸' : '▶'}
+              </button>
+              <div className="audio__wave">
+                <span/><span/><span/><span/><span/>
+              </div>
+              <span className="audio__count">{playCount}회 재생</span>
             </div>
           )}
           <p className="question-card__text">{item.question}</p>
