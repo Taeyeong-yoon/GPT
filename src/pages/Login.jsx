@@ -25,7 +25,7 @@ export default function Login() {
     <div className="login">
       <div className="login__hero">
         <div className="login__mascot">🐱</div>
-        <h1 className="login__logo">네코마스터</h1>
+        <h1 className="login__logo">네코짱 테스트</h1>
         <p className="login__slogan">실전처럼 풀고, 시험처럼 통과하자</p>
       </div>
       <div className="login__actions">
