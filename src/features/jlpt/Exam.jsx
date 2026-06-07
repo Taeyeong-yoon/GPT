@@ -60,12 +60,12 @@ export default function JlptExam() {
     }
   }, [current, examSet]);
 
-  const handlePlay = useCallback(async (text) => {
+  const handlePlay = useCallback(async (text, subType) => {
     if (ttsPlaying || !text) return;
     setTtsPlaying(true);
     setTtsError('');
     try {
-      await speakListening(text, item.subType);
+      await speakListening(text, subType);
       setPlayCount(c => c + 1);
     } catch(e) {
       setTtsError('재생 실패 — 다시 눌러주세요');
@@ -144,7 +144,7 @@ export default function JlptExam() {
 
           {sec === 'listening' && item.ttsText && (
             <div className={`audio ${ttsPlaying?'is-playing':''}`} style={{marginBottom:14}}>
-              <button className="audio__btn" onClick={() => handlePlay(item.ttsText)} disabled={ttsPlaying}>
+              <button className="audio__btn" onClick={() => handlePlay(item.ttsText, item.subType)} disabled={ttsPlaying}>
                 {ttsPlaying ? '⏸' : '▶'}
               </button>
               <div className="audio__wave"><span/><span/><span/><span/><span/></div>
