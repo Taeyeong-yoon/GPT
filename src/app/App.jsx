@@ -22,8 +22,8 @@ const History      = lazy(() => import('../pages/History'));
 const Profile      = lazy(() => import('../pages/Profile'));
 
 const Fallback = () => (
-  <div className="splash-screen">
-    <div className="splash-cat">🐱</div>
+  <div className="nm-app" style={{alignItems:'center',justifyContent:'center'}}>
+    <p style={{fontSize:'3rem'}}>🐱</p>
   </div>
 );
 
@@ -31,6 +31,7 @@ export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
+        <div className="nm-app">
         <Suspense fallback={<Fallback />}>
           <Routes>
             <Route path="/login" element={<Login />} />
@@ -71,6 +72,7 @@ export default function App() {
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Suspense>
+        </div>
       </BrowserRouter>
     </AuthProvider>
   );
