@@ -28,7 +28,7 @@ export default function SjptExam() {
   const handleSpeak = useCallback(async () => {
     if (!q?.text || ttsLoading) return;
     setTtsLoading(true);
-    try { await speakJapanese(q.text); } catch {}
+    try { await speakJapanese(q.text, 'ja-JP-Neural2-C'); } catch {}
     setTtsLoading(false);
   }, [q, ttsLoading]);
 
