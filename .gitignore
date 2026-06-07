@@ -2,6 +2,8 @@
 .env.local
 .env
 api_keys.json
+*service-account*.json
+*credentials*.json
 
 # 빌드
 build/
