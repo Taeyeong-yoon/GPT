@@ -65,24 +65,18 @@ export default function Home() {
         </button>
       )}
 
-      {/* 시험 진입 카드 */}
+      {/* 시험 진입 카드 — 네코짱 이미지 없이 텍스트 중심 */}
       <div className="home__entries">
         <button className="entry-card entry-card--jlpt" onClick={() => navigate('/jlpt')}>
-          <div className="entry-card__top">
-            <img src={nekoLandingCat} alt="" className="entry-card__cat-img" />
-            <span className="entry-card__badge">JLPT</span>
-          </div>
-          <p className="entry-card__title">실전 모의고사</p>
+          <span className="entry-card__badge">JLPT</span>
+          <p className="entry-card__title">실전<br />모의고사</p>
           <p className="entry-card__meta">어휘·문법·독해·청해<br />40문항 실전 풀이</p>
           <span className="entry-card__arrow">시작하기 →</span>
         </button>
 
         <button className="entry-card entry-card--sjpt" onClick={() => navigate('/sjpt')}>
-          <div className="entry-card__top">
-            <img src={nekoLandingCat} alt="" className="entry-card__cat-img" />
-            <span className="entry-card__badge">SJPT</span>
-          </div>
-          <p className="entry-card__title">말하기 시험</p>
+          <span className="entry-card__badge">SJPT</span>
+          <p className="entry-card__title">말하기<br />시험</p>
           <p className="entry-card__meta">문제 청취·녹음·<br />AI 채점 피드백</p>
           <span className="entry-card__arrow">응시하기 →</span>
         </button>
@@ -93,7 +87,7 @@ export default function Home() {
         <div className="home-exam-info__item" onClick={() => navigate('/jlpt')}>
           <span className="home-exam-info__badge home-exam-info__badge--jlpt">JLPT</span>
           <div>
-            <p className="home-exam-info__title">일본어능력시험이란?</p>
+            <p className="home-exam-info__title">일본어 능력시험이란?</p>
             <p className="home-exam-info__desc">N1~N5 다섯 단계로 어휘·문법·독해·청해 능력을 측정하는 국제 공인 시험입니다.</p>
           </div>
         </div>
@@ -101,7 +95,7 @@ export default function Home() {
         <div className="home-exam-info__item" onClick={() => navigate('/sjpt')}>
           <span className="home-exam-info__badge home-exam-info__badge--sjpt">SJPT</span>
           <div>
-            <p className="home-exam-info__title">일본어말하기시험이란?</p>
+            <p className="home-exam-info__title">일본어 말하기 시험이란?</p>
             <p className="home-exam-info__desc">1~7부 구성으로 준비·녹음·AI 채점까지, 실제 시험과 동일한 흐름으로 말하기 실력을 진단합니다.</p>
           </div>
         </div>
