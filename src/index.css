@@ -570,11 +570,11 @@ img { max-width: 100%; display: block; }
 .home-brandbar__title {
   margin: 0;
   color: #2F2119;
-  font-size: 2.15rem;
+  font-size: 1.72rem;
   line-height: 1.12;
   font-weight: var(--fw-black);
-  letter-spacing: -0.01em;
-  word-break: keep-all;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
 }
 .home-brandbar__title span { color: #F36D9F; }
 
@@ -1342,7 +1342,7 @@ img { max-width: 100%; display: block; }
   }
   .home-brandbar__eyebrow { font-size: 0.72rem; }
   .home-brandbar__title {
-    font-size: 2.12rem;
+    font-size: 1.62rem;
     line-height: 1.08;
   }
   .home-profile {

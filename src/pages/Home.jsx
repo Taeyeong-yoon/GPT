@@ -28,7 +28,7 @@ export default function Home() {
         <div>
           <p className="home-brandbar__eyebrow">NEKOCHAN TEST</p>
           <h1 className="home-brandbar__title">
-            日本語<br /><span>시험</span>에 도전!!
+            日本語 <span>시험</span> 도전!!
           </h1>
         </div>
         <button className="home-profile" onClick={() => navigate('/profile')} aria-label="프로필">
