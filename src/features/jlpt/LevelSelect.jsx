@@ -3,11 +3,11 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import CatIcon from '../../components/CatIcon';
 
 const LEVELS = [
-  { code:'N5', meta:'입문',     desc:'40문항 · 60분', mood:'wave',     cls:'level-card--n5' },
-  { code:'N4', meta:'초급',     desc:'40문항 · 60분', mood:'look',     cls:'level-card--n4' },
-  { code:'N3', meta:'중급',     desc:'40문항 · 60분', mood:'chill',    cls:'level-card--n3' },
-  { code:'N2', meta:'중상급',   desc:'40문항 · 60분', mood:'think',    cls:'level-card--n2' },
-  { code:'N1', meta:'상급',     desc:'40문항 · 60분', mood:'story',    cls:'level-card--n1' },
+  { code:'N5', meta:'입문',     desc:'40문항 · 60분', mood:'wave',       cls:'level-card--n5' },
+  { code:'N4', meta:'초급',     desc:'40문항 · 60분', mood:'look',       cls:'level-card--n4' },
+  { code:'N3', meta:'중급',     desc:'40문항 · 60분', mood:'heart',      cls:'level-card--n3' },
+  { code:'N2', meta:'중상급',   desc:'40문항 · 60분', mood:'think',      cls:'level-card--n2' },
+  { code:'N1', meta:'상급',     desc:'40문항 · 60분', mood:'sunglasses', cls:'level-card--n1' },
 ];
 
 export default function LevelSelect() {
