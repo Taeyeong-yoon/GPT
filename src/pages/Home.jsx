@@ -88,26 +88,22 @@ export default function Home() {
         </button>
       </div>
 
-      {/* JLPT 레벨 바로가기 */}
-      <div className="home-levels">
-        <p className="home-levels__label">✦ JLPT 레벨 바로가기</p>
-        <div className="home-levels__row">
-          {[
-            { code:'N5', meta:'입문',   cls:'n5' },
-            { code:'N4', meta:'초급',   cls:'n4' },
-            { code:'N3', meta:'중급',   cls:'n3' },
-            { code:'N2', meta:'중상급', cls:'n2' },
-            { code:'N1', meta:'상급',   cls:'n1' },
-          ].map(lv => (
-            <button
-              key={lv.code}
-              className={`home-level-pill home-level-pill--${lv.cls}`}
-              onClick={() => navigate('/jlpt', { state: { level: lv.code } })}
-            >
-              <span className="home-level-pill__code">{lv.code}</span>
-              <span className="home-level-pill__meta">{lv.meta}</span>
-            </button>
-          ))}
+      {/* 시험 소개 */}
+      <div className="home-exam-info">
+        <div className="home-exam-info__item" onClick={() => navigate('/jlpt')}>
+          <span className="home-exam-info__badge home-exam-info__badge--jlpt">JLPT</span>
+          <div>
+            <p className="home-exam-info__title">일본어능력시험이란?</p>
+            <p className="home-exam-info__desc">N1~N5 다섯 단계로 어휘·문법·독해·청해 능력을 측정하는 국제 공인 시험입니다.</p>
+          </div>
+        </div>
+        <div className="home-exam-info__divider" />
+        <div className="home-exam-info__item" onClick={() => navigate('/sjpt')}>
+          <span className="home-exam-info__badge home-exam-info__badge--sjpt">SJPT</span>
+          <div>
+            <p className="home-exam-info__title">일본어말하기시험이란?</p>
+            <p className="home-exam-info__desc">1~7부 구성으로 준비·녹음·AI 채점까지, 실제 시험과 동일한 흐름으로 말하기 실력을 진단합니다.</p>
+          </div>
         </div>
       </div>
 
