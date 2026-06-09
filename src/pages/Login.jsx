@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthProvider';
+import nekoLandingCat from '../assets/neko-landing-cat.jpg';
 
 export default function Login() {
   const { user, loading, login } = useAuth();
@@ -24,7 +25,9 @@ export default function Login() {
   return (
     <div className="login">
       <div className="login__hero">
-        <div className="login__mascot">🐱</div>
+        <div className="login__mascot">
+          <img src={nekoLandingCat} alt="네코짱" />
+        </div>
         <h1 className="login__logo">네코짱 테스트</h1>
         <p className="login__slogan">실전처럼 풀고, 시험처럼 통과하자</p>
       </div>
