@@ -5,26 +5,6 @@ import { useAuth } from '../context/AuthProvider';
 import { db } from '../services/firebase';
 import nekoLandingCat from '../assets/neko-landing-cat.jpg';
 
-const CHEERS = [
-  '오늘 맞춤 학습 종료. 다른 루트도 가보자.',
-  '듣고, 말하고, 다시 확인하는 루트예요.',
-  '오늘은 실전 감각을 조금 더 올려볼게요.',
-  '네코짱이 오늘 분량을 차분히 골라뒀어요.',
-];
-
-const STAT_CARDS = [
-  { tone: 'cream', label: '연속 학습', value: '4일째', icon: '🔥' },
-  { tone: 'pink', label: '오늘 보상', value: '보상 획득', icon: '🎁' },
-  { tone: 'sage', label: '오늘 목표', value: '준비 완료', icon: '✓' },
-];
-
-const STUDY_MODES = [
-  { label: '학습', icon: '📚' },
-  { label: '퀴즈', icon: '📝', active: true },
-  { label: '보강', icon: '🧩' },
-  { label: '자율', icon: '📁' },
-];
-
 export default function Home() {
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -37,90 +17,55 @@ export default function Home() {
   }, [user]);
 
   const nickname = user?.displayName?.split(' ')[0] || '학습자';
-  const cheer = CHEERS[new Date().getDate() % CHEERS.length];
-  const lastResultLabel = lastResult
-    ? `${lastResult.type?.toUpperCase()} ${lastResult.level || ''} · ${lastResult.totalScore ?? '-'}점`
-    : '아직 응시 기록이 없어요';
 
   return (
     <div className="screen home-screen">
       <div className="home-ornament home-ornament--left" />
       <div className="home-ornament home-ornament--right" />
 
+      {/* 브랜드바 */}
       <div className="home-brandbar">
         <div>
-          <p className="home-brandbar__eyebrow">NEKOCHAN JLPT · SJPT</p>
+          <p className="home-brandbar__eyebrow">NEKOCHAN TEST</p>
           <h1 className="home-brandbar__title">
-            오늘 공부는<br /><span>네코짱</span>이 골랐어
+            {nickname}님,<br /><span>어떤 시험</span> 볼까요?
           </h1>
         </div>
         <button className="home-profile" onClick={() => navigate('/profile')} aria-label="프로필">
           {user?.photoURL
             ? <img src={user.photoURL} alt="" />
-            : <img src={nekoLandingCat} alt="" />}
+            : <img src={nekoLandingCat} alt="네코짱" />}
         </button>
       </div>
 
+      {/* 네코짱 응원 코치 */}
       <section className="coach-card">
         <div className="coach-card__avatar">
           <img src={nekoLandingCat} alt="네코짱" />
         </div>
         <div>
           <p className="coach-card__name">네코 코치</p>
-          <p className="coach-card__message">{nickname}님, {cheer}</p>
+          <p className="coach-card__message">
+            실전처럼 풀고,<br />시험처럼 통과하자! 🐾
+          </p>
         </div>
       </section>
 
-      <section className="home-hero-card">
-        <img src={nekoLandingCat} alt="네코짱 JLPT 캐릭터" className="home-hero-card__image" />
-        <div className="home-hero-card__copy">
-          <span>냥</span>
-          <p>앱에서 이어지는 JLPT·SJPT 테스트 홈페이지예요.</p>
-        </div>
-      </section>
-
-      <div className="home-test-actions">
-        <button className="home-test-button home-test-button--jlpt" onClick={() => navigate('/jlpt')}>
-          JLPT TEST
-        </button>
-        <button className="home-test-button home-test-button--sjpt" onClick={() => navigate('/sjpt')}>
-          SJPT TEST
-        </button>
-      </div>
-
-      <div className="home-stats">
-        {STAT_CARDS.map(card => (
-          <div key={card.label} className={`home-stat home-stat--${card.tone}`}>
-            <span className="home-stat__icon">{card.icon}</span>
-            <p className="home-stat__label">{card.label}</p>
-            <p className="home-stat__value">{card.value}</p>
+      {/* 최근 응시 기록 */}
+      {lastResult && (
+        <button className="recent recent--action" onClick={() => navigate('/history')}>
+          <span className="recent__icon">{lastResult.type === 'sjpt' ? '🎙️' : '📝'}</span>
+          <div>
+            <p className="recent__label">마지막 응시</p>
+            <p className="recent__value">
+              {lastResult.type?.toUpperCase()} {lastResult.level || ''} · {lastResult.totalScore ?? '-'}점
+            </p>
           </div>
-        ))}
-      </div>
+          <span className="recent__prob">›</span>
+        </button>
+      )}
 
-      <button className="recent recent--action" onClick={() => navigate(lastResult ? '/history' : '/jlpt')}>
-        <span className="recent__icon">{lastResult?.type === 'sjpt' ? '🎙️' : '📋'}</span>
-        <div>
-          <p className="recent__label">최근 리포트</p>
-          <p className="recent__value">{lastResultLabel}</p>
-        </div>
-        <span className="recent__prob">›</span>
-      </button>
-
-      <div className="home-section-title">
-        <span>✦</span>
-        <h2>오늘의 맞춤 학습</h2>
-        <i />
-      </div>
-
-      <div className="mode-tabs" aria-label="학습 모드">
-        {STUDY_MODES.map(mode => (
-          <button key={mode.label} className={mode.active ? 'is-active' : ''}>
-            <span>{mode.icon}</span>{mode.label}
-          </button>
-        ))}
-      </div>
-
+      {/* 시험 진입 카드 */}
       <div className="home__entries">
         <button className="entry-card entry-card--jlpt" onClick={() => navigate('/jlpt')}>
           <div className="entry-card__top">
@@ -128,7 +73,7 @@ export default function Home() {
             <span className="entry-card__badge">JLPT</span>
           </div>
           <p className="entry-card__title">실전 모의고사</p>
-          <p className="entry-card__meta">40문항으로 어휘, 문법, 독해, 청해를 한번에 점검해요.</p>
+          <p className="entry-card__meta">어휘·문법·독해·청해<br />40문항 실전 풀이</p>
           <span className="entry-card__arrow">시작하기 →</span>
         </button>
 
@@ -137,18 +82,19 @@ export default function Home() {
             <img src={nekoLandingCat} alt="" className="entry-card__cat-img" />
             <span className="entry-card__badge">SJPT</span>
           </div>
-          <p className="entry-card__title">말하기 진단</p>
-          <p className="entry-card__meta">문제 듣기, 녹음, AI 피드백까지 시험 흐름으로 진행해요.</p>
+          <p className="entry-card__title">말하기 시험</p>
+          <p className="entry-card__meta">문제 청취·녹음·<br />AI 채점 피드백</p>
           <span className="entry-card__arrow">응시하기 →</span>
         </button>
       </div>
 
+      {/* 하단 네비게이션 */}
       <div className="home__nav">
         <button className="is-active" onClick={() => navigate('/')}>
           <span className="ico">⌂</span>홈
         </button>
         <button onClick={() => navigate('/history')}>
-          <span className="ico">▤</span>리포트
+          <span className="ico">▤</span>기록
         </button>
         <button onClick={() => navigate('/jlpt')}>
           <span className="ico">◇</span>JLPT
