@@ -88,14 +88,14 @@ export default function Home() {
       <div className="home__entries">
         <button className="entry-card entry-card--jlpt" onClick={() => navigate('/jlpt')}>
           <span className="entry-card__badge">JLPT</span>
-          <p className="entry-card__title">실전<br />모의고사</p>
+          <p className="entry-card__title">모의고사</p>
           <p className="entry-card__meta">어휘·문법·독해·청해<br />40문항 실전 풀이</p>
           <span className="entry-card__arrow">시작하기 →</span>
         </button>
 
         <button className="entry-card entry-card--sjpt" onClick={() => navigate('/sjpt')}>
           <span className="entry-card__badge">SJPT</span>
-          <p className="entry-card__title">말하기<br />시험</p>
+          <p className="entry-card__title">말하기</p>
           <p className="entry-card__meta">문제 청취·녹음·<br />AI 채점 피드백</p>
           <span className="entry-card__arrow">응시하기 →</span>
         </button>

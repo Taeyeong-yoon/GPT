@@ -845,7 +845,7 @@ img { max-width: 100%; display: block; }
   color: #2F2119;
   font-size: var(--fs-2xl);
   line-height: 1.2;
-  white-space: normal;
+  white-space: nowrap;
   letter-spacing: 0;
 }
 .home-screen .entry-card__meta {
