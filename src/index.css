@@ -502,7 +502,7 @@ img { max-width: 100%; display: block; }
 .home__topbar { display: flex; align-items: center; justify-content: space-between; min-height: 32px; }
 .home__entries { display: flex; flex-direction: column; gap: var(--sp-4); }
 
-/* 앱 스크린샷 톤과 맞춘 고급 홈 */
+/* 홈 화면 — 브랜드 팔레트(크림·핑크·브라운) 통일 */
 .home-screen {
   position: relative;
   gap: var(--sp-4);
@@ -510,9 +510,9 @@ img { max-width: 100%; display: block; }
   overflow-x: hidden;
   overflow-y: auto;
   background:
-    radial-gradient(circle at 18% 6%, rgba(255, 214, 228, 0.62), transparent 24%),
-    radial-gradient(circle at 86% 28%, rgba(212, 236, 217, 0.45), transparent 24%),
-    linear-gradient(180deg, #FFF4E8 0%, #FFF8EF 56%, #FFFDF9 100%);
+    radial-gradient(ellipse at 25% 0%, rgba(255,175,199,0.38) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 8%, rgba(255,214,228,0.28) 0%, transparent 40%),
+    var(--cream);
 }
 
 .home-ornament {
@@ -562,21 +562,21 @@ img { max-width: 100%; display: block; }
 }
 .home-brandbar__eyebrow {
   margin: 0 0 4px;
-  color: #A8785B;
+  color: var(--brown);
   font-size: var(--fs-sm);
   font-weight: var(--fw-black);
-  letter-spacing: 0;
+  letter-spacing: 0.06em;
 }
 .home-brandbar__title {
   margin: 0;
-  color: #2F2119;
+  color: var(--text);
   font-size: 1.72rem;
   line-height: 1.12;
   font-weight: var(--fw-black);
   letter-spacing: -0.02em;
   white-space: nowrap;
 }
-.home-brandbar__title span { color: #F36D9F; }
+.home-brandbar__title span { color: var(--pink-d); }
 
 .home-profile {
   width: 58px;
@@ -604,10 +604,10 @@ img { max-width: 100%; display: block; }
   align-items: center;
   gap: var(--sp-4);
   padding: var(--sp-5);
-  border: 2px solid rgba(247, 127, 170, 0.34);
+  border: 2px solid var(--pink-l);
   border-radius: 28px;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 10px 28px rgba(193, 123, 78, 0.13);
+  background: linear-gradient(135deg, rgba(255,214,228,0.45) 0%, var(--surface) 60%);
+  box-shadow: 0 8px 24px rgba(247,127,170,0.12);
 }
 .coach-card__avatar {
   width: 70px;
@@ -626,13 +626,13 @@ img { max-width: 100%; display: block; }
 }
 .coach-card__name {
   margin: 0 0 4px;
-  color: #A8785B;
+  color: var(--brown);
   font-size: var(--fs-sm);
   font-weight: var(--fw-black);
 }
 .coach-card__message {
   margin: 0;
-  color: #A8785B;
+  color: var(--text);
   font-size: var(--fs-xl);
   line-height: 1.26;
   font-weight: var(--fw-black);
@@ -816,8 +816,14 @@ img { max-width: 100%; display: block; }
   border-radius: 24px;
   box-shadow: 0 12px 26px rgba(193, 123, 78, 0.12);
 }
-.home-screen .entry-card--jlpt { background: #FFD2E2; }
-.home-screen .entry-card--sjpt { background: #E4DDF8; }
+.home-screen .entry-card--jlpt {
+  background: linear-gradient(160deg, var(--pink-l) 0%, #fff4f8 100%);
+  border: 2px solid var(--pink);
+}
+.home-screen .entry-card--sjpt {
+  background: linear-gradient(160deg, var(--lav-l) 0%, #f5f2ff 100%);
+  border: 2px solid var(--lavender);
+}
 .entry-card__top {
   display: flex;
   align-items: center;
@@ -825,12 +831,14 @@ img { max-width: 100%; display: block; }
   gap: var(--sp-2);
 }
 .entry-card__badge {
-  padding: 4px 9px;
+  padding: 4px 12px;
   border-radius: var(--r-pill);
-  background: rgba(255, 255, 255, 0.66);
-  color: #8C6251;
-  font-size: 0.68rem;
+  background: var(--surface);
+  color: var(--text-mid);
+  font-size: var(--fs-sm);
   font-weight: var(--fw-black);
+  letter-spacing: 0.04em;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 .entry-card__cat-img {
   width: 44px;
@@ -842,25 +850,28 @@ img { max-width: 100%; display: block; }
 }
 .home-screen .entry-card__title {
   margin: 0;
-  color: #2F2119;
+  color: var(--text);
   font-size: var(--fs-2xl);
   line-height: 1.2;
   white-space: nowrap;
-  letter-spacing: 0;
+  letter-spacing: -0.01em;
 }
 .home-screen .entry-card__meta {
   margin: 0;
-  color: #6B4A3D;
+  color: var(--text-mid);
   font-size: var(--fs-sm);
   line-height: 1.48;
   font-weight: var(--fw-bold);
 }
 .home-screen .entry-card__arrow {
   margin: auto 0 0;
-  color: #F36D9F;
+  color: var(--pink-d);
   font-size: var(--fs-sm);
   font-weight: var(--fw-black);
   opacity: 1;
+}
+.home-screen .entry-card--sjpt .entry-card__arrow {
+  color: var(--lavender);
 }
 
 .home-screen .recent {
@@ -903,8 +914,8 @@ img { max-width: 100%; display: block; }
 
 /* ---------- 홈 시험 소개 카드 ------------------------------ */
 .home-exam-info {
-  background: rgba(255,255,255,0.88);
-  border: 1.5px solid rgba(237,213,181,0.7);
+  background: var(--surface);
+  border: 1.5px solid var(--border-soft);
   border-radius: var(--r-lg);
   box-shadow: var(--shadow-card);
   overflow: hidden;
@@ -933,17 +944,17 @@ img { max-width: 100%; display: block; }
   margin: 0 0 4px;
   font-size: var(--fs-md);
   font-weight: var(--fw-extra);
-  color: #2F2119;
+  color: var(--text);
 }
 .home-exam-info__desc {
   margin: 0;
   font-size: var(--fs-sm);
-  color: #7A5544;
+  color: var(--text-mid);
   line-height: 1.55;
 }
 .home-exam-info__divider {
   height: 1px;
-  background: rgba(237,213,181,0.6);
+  background: var(--border-soft);
   margin: 0 var(--sp-5);
 }
 
