@@ -28,7 +28,7 @@ export default function Home() {
         <div>
           <p className="home-brandbar__eyebrow">NEKOCHAN TEST</p>
           <h1 className="home-brandbar__title">
-            {nickname}님,<br /><span>어떤 시험</span> 볼까요?
+            日本語<br /><span>시험</span>에 도전!!
           </h1>
         </div>
         <button className="home-profile" onClick={() => navigate('/profile')} aria-label="프로필">
@@ -65,24 +65,7 @@ export default function Home() {
         </button>
       )}
 
-      {/* 시험 진입 카드 — 네코짱 이미지 없이 텍스트 중심 */}
-      <div className="home__entries">
-        <button className="entry-card entry-card--jlpt" onClick={() => navigate('/jlpt')}>
-          <span className="entry-card__badge">JLPT</span>
-          <p className="entry-card__title">실전<br />모의고사</p>
-          <p className="entry-card__meta">어휘·문법·독해·청해<br />40문항 실전 풀이</p>
-          <span className="entry-card__arrow">시작하기 →</span>
-        </button>
-
-        <button className="entry-card entry-card--sjpt" onClick={() => navigate('/sjpt')}>
-          <span className="entry-card__badge">SJPT</span>
-          <p className="entry-card__title">말하기<br />시험</p>
-          <p className="entry-card__meta">문제 청취·녹음·<br />AI 채점 피드백</p>
-          <span className="entry-card__arrow">응시하기 →</span>
-        </button>
-      </div>
-
-      {/* 시험 소개 */}
+      {/* 시험 소개 — 진입 버튼 위로 */}
       <div className="home-exam-info">
         <div className="home-exam-info__item" onClick={() => navigate('/jlpt')}>
           <span className="home-exam-info__badge home-exam-info__badge--jlpt">JLPT</span>
@@ -99,6 +82,23 @@ export default function Home() {
             <p className="home-exam-info__desc">1~7부 구성으로 준비·녹음·AI 채점까지, 실제 시험과 동일한 흐름으로 말하기 실력을 진단합니다.</p>
           </div>
         </div>
+      </div>
+
+      {/* 시험 진입 카드 */}
+      <div className="home__entries">
+        <button className="entry-card entry-card--jlpt" onClick={() => navigate('/jlpt')}>
+          <span className="entry-card__badge">JLPT</span>
+          <p className="entry-card__title">실전<br />모의고사</p>
+          <p className="entry-card__meta">어휘·문법·독해·청해<br />40문항 실전 풀이</p>
+          <span className="entry-card__arrow">시작하기 →</span>
+        </button>
+
+        <button className="entry-card entry-card--sjpt" onClick={() => navigate('/sjpt')}>
+          <span className="entry-card__badge">SJPT</span>
+          <p className="entry-card__title">말하기<br />시험</p>
+          <p className="entry-card__meta">문제 청취·녹음·<br />AI 채점 피드백</p>
+          <span className="entry-card__arrow">응시하기 →</span>
+        </button>
       </div>
 
       {/* 하단 네비게이션 */}
