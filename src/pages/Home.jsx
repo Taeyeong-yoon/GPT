@@ -46,7 +46,7 @@ export default function Home() {
         <div>
           <p className="coach-card__name">네코 코치</p>
           <p className="coach-card__message">
-            실전처럼 풀고,<br />시험처럼 통과하자! 🐾
+            실전처럼 응시하고,<br />시험처럼 통과하자! 🐾
           </p>
         </div>
       </section>
@@ -86,6 +86,29 @@ export default function Home() {
           <p className="entry-card__meta">문제 청취·녹음·<br />AI 채점 피드백</p>
           <span className="entry-card__arrow">응시하기 →</span>
         </button>
+      </div>
+
+      {/* JLPT 레벨 바로가기 */}
+      <div className="home-levels">
+        <p className="home-levels__label">✦ JLPT 레벨 바로가기</p>
+        <div className="home-levels__row">
+          {[
+            { code:'N5', meta:'입문',   cls:'n5' },
+            { code:'N4', meta:'초급',   cls:'n4' },
+            { code:'N3', meta:'중급',   cls:'n3' },
+            { code:'N2', meta:'중상급', cls:'n2' },
+            { code:'N1', meta:'상급',   cls:'n1' },
+          ].map(lv => (
+            <button
+              key={lv.code}
+              className={`home-level-pill home-level-pill--${lv.cls}`}
+              onClick={() => navigate('/jlpt', { state: { level: lv.code } })}
+            >
+              <span className="home-level-pill__code">{lv.code}</span>
+              <span className="home-level-pill__meta">{lv.meta}</span>
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* 하단 네비게이션 */}

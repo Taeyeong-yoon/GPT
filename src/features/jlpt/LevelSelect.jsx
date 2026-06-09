@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import CatIcon from '../../components/CatIcon';
 
 const LEVELS = [
@@ -12,7 +12,8 @@ const LEVELS = [
 
 export default function LevelSelect() {
   const navigate = useNavigate();
-  const [selected, setSelected] = useState(null);
+  const { state } = useLocation();
+  const [selected, setSelected] = useState(state?.level ?? null);
 
   return (
     <div className="screen screen--cta-pad">

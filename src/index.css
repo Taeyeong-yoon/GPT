@@ -900,6 +900,57 @@ img { max-width: 100%; display: block; }
   font-size: 1.35rem;
 }
 
+/* ---------- 홈 JLPT 레벨 바로가기 ------------------------- */
+.home-levels {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+.home-levels__label {
+  margin: 0;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-black);
+  color: #A8785B;
+  letter-spacing: 0.01em;
+}
+.home-levels__row {
+  display: flex;
+  gap: var(--sp-2);
+}
+.home-level-pill {
+  flex: 1;
+  min-width: 0;
+  height: 62px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  border: none;
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--dur-fast) var(--ease);
+}
+.home-level-pill:active { transform: scale(0.95); }
+.home-level-pill__code {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-black);
+  color: #3D2B1F;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.home-level-pill__meta {
+  font-size: 0.68rem;
+  font-weight: var(--fw-bold);
+  color: #7A5544;
+  line-height: 1;
+}
+.home-level-pill--n5 { background: var(--yellow-l); }
+.home-level-pill--n4 { background: var(--lav-l); }
+.home-level-pill--n3 { background: var(--sage-l); }
+.home-level-pill--n2 { background: var(--lavender); }
+.home-level-pill--n1 { background: var(--pink-l); }
+
 /* ---------- 네코짱 히어로 (홈 상단 인사) -------------------- */
 .neko-hero {
   display: flex; flex-direction: column; align-items: center; text-align: center;
