@@ -1258,6 +1258,65 @@ img { max-width: 100%; display: block; }
 .sjpt-progress { font-size: var(--fs-sm); font-weight: var(--fw-extra); color: var(--on-surface-2); }
 .sjpt-image { width: 100%; max-height: 250px; object-fit: cover; border-radius: var(--r-md); margin-top: var(--sp-3); }
 
+/* ── SJPT 부 전환 안내 화면 ── */
+.sjpt-part-intro {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: var(--sp-3);
+  padding: var(--sp-10) var(--sp-6);
+  background: radial-gradient(ellipse at 50% 20%, rgba(196,174,240,0.22), transparent 65%), var(--cream);
+}
+.sjpt-part-intro__label {
+  font-size: var(--fs-sm);
+  color: var(--on-surface-3);
+  font-weight: var(--fw-semi);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.sjpt-part-intro__cat {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  margin: var(--sp-1) 0;
+}
+.sjpt-part-intro__part {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-1);
+}
+.sjpt-part-intro__num {
+  font-size: var(--fs-3xl);
+  font-weight: var(--fw-extra);
+  color: var(--lavender);
+  line-height: 1.1;
+}
+.sjpt-part-intro__name {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-semi);
+  color: var(--text);
+}
+.sjpt-part-intro__kanji {
+  font-size: var(--fs-sm);
+  color: var(--on-surface-3);
+}
+.sjpt-part-intro__desc {
+  font-size: var(--fs-sm);
+  color: var(--on-surface-2);
+  line-height: 1.65;
+  max-width: 280px;
+  margin-top: var(--sp-1);
+}
+.sjpt-part-intro__timing {
+  font-size: var(--fs-xs);
+  color: var(--on-surface-3);
+  background: var(--surface);
+  border: 1px solid var(--lav-l);
+  border-radius: var(--r-full);
+  padding: var(--sp-1) var(--sp-4);
+}
+
 .countdown {
   display: grid; place-items: center;
   width: 96px; height: 96px; margin: var(--sp-4) auto;

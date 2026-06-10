@@ -6,6 +6,34 @@ import { db } from "../../services/firebase";
 import { speakJapanese } from "../../services/tts";
 import { useSjptFlow } from "./hooks/useSjptFlow";
 import { useRecorder } from "./hooks/useRecorder";
+import nekoStudy      from "../../assets/neko-cats/neko-cat-01-study.png";
+import nekoHeadset    from "../../assets/neko-cats/neko-cat-05-headset.png";
+import nekoMicrophone from "../../assets/neko-cats/neko-cat-06-microphone.png";
+import nekoSurprised  from "../../assets/neko-cats/neko-cat-07-surprised.png";
+import nekoThinking   from "../../assets/neko-cats/neko-cat-08-thinking.png";
+import nekoCelebrate  from "../../assets/neko-cats/neko-cat-09-celebrate.png";
+import nekoTeacher    from "../../assets/neko-cats/neko-cat-11-teacher.png";
+
+const PART_IMAGES = {
+  1: nekoStudy,
+  2: nekoHeadset,
+  3: nekoMicrophone,
+  4: nekoThinking,
+  5: nekoTeacher,
+  6: nekoSurprised,
+  7: nekoCelebrate,
+};
+
+// 부 안내 문구 (1~7부)
+const PART_INTRO = {
+  1: "자신을 일본어로 소개하는 파트입니다. 준비 시간 없이 바로 녹음이 시작됩니다.",
+  2: "화면에 제시된 그림을 보고 짧게 답하는 파트입니다.",
+  3: "짧은 대화를 듣고 이어지는 말을 자연스럽게 완성하는 파트입니다.",
+  4: "일상적인 주제에 대해 자신의 생각을 설명하는 파트입니다.",
+  5: "주어진 주제에 대한 의견을 논리적으로 말하는 파트입니다.",
+  6: "제시된 상황에 맞게 적절히 대응하는 파트입니다.",
+  7: "연속된 그림을 보고 이야기를 구성하여 말하는 파트입니다.",
+};
 
 // 부분별 구성 · 준비 시간(초) · 답변 시간(초) — 실제 SJPT 기준
 const PART_CONFIG = {
@@ -49,12 +77,15 @@ export default function SjptExam() {
   const [phase, setPhase] = useState("question"); // question -> prep -> recording -> done
   const [countdown, setCountdown] = useState(0);
   const [ttsLoading, setTtsLoading] = useState(false);
+  const [showPartIntro, setShowPartIntro] = useState(true);
+  const [doneLabel, setDoneLabel] = useState("registering"); // "registering" | "registered"
   const timerRef = useRef(null);
+  const handleNextRef = useRef(null);
   const q = flow.currentQuestion;
   const part = flow.currentPart?.part || 1;
   const cfg = getPartConfig(part);
 
-  useEffect(() => { setPhase("question"); setTtsLoading(false); }, [q?.id]);
+  useEffect(() => { setPhase("question"); setTtsLoading(false); setDoneLabel("registering"); }, [q?.id]);
   useEffect(() => () => clearInterval(timerRef.current), []);
 
   const startTimer = useCallback((sec, onEnd) => {
@@ -95,8 +126,28 @@ export default function SjptExam() {
   }, [q, ttsLoading, phase, cfg.prep, startTimer, beginRecording]);
 
   const handleNext = useCallback(() => {
+    const isLastQuestionOfPart =
+      (flow.questionIdx + 1) >= (flow.currentPart?.questions?.length || 0);
+    const isLastPart =
+      (flow.partIdx + 1) >= (flow.parts?.length || 0);
+
     flow.submitAnswer(recorder.transcript);
+
+    if (isLastQuestionOfPart && !isLastPart) {
+      setShowPartIntro(true);
+    }
   }, [flow, recorder.transcript]);
+
+  // handleNext 최신 버전을 ref에 유지 (자동 진행 타이머에서 사용)
+  useEffect(() => { handleNextRef.current = handleNext; }, [handleNext]);
+
+  // 답변 완료 시 자동 진행: 1초 "등록 중" → 1초 "완료" → 다음 문항
+  useEffect(() => {
+    if (phase !== "done") return;
+    const t1 = setTimeout(() => setDoneLabel("registered"), 1800);
+    const t2 = setTimeout(() => handleNextRef.current?.(), 3500);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, [phase]);
 
   useEffect(() => {
     if (!flow.isDone || flow.answers.length === 0) return;
@@ -123,7 +174,46 @@ export default function SjptExam() {
       <button className="btn btn--primary" onClick={() => navigate("/sjpt")}>돌아가기</button>
     </div>
   );
-  if (!q) return null;
+  if (!q && !showPartIntro) return null;
+
+  // 부 안내 화면 (1부 시작 + 2~7부 전환)
+  if (showPartIntro) {
+    const introPart = flow.currentPart?.part || 1;
+    const introCfg  = getPartConfig(introPart);
+    const isFirst   = introPart === 1;
+    return (
+      <div className="screen sjpt-part-intro">
+        <p className="sjpt-part-intro__label">
+          {isFirst ? "지금부터 시작합니다" : "이제부터"}
+        </p>
+        <img
+          src={PART_IMAGES[introPart] || nekoStudy}
+          alt=""
+          className="sjpt-part-intro__cat"
+        />
+        <div className="sjpt-part-intro__part">
+          <span className="sjpt-part-intro__num">제{introPart}부</span>
+          <span className="sjpt-part-intro__name">{introCfg.name}</span>
+          {introCfg.kanji && (
+            <span className="sjpt-part-intro__kanji">{introCfg.kanji}</span>
+          )}
+        </div>
+        <p className="sjpt-part-intro__desc">{PART_INTRO[introPart]}</p>
+        <p className="sjpt-part-intro__timing">
+          준비 시간&nbsp;{introCfg.prep > 0 ? `${introCfg.prep}초` : '없음'}
+          &nbsp;·&nbsp;
+          답변 시간&nbsp;{introCfg.answer}초
+        </p>
+        <button
+          className="btn btn--primary"
+          style={{ minWidth: 200, marginTop: 'var(--sp-4)' }}
+          onClick={() => setShowPartIntro(false)}
+        >
+          시작하기 →
+        </button>
+      </div>
+    );
+  }
 
   const pct = Math.round((flow.totalAnswered / flow.totalQuestions) * 100);
 
@@ -179,10 +269,20 @@ export default function SjptExam() {
 
         {phase === "done" && (
           <div className="card" style={{padding:"var(--sp-5)"}}>
-            <p style={{marginBottom:12,fontSize:"var(--fs-sm)",color:"var(--on-surface-2)"}}>{recorder.transcript || "답변을 등록하고 있습니다..."}</p>
-            <button className="btn btn--primary btn--block" onClick={handleNext}>
-              {flow.totalAnswered + 1 >= flow.totalQuestions ? "채점 요청" : "다음 문항"}
-            </button>
+            {recorder.transcript && (
+              <p style={{marginBottom:12,fontSize:"var(--fs-sm)",color:"var(--on-surface-2)",lineHeight:1.6}}>
+                {recorder.transcript}
+              </p>
+            )}
+            {doneLabel === "registering" ? (
+              <p style={{fontSize:"var(--fs-sm)",color:"var(--on-surface-3)",textAlign:"center"}}>
+                답변을 등록하고 있습니다...
+              </p>
+            ) : (
+              <p style={{fontSize:"var(--fs-sm)",color:"var(--success,#2e7d32)",fontWeight:"var(--fw-semi)",textAlign:"center"}}>
+                등록이 완료되었습니다 ✓
+              </p>
+            )}
           </div>
         )}
       </div>

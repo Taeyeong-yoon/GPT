@@ -57,7 +57,7 @@ export default function SjptSetup() {
       <div>
         <h2 className="screen__title">SJPT 모의고사</h2>
         <p className="screen__sub">
-          {parts.length > 0 ? `${parts.length}개 부분 · L1~L9` : '로딩 중...'}
+          1부~7부 실전 대비
         </p>
       </div>
 
