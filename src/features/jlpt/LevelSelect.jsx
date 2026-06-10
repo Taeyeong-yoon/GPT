@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import CatIcon from '../../components/CatIcon';
+import nekoStudy from '../../assets/neko-cats/neko-cat-01-study.png';
+import nekoHeart from '../../assets/neko-cats/neko-cat-02-heart-eyes.png';
+import nekoSunglasses from '../../assets/neko-cats/neko-cat-03-sunglasses.png';
+import nekoThinking from '../../assets/neko-cats/neko-cat-08-thinking.png';
+import nekoStar from '../../assets/neko-cats/neko-cat-12-star-eyes.png';
 
 const LEVELS = [
-  { code:'N5', meta:'입문',     desc:'40문항 · 60분', mood:'wave',       cls:'level-card--n5' },
-  { code:'N4', meta:'초급',     desc:'40문항 · 60분', mood:'look',       cls:'level-card--n4' },
-  { code:'N3', meta:'중급',     desc:'40문항 · 60분', mood:'heart',      cls:'level-card--n3' },
-  { code:'N2', meta:'중상급',   desc:'40문항 · 60분', mood:'think',      cls:'level-card--n2' },
-  { code:'N1', meta:'상급',     desc:'40문항 · 60분', mood:'sunglasses', cls:'level-card--n1' },
+  { code:'N5', meta:'입문',     desc:'40문항 · 60분', image:nekoStudy,      cls:'level-card--n5' },
+  { code:'N4', meta:'초급',     desc:'40문항 · 60분', image:nekoHeart,      cls:'level-card--n4' },
+  { code:'N3', meta:'중급',     desc:'40문항 · 60분', image:nekoThinking,   cls:'level-card--n3' },
+  { code:'N2', meta:'중상급',   desc:'40문항 · 60분', image:nekoSunglasses, cls:'level-card--n2' },
+  { code:'N1', meta:'상급',     desc:'40문항 · 60분', image:nekoStar,       cls:'level-card--n1' },
 ];
 
 export default function LevelSelect() {
@@ -29,7 +33,7 @@ export default function LevelSelect() {
             className={`level-card ${lv.cls} ${selected === lv.code ? 'is-selected' : ''}`}
             onClick={() => setSelected(lv.code)}
           >
-            <CatIcon mood={lv.mood} size={40}/>
+            <img src={lv.image} alt="" className="level-card__cat-img" />
             <p className="level-card__name">{lv.code}</p>
             <p className="level-card__meta">{lv.meta}</p>
             <p className="level-card__desc">{lv.desc}</p>

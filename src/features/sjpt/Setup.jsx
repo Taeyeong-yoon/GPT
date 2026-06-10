@@ -1,6 +1,22 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import CatIcon, { PART_MOODS } from '../../components/CatIcon';
+import nekoStudy from '../../assets/neko-cats/neko-cat-01-study.png';
+import nekoHeadset from '../../assets/neko-cats/neko-cat-05-headset.png';
+import nekoMicrophone from '../../assets/neko-cats/neko-cat-06-microphone.png';
+import nekoSurprised from '../../assets/neko-cats/neko-cat-07-surprised.png';
+import nekoThinking from '../../assets/neko-cats/neko-cat-08-thinking.png';
+import nekoCelebrate from '../../assets/neko-cats/neko-cat-09-celebrate.png';
+import nekoTeacher from '../../assets/neko-cats/neko-cat-11-teacher.png';
+
+const PART_IMAGES = {
+  1: nekoStudy,
+  2: nekoHeadset,
+  3: nekoMicrophone,
+  4: nekoThinking,
+  5: nekoTeacher,
+  6: nekoSurprised,
+  7: nekoCelebrate,
+};
 
 // 구성 · 준비/답변 시간(초) · 문항수 — 실제 SJPT 기준 (Exam.jsx의 PART_CONFIG와 동일)
 const PART_INFO = {
@@ -50,7 +66,7 @@ export default function SjptSetup() {
           const info = PART_INFO[p.part] || { name:`${p.part}부`, kanji:'', prep:0, answer:60, count:p.questions?.length || 0 };
           return (
             <div key={p.part} className="part-tile">
-              <CatIcon mood={PART_MOODS[p.part] || 'wave'} size={44}/>
+              <img src={PART_IMAGES[p.part] || nekoStudy} alt="" className="part-tile__cat-img" />
               <div className="stack" style={{gap:2}}>
                 <p className="part-tile__name">제{p.part}부 · {info.name}{info.kanji ? `(${info.kanji})` : ''}</p>
                 <p className="part-tile__count">

@@ -1098,6 +1098,14 @@ img { max-width: 100%; display: block; }
 .level-card:last-child { grid-column: 1 / -1; flex-direction: row; justify-content: center; gap: var(--sp-4); }
 .level-card:active { transform: scale(0.97); }
 .level-card.is-selected { border-color: var(--pink-d); }
+.level-card__cat-img {
+  width: 58px;
+  height: 58px;
+  flex: 0 0 58px;
+  border-radius: 18px;
+  object-fit: cover;
+  box-shadow: 0 6px 14px rgba(193, 123, 78, 0.14);
+}
 .level-card__name { margin: 2px 0 0; font-size: var(--fs-xl); font-weight: var(--fw-black); letter-spacing: -0.02em; }
 .level-card__meta { margin: 0; font-size: var(--fs-xs); font-weight: var(--fw-bold); color: var(--pink-d); }
 .level-card__desc { margin: 0; font-size: var(--fs-xs); color: var(--text-mid); }
@@ -1206,6 +1214,14 @@ img { max-width: 100%; display: block; }
   background: var(--surface); border-radius: var(--r-md);
   box-shadow: var(--shadow-card); padding: var(--sp-4);
   display: flex; flex-direction: row; align-items: center; gap: var(--sp-3);
+}
+.part-tile__cat-img {
+  width: 54px;
+  height: 54px;
+  flex: 0 0 54px;
+  border-radius: 17px;
+  object-fit: cover;
+  box-shadow: 0 6px 14px rgba(193, 123, 78, 0.14);
 }
 .part-tile__name { font-weight: var(--fw-extra); font-size: var(--fs-sm); line-height: 1.3; }
 .part-tile__count { font-size: var(--fs-xs); color: var(--on-surface-2); }

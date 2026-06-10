@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
 import { useAuth } from '../context/AuthProvider';
 import { db } from '../services/firebase';
-import nekoLandingCat from '../assets/neko-landing-cat.jpg';
+import nekoStudy from '../assets/neko-cats/neko-cat-01-study.png';
+import nekoTeacher from '../assets/neko-cats/neko-cat-11-teacher.png';
 
 export default function Home() {
   const { user } = useAuth();
@@ -34,14 +35,14 @@ export default function Home() {
         <button className="home-profile" onClick={() => navigate('/profile')} aria-label="프로필">
           {user?.photoURL
             ? <img src={user.photoURL} alt="" />
-            : <img src={nekoLandingCat} alt="네코짱" />}
+            : <img src={nekoStudy} alt="네코짱" />}
         </button>
       </div>
 
       {/* 네코짱 응원 코치 */}
       <section className="coach-card">
         <div className="coach-card__avatar">
-          <img src={nekoLandingCat} alt="네코짱" />
+          <img src={nekoTeacher} alt="네코짱" />
         </div>
         <div>
           <p className="coach-card__name">네코 코치</p>
