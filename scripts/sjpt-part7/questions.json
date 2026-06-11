@@ -1,0 +1,302 @@
+[
+  {
+    "id": "sjpt-7-001",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-001.png",
+    "theme": "약속에 늦다",
+    "keywords": ["約束", "遅刻", "急ぐ", "謝る", "許す"],
+    "story": {
+      "panel1": "두 친구가 카페 앞에서 오후 3시에 만나기로 약속하며 기뻐하고 있다",
+      "panel2": "주인공이 집에서 낮잠을 자다 3시 30분에 깜짝 놀라 일어난다",
+      "panel3": "주인공이 뛰면서 친구에게 전화하고, 친구는 카페에서 혼자 기다리며 지루해한다",
+      "panel4": "주인공이 숨을 헐떡이며 도착해 고개 숙여 사과하고, 친구가 웃으며 용서해준다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, anime-style illustration, thick black borders between panels, no speech bubbles, no text, no numbers in panels, bright clear colors, white background. Top-left panel: Two cheerful young adults shaking hands in front of a cozy cafe, a wall clock visible showing 3:00 PM, both smiling happily. Top-right panel: Same young adult sleeping deeply at a desk at home, wall clock showing 3:30 PM, alarm going off, person waking up with shocked expression. Bottom-left panel: Person running urgently on a street holding a smartphone to ear, looking panicked and sweaty; separately, a friend sitting alone at a cafe table looking bored and checking watch. Bottom-right panel: Person arriving breathless and bowing deeply in apology, friend standing with arms crossed but smiling warmly in forgiveness. Professional quality, suitable for Japanese language examination."
+  },
+  {
+    "id": "sjpt-7-002",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-002.png",
+    "theme": "지갑을 잃어버리다",
+    "keywords": ["財布", "落とす", "気づく", "探す", "見つかる", "安心する"],
+    "story": {
+      "panel1": "주인공이 쇼핑몰에서 물건을 사며 지갑을 꺼내고 있다",
+      "panel2": "레스토랑에서 계산하려는데 가방에 지갑이 없어 당황한다",
+      "panel3": "왔던 길을 되짚으며 직원에게 물어보고 걱정스러운 표정으로 찾고 있다",
+      "panel4": "직원이 보관하고 있던 지갑을 돌려주고, 주인공이 크게 안도하며 고마워한다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, anime-style illustration, thick black borders between panels, no speech bubbles, no text, bright clear colors, white background. Top-left panel: A young person happily taking out a wallet to pay at a bright shopping mall counter, smiling. Top-right panel: Same person at a restaurant, reaching into bag with panicked expression, wallet is missing, empty hands shown, worried face. Bottom-left panel: Person retracing steps in a shopping mall corridor, looking around anxiously, asking a staff member in uniform who looks helpful. Bottom-right panel: Smiling staff member holding out a found wallet to the relieved person, who is clasping hands together in grateful relief. Professional quality, suitable for Japanese language examination."
+  },
+  {
+    "id": "sjpt-7-003",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-003.png",
+    "theme": "전철을 지나치다",
+    "keywords": ["乗り過ごす", "眠る", "気づく", "慌てる", "戻る"],
+    "story": {
+      "panel1": "주인공이 전철 안에서 스마트폰을 보며 편안하게 앉아 있다",
+      "panel2": "어느새 잠이 들었고, 창밖으로 낯선 역 이름이 보인다",
+      "panel3": "깜짝 놀라 일어나 역 이름을 확인하고 황급히 전화를 건다",
+      "panel4": "반대 방향 전철을 타고 약속 장소에 늦게 도착해 기다리던 친구에게 사과한다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, anime-style illustration, thick black borders between panels, no speech bubbles, no text, bright clear colors, white background. Top-left panel: A relaxed young person sitting comfortably on a train, looking at smartphone, other passengers visible. Top-right panel: Same person asleep on the train, head tilted, train window showing an unfamiliar station sign outside. Bottom-left panel: Person jolting awake with shocked expression, staring at the station name sign through the window, frantically grabbing phone to call someone. Bottom-right panel: Person arriving late at a meeting spot, bowing apologetically to a waiting friend who looks mildly annoyed but understanding. Professional quality, suitable for Japanese language examination."
+  },
+  {
+    "id": "sjpt-7-004",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-004.png",
+    "theme": "요리에 실패하다",
+    "keywords": ["料理", "焦げる", "失敗する", "仕方ない", "注文する", "笑う"],
+    "story": {
+      "panel1": "주인공이 친구를 위해 요리하겠다며 신나게 재료를 준비한다",
+      "panel2": "요리 중 스마트폰을 보느라 한눈을 파는 사이 냄비에서 연기가 피어오른다",
+      "panel3": "요리가 새까맣게 타버려 주인공이 울상이 되어 있다",
+      "panel4": "결국 배달 음식을 시키고, 주인공과 친구가 함께 웃으며 먹고 있다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, anime-style illustration, thick black borders between panels, no speech bubbles, no text, bright clear colors, white background. Top-left panel: An enthusiastic person in an apron cheerfully arranging fresh ingredients on a kitchen counter, looking excited to cook. Top-right panel: Same person distracted by smartphone while cooking, smoke rising from a pot on the stove, danger sign visible. Bottom-left panel: Person standing over a pot of completely burned black food, looking dismayed and disappointed, holding a ladle, smoke in the air. Bottom-right panel: Two friends laughing together happily while eating food from delivery containers spread on a table, the cooking disaster forgotten. Professional quality, suitable for Japanese language examination."
+  },
+  {
+    "id": "sjpt-7-005",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-005.png",
+    "theme": "우산을 잊고 비를 맞다",
+    "keywords": ["傘", "忘れる", "突然", "雨に濡れる", "助ける", "一緒に"],
+    "story": {
+      "panel1": "맑은 아침, 주인공이 기분 좋게 집을 나서며 우산을 현관에 두고 간다",
+      "panel2": "갑자기 먹구름이 몰려오고 폭우가 내려 주인공이 흠뻑 젖는다",
+      "panel3": "가게 처마 밑에서 비를 피하며 친구에게 SOS 전화를 건다",
+      "panel4": "친구가 우산을 들고 나타나 함께 우산 쓰고 걷는 모습에 둘 다 미소 짓는다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, anime-style illustration, thick black borders between panels, no speech bubbles, no text, bright clear colors, white background. Top-left panel: A cheerful person leaving home on a sunny morning, an umbrella visibly left behind near the front door. Top-right panel: Same person caught in a sudden heavy downpour on the street, drenched and distressed, dark storm clouds overhead. Bottom-left panel: Wet person sheltering under a shop awning, calling a friend on the phone with a worried expression, rain pouring outside. Bottom-right panel: Two people sharing an umbrella and walking together, both smiling warmly at each other in the rain. Professional quality, suitable for Japanese language examination."
+  },
+  {
+    "id": "sjpt-7-006",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-006.png",
+    "theme": "카페에서 음료를 쏟다",
+    "keywords": ["こぼす", "慌てる", "拭く", "申し訳ない", "助かる", "ほっとする"],
+    "story": {
+      "panel1": "주인공이 카페에서 노트북과 커피를 두고 공부하고 있다",
+      "panel2": "팔꿈치가 걸려 커피가 노트북 위로 쏟아진다",
+      "panel3": "직원이 급히 달려와 함께 닦고 주인공은 연신 사과한다",
+      "panel4": "직원이 새 커피를 가져다주고 노트북도 멀쩡해서 주인공이 안도한다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, anime-style illustration, thick black borders between panels, no speech bubbles, no text, bright clear colors, white background. Top-left panel: A focused student studying at a cozy cafe table with a laptop and a cup of coffee beside them. Top-right panel: Person accidentally knocking over the coffee cup with their elbow, coffee spilling toward the laptop, shocked expression. Bottom-left panel: Cafe staff member rushing over with a cloth, both the staff and the person frantically wiping the table, person looking apologetic. Bottom-right panel: Smiling staff member placing a fresh cup of coffee on the now-clean table, relieved person bowing gratefully, laptop undamaged. Professional quality, suitable for Japanese language examination."
+  },
+  {
+    "id": "sjpt-7-007",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-007.png",
+    "theme": "스마트폰을 잃어버리다",
+    "keywords": ["なくす", "焦る", "探す", "届ける", "親切", "感謝する"],
+    "story": {
+      "panel1": "주인공이 공원 벤치에 앉아 스마트폰으로 사진을 찍으며 즐기고 있다",
+      "panel2": "자리를 떠난 뒤 폰이 없다는 것을 깨닫고 허둥지둥 찾는다",
+      "panel3": "공원 관리소에 분실신고를 하며 걱정스러운 얼굴로 사정을 설명한다",
+      "panel4": "공원에서 폰을 주운 사람이 관리소에 갖다줘 돌려받고 크게 감사한다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, anime-style illustration, thick black borders between panels, no speech bubbles, no text, bright clear colors, white background. Top-left panel: A happy person sitting on a park bench, taking selfies or photos with their smartphone, sunny park scenery. Top-right panel: Same person walking away from the bench, suddenly patting pockets with alarmed look, smartphone missing. Bottom-left panel: Person at a park information office counter, explaining the situation with worried expression to a park staff member. Bottom-right panel: A kind stranger handing the recovered smartphone to the grateful person at the park office, everyone smiling. Professional quality, suitable for Japanese language examination."
+  },
+  {
+    "id": "sjpt-7-008",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-008.png",
+    "theme": "선물을 잊다",
+    "keywords": ["誕生日", "プレゼント", "忘れる", "慌てる", "買いに行く", "喜ぶ"],
+    "story": {
+      "panel1": "친구의 생일 파티에 신나게 도착한 주인공, 그런데 선물이 없다는 것을 깨닫는다",
+      "panel2": "다들 선물을 드리는 상황에서 주인공만 빈손이라 당황한다",
+      "panel3": "몰래 파티장을 빠져나가 근처 편의점에서 급하게 선물을 산다",
+      "panel4": "뒤늦게 선물을 건네자 친구가 크게 기뻐하고 둘이 함께 웃는다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, anime-style illustration, thick black borders between panels, no speech bubbles, no text, bright clear colors, white background. IMPORTANT: The MAIN CHARACTER is a young woman with dark short hair wearing a LIGHT BLUE T-SHIRT and dark jeans. She wears this EXACT SAME light blue t-shirt in ALL 4 panels without exception. Top-left panel: The young woman in light blue t-shirt arrives at a colorful birthday party, suddenly realizing with a shocked expression she forgot to bring a gift, while other guests hold wrapped presents. Top-right panel: The SAME young woman in light blue t-shirt stands empty-handed looking embarrassed, while others give gifts to the birthday person. Bottom-left panel: The SAME young woman in light blue t-shirt sneaks out and rushes into a convenience store, urgently grabbing a gift item from a shelf. Bottom-right panel: The SAME young woman in light blue t-shirt presents a small wrapped gift to her birthday friend who reacts with joy, both laughing happily. Professional quality, suitable for Japanese language examination."
+  },
+  {
+    "id": "sjpt-7-009",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-009.png",
+    "theme": "길을 잃다",
+    "keywords": ["迷う", "困る", "尋ねる", "親切", "やっと", "着く"],
+    "story": {
+      "panel1": "주인공이 스마트폰 지도를 보며 새 레스토랑을 찾아가고 있다",
+      "panel2": "배터리가 방전되어 지도가 꺼지고 낯선 골목에서 완전히 길을 잃는다",
+      "panel3": "지나가는 동네 어르신에게 길을 물어본다",
+      "panel4": "어르신이 직접 레스토랑까지 안내해줘 기다리던 친구와 무사히 만난다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, anime-style illustration, thick black borders between panels, no speech bubbles, no text, bright clear colors, white background. CRITICAL RULE: The MAIN CHARACTER is a YOUNG ADULT in their 20s with short dark hair wearing a GREEN JACKET and dark pants. This SAME young person appears in ALL 4 panels. The elderly person is a SEPARATE CHARACTER who only appears in panel 3 as a helper. Top-left panel: The YOUNG ADULT in green jacket walks confidently while looking at a map on their smartphone. Top-right panel: The SAME young adult in green jacket stands confused in an unfamiliar narrow alley, phone screen dark (dead battery), clearly lost. Bottom-left panel: The SAME young adult in green jacket politely asks an ELDERLY LOCAL RESIDENT (white hair, different clothing) for directions — TWO DISTINCT CHARACTERS clearly visible. Bottom-right panel: The SAME young adult in green jacket arrives at the restaurant entrance, greeted by a waiting friend who waves happily. Professional quality, suitable for Japanese language examination."
+  },
+  {
+    "id": "sjpt-7-010",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-010.png",
+    "theme": "자전거 타이어가 펑크나다",
+    "keywords": ["パンク", "困る", "遅刻しそう", "助ける", "間に合う", "ほっとする"],
+    "story": {
+      "panel1": "주인공이 자전거를 타고 학교나 회사로 즐겁게 출발한다",
+      "panel2": "갑자기 타이어가 펑크 나서 길가에 멈춰 서고 당황한다",
+      "panel3": "자전거를 끌며 걷다가 자전거 수리점 아저씨가 도움을 제안한다",
+      "panel4": "빠르게 수리를 마치고 다시 자전거를 타며 제시간에 도착한다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, anime-style illustration, thick black borders between panels, no speech bubbles, no text, bright clear colors, white background. Top-left panel: A cheerful young person riding a bicycle on a bright morning, looking happy and energetic. Top-right panel: Person stopped on the roadside, bicycle with a flat tire clearly visible, person crouching down with a troubled expression. Bottom-left panel: Person pushing the bicycle along the road, looking worried about being late, passing a small bicycle repair shop where the owner waves them in helpfully. Bottom-right panel: Person riding the repaired bicycle again with a relieved smile, arriving at their destination just in time. Professional quality, suitable for Japanese language examination."
+  },
+  {
+    "id": "sjpt-7-011",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-011.png",
+    "theme": "시험 전날 밤에 잠들다",
+    "keywords": ["試験", "準備する", "眠る", "焦る", "急いで", "間に合う"],
+    "story": {
+      "panel1": "시험 전날 밤, 주인공이 책상 앞에 앉아 열심히 공부를 시작한다",
+      "panel2": "공부하다 어느새 잠이 들어버린다",
+      "panel3": "아침 햇빛에 눈을 떠보니 시험 시작 30분 전이라 패닉 상태가 된다",
+      "panel4": "전력 질주해서 시험장에 겨우 도착, 숨을 헐떡이며 자리에 앉는다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, anime-style illustration, thick black borders between panels, no speech bubbles, no text, bright clear colors, white background. Top-left panel: A determined student sitting at a well-lit desk at night, surrounded by textbooks and notes, studying intensively. Top-right panel: Same student slumped over the desk fast asleep, books scattered, morning sunlight now coming through the window. Bottom-left panel: Student waking up with extreme panic, alarm clock showing it's almost exam time, scrambling to grab bag and run. Bottom-right panel: Student arriving breathlessly at the exam room door, collapsing into their seat just in time as the exam is about to start. Professional quality, suitable for Japanese language examination."
+  },
+  {
+    "id": "sjpt-7-012",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-012.png",
+    "theme": "이사 짐을 옮기다 실수하다",
+    "keywords": ["引越し", "手伝う", "重い", "落とす", "一緒に", "お礼"],
+    "story": {
+      "panel1": "친구가 이사를 도와달라고 부탁하고, 주인공이 흔쾌히 수락한다",
+      "panel2": "무거운 짐을 나르다 발이 걸려 박스를 떨어뜨린다",
+      "panel3": "내용물이 쏟아지고 둘이 함께 치우며 걱정스러운 표정을 짓는다",
+      "panel4": "이사를 무사히 마치고, 친구가 감사의 의미로 맛있는 식사를 대접한다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, anime-style illustration, thick black borders between panels, no speech bubbles, no text, bright clear colors, white background. Top-left panel: Two friends shaking hands cheerfully in front of an apartment building, one agreeing to help the other move, boxes visible in the background. Top-right panel: Person carrying a heavy cardboard box, tripping over something, box falling and contents spilling on the floor. Bottom-left panel: Both friends kneeling on the floor, picking up scattered items together, looking concerned but cooperative. Bottom-right panel: Moving complete, both friends sitting at a table sharing a delicious home-cooked meal as a thank-you, smiling warmly. Professional quality, suitable for Japanese language examination."
+  },
+  {
+    "id": "sjpt-7-013",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-013.png",
+    "theme": "병원 대기 시간이 너무 길다",
+    "keywords": ["具合が悪い", "待つ", "長い", "やっと", "診察", "元気になる"],
+    "story": {
+      "panel1": "주인공이 몸이 안 좋아 병원을 찾아간다",
+      "panel2": "대기실이 꽉 차있고 대기 번호표가 한참 남아 지루하고 힘들다",
+      "panel3": "드디어 이름이 불려 진찰실에서 의사에게 증상을 설명한다",
+      "panel4": "약을 받아 집에 돌아와 먹고 건강하게 회복해서 밝은 표정이다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, anime-style illustration, thick black borders between panels, no speech bubbles, no text, bright clear colors, white background. Top-left panel: A tired, unwell person entering a hospital or clinic, looking pale and uncomfortable. Top-right panel: A packed waiting room with many patients, the person sitting and waiting with a pained, exhausted expression, a numbered waiting ticket visible. Bottom-left panel: Person finally called in, sitting across from a kind doctor in the examination room, describing symptoms. Bottom-right panel: Person at home, having taken medicine, looking recovered and healthy with a bright smile, sunlight through the window. Professional quality, suitable for Japanese language examination."
+  },
+  {
+    "id": "sjpt-7-014",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-014.png",
+    "theme": "소풍 중 벌레가 나타나다",
+    "keywords": ["ピクニック", "虫", "驚く", "困る", "解決する", "楽しむ"],
+    "story": {
+      "panel1": "친구들과 공원에서 즐겁게 도시락을 펴고 피크닉을 즐기고 있다",
+      "panel2": "개미 떼가 음식으로 몰려들어 모두 깜짝 놀라 당황한다",
+      "panel3": "재빨리 천을 덮고 다들 협력해서 개미를 쫓아낸다",
+      "panel4": "문제를 해결하고 다시 모두 웃으며 피크닉을 즐긴다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, anime-style illustration, thick black borders between panels, no speech bubbles, no text, bright clear colors, white background. CRITICAL RULE: The picnic group consists of EXACTLY 3 FRIENDS who appear in ALL 4 panels. Friend A: young woman with long hair in a RED SHIRT. Friend B: young man with glasses in a BLUE SHIRT. Friend C: young woman with short hair in an ORANGE SHIRT. These EXACT SAME 3 people appear consistently in every panel. Top-left panel: Friend A (red shirt), Friend B (blue shirt), and Friend C (orange shirt) sit on a picnic blanket in a sunny park, MULTIPLE BENTO LUNCH BOXES AND FOOD ITEMS CLEARLY VISIBLE on the blanket in front of them, all smiling happily. Top-right panel: The SAME 3 friends (red shirt, blue shirt, orange shirt) are seated at the picnic — the BENTO BOXES AND FOOD MUST BE PROMINENTLY VISIBLE on the blanket — A LARGE TRAIL OF BLACK ANTS is shown crawling all over the bento boxes and food, and the 3 friends react with big shocked expressions, pointing at the ants on the food. Bottom-left panel: The SAME 3 friends (red, blue, orange shirts) cooperate urgently to cover the bento boxes with a cloth and shoo the ants away. Bottom-right panel: The SAME 3 friends (red, blue, orange shirts) laugh and happily eat from their lunch boxes again on the picnic blanket, problem solved. Professional quality, suitable for Japanese language examination."
+  },
+  {
+    "id": "sjpt-7-015",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-015.png",
+    "theme": "영화관에서 자리를 잘못 앉다",
+    "keywords": ["映画", "座席", "間違える", "気づく", "謝る", "ちょうど間に合う"],
+    "story": {
+      "panel1": "커플이 기대하던 영화를 보러 신나게 영화관에 입장한다",
+      "panel2": "자리에 앉았는데 다른 사람이 와서 자기 자리라고 한다",
+      "panel3": "티켓을 확인하니 상영관을 잘못 찾아왔다는 것을 깨닫고 사과한다",
+      "panel4": "맞는 상영관으로 달려가 영화가 막 시작할 때 겨우 자리에 앉는다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, anime-style illustration, thick black borders between panels, no speech bubbles, no text, bright clear colors, white background. Top-left panel: An excited couple entering a movie theater, holding popcorn and tickets, looking forward to the film. Top-right panel: The couple seated in what they think are their seats, but another person arrives and points at the seats indicating they are in the wrong spot. Bottom-left panel: The couple checking their tickets with embarrassed expressions, realizing they are in the wrong screening room, apologizing to the other person. Bottom-right panel: The couple rushing into the correct screening room and sitting down just as the movie begins on the big screen, looking relieved. Professional quality, suitable for Japanese language examination."
+  },
+  {
+    "id": "sjpt-7-016",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-016.png",
+    "theme": "스포츠 대회에서 팀원이 부상을 입다",
+    "keywords": ["試合", "けが", "心配する", "協力する", "乗り越える", "勝つ"],
+    "story": {
+      "panel1": "팀원들이 스포츠 대회를 앞두고 열정적으로 준비운동을 한다",
+      "panel2": "주요 선수가 워밍업 중 발목을 삐어 쓰러진다",
+      "panel3": "팀원들이 모여 걱정하며 작전 회의를 하고 서로 격려한다",
+      "panel4": "남은 팀원들이 협력해서 경기에서 이기고 부상 선수도 함께 기뻐한다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, anime-style illustration, thick black borders between panels, no speech bubbles, no text, bright clear colors, white background. Top-left panel: A sports team doing warm-up exercises energetically before a match, all looking motivated and confident. Top-right panel: A key team member falling to the ground, clutching an injured ankle, teammates rushing over with worried faces. Bottom-left panel: Team huddled together in a strategy discussion circle, teammates putting hands on each other's shoulders, encouraging each other with determined expressions. Bottom-right panel: Team celebrating a victory on the field, the injured player cheering from the sideline, everyone joyful together. Professional quality, suitable for Japanese language examination."
+  },
+  {
+    "id": "sjpt-7-017",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-017.png",
+    "theme": "여행 중 막차를 놓치다",
+    "keywords": ["旅行", "バス", "乗り遅れる", "困る", "タクシー", "無事に帰る"],
+    "story": {
+      "panel1": "관광지에서 친구와 사진을 찍으며 즐겁게 구경하고 있다",
+      "panel2": "시간 가는 줄 모르다 막차 버스가 떠나는 것을 발견하고 달려가지만 놓친다",
+      "panel3": "버스 정류장에서 어떻게 할지 둘이서 상의한다",
+      "panel4": "택시를 함께 타고 호텔에 무사히 도착해 오히려 웃으며 추억을 이야기한다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, anime-style illustration, thick black borders between panels, no speech bubbles, no text, bright clear colors, white background. STORY MUST BE CRYSTAL CLEAR. Two tourists: Tourist A is a young woman with ponytail in a YELLOW JACKET, Tourist B is a young man with a camera in a NAVY SHIRT. These SAME TWO PEOPLE appear in all 4 panels. Top-left panel: Tourist A in yellow jacket and Tourist B in navy shirt happily pose for photos in front of a famous scenic landmark (pagoda or mountain), both smiling with cameras. Top-right panel: The SAME Tourist A in yellow jacket and Tourist B in navy shirt run desperately toward a BUS that is CLEARLY PULLING AWAY — the bus door is closing, exhaust visible, they are waving their arms to stop it but miss it. Bottom-left panel: The SAME Tourist A in yellow jacket and Tourist B in navy shirt stand at a now COMPLETELY EMPTY bus stop, a schedule board showing no more buses tonight, both looking at each other with worried expressions. Bottom-right panel: The SAME Tourist A in yellow jacket and Tourist B in navy shirt sit in the back of a TAXI cab together, laughing and smiling, a hotel building visible through the taxi window as they arrive safely. Professional quality, suitable for Japanese language examination."
+  },
+  {
+    "id": "sjpt-7-018",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-018.png",
+    "theme": "정전이 되다",
+    "keywords": ["停電", "暗くなる", "ろうそく", "集まる", "楽しむ", "電気が戻る"],
+    "story": {
+      "panel1": "가족이 거실에서 TV를 보며 즐겁게 시간을 보내고 있다",
+      "panel2": "갑자기 정전이 되어 온 집이 캄캄해지고 모두 놀란다",
+      "panel3": "촛불을 켜고 가족 모두가 촛불 주위에 옹기종기 모여 이야기를 나눈다",
+      "panel4": "전기가 다시 들어오지만 가족은 촛불 대화가 좋았다며 미소 짓는다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, anime-style illustration, thick black borders between panels, no speech bubbles, no text, bright clear colors, white background. CRITICAL RULE: The family has exactly 3 members who appear in ALL 4 panels: FATHER (tall man with glasses), MOTHER (woman with shoulder-length hair), and ONE YOUNG BOY (approximately 7 years old, wearing a BRIGHT YELLOW T-SHIRT). The BOY ALWAYS wears the BRIGHT YELLOW T-SHIRT and is ALWAYS CLEARLY A BOY with short hair — DO NOT change to a girl. Top-left panel: Father, Mother, and the YOUNG BOY in bright yellow t-shirt watch TV together in a cozy lit living room, all smiling. Top-right panel: The lights and TV suddenly go dark — Father, Mother, and the SAME YOUNG BOY in yellow t-shirt all react with surprise in the darkness. Bottom-left panel: Father, Mother, and the SAME YOUNG BOY in yellow t-shirt sit closely together around lit candles on the table, talking warmly in the dark. Bottom-right panel: The lights come back on — Father, Mother, and the SAME YOUNG BOY in yellow t-shirt remain seated together smiling happily. Professional quality, suitable for Japanese language examination."
+  },
+  {
+    "id": "sjpt-7-019",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-019.png",
+    "theme": "분실물을 경찰서에 신고하다",
+    "keywords": ["落とし物", "拾う", "警察署", "届ける", "感謝する", "断る"],
+    "story": {
+      "panel1": "길을 걷던 주인공이 바닥에 지갑이 떨어져 있는 것을 발견한다",
+      "panel2": "지갑 안을 열어보니 신분증과 돈이 들어있어 어떻게 할지 고민한다",
+      "panel3": "경찰서에 가서 주운 지갑을 성실하게 신고·제출한다",
+      "panel4": "지갑 주인이 찾아와 사례를 하려 하지만 주인공이 정중히 사양한다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, anime-style illustration, thick black borders between panels, no speech bubbles, no text, bright clear colors, white background. CRITICAL RULE: The MAIN CHARACTER is a young person with short hair wearing a DARK GREY HOODIE and blue jeans. This SAME person in the DARK GREY HOODIE appears in ALL 4 panels — the grey hoodie NEVER changes to any other clothing type, not a polo shirt, not a collar shirt, always a HOODIE. Top-left panel: The young person in DARK GREY HOODIE walks on a city street, notices a wallet lying on the ground, looks surprised. Top-right panel: The SAME person in DARK GREY HOODIE crouches down, carefully examining the wallet contents — an ID card and cash visible — with a thoughtful responsible expression. Bottom-left panel: The SAME person in DARK GREY HOODIE stands at a police station counter, hands the wallet to a uniformed police officer, both looking respectful. Bottom-right panel: The grateful wallet owner meets the SAME person in DARK GREY HOODIE, trying to offer cash as a reward, but the person in grey hoodie politely declines with a kind smile and gentle hand gesture. Professional quality, suitable for Japanese language examination."
+  },
+  {
+    "id": "sjpt-7-020",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-020.png",
+    "theme": "요리 교실에서 실수하다",
+    "keywords": ["料理教室", "失敗する", "助ける", "協力する", "完成する", "喜ぶ"],
+    "story": {
+      "panel1": "주인공이 처음으로 요리 교실에 참가해 설레는 마음으로 앞치마를 두른다",
+      "panel2": "레시피를 따라 하지만 순서를 헷갈려 강사가 걱정스러운 눈빛으로 바라본다",
+      "panel3": "옆의 수강생들이 친절하게 도와주며 함께 요리를 완성해나간다",
+      "panel4": "완성된 요리를 모두 함께 맛보며 기뻐하고 주인공도 뿌듯한 표정을 짓는다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, anime-style illustration, thick black borders between panels, no speech bubbles, no text, bright clear colors, white background. CRITICAL RULE: The MAIN CHARACTER is THE SAME YOUNG WOMAN in all 4 panels — she has shoulder-length dark hair pulled back in a small ponytail, and wears a PINK BLOUSE under a WHITE APRON. This EXACT SAME young woman with pink blouse and white apron must appear in panels 1, 2, 3, AND 4 without any change. Top-left panel: The young woman with shoulder-length dark hair, pink blouse, white apron ties her apron excitedly at a bright cooking class kitchen, looking eager. Top-right panel: The SAME young woman in pink blouse and white apron looks confused at a recipe card, making mistakes at her cooking station, while an instructor nearby watches with concern. Bottom-left panel: The SAME young woman in pink blouse and white apron receives help from friendly classmates around the cooking station, everyone cooperating cheerfully. Bottom-right panel: The SAME young woman in pink blouse and white apron stands proudly at the table where the completed dish is placed, everyone tasting it and smiling, the young woman beaming with pride. Professional quality, suitable for Japanese language examination."
+  }
+]

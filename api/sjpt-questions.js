@@ -1,4 +1,10 @@
-// GET /api/sjpt-questions — 1부 고정 + Sheet2(2~7부) + Sheet6(2~3부 이미지)
+// GET /api/sjpt-questions — 1부 고정 + Sheet2(2~7부) + Sheet6(2~3부 이미지) + Part7 로컬 JSON
+import { readFileSync } from 'fs';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+const __apiDir = dirname(fileURLToPath(import.meta.url));
+
 const SHEETS_BASE = 'https://sheets.googleapis.com/v4/spreadsheets';
 const SHEET_ID    = process.env.GOOGLE_SHEETS_ID || '1jtfUtckNAAJJGLCQpUhR-J539Tk0i_OPz-jCV-HT4yY';
 
@@ -41,13 +47,26 @@ const FILE_ID_MAP = {
 };
 
 function getImageUrl(imageNo) {
-  // Part 6 이미지는 Vercel public 폴더에서 서빙 (Drive 불필요)
+  // Part 6·7 이미지는 Vercel public 폴더에서 서빙 (Drive 불필요)
   if (/^part6-\d+\.(png|jpg)$/i.test(imageNo)) return `/sjpt/part6/${imageNo}`;
+  if (/^part7-\d+\.(png|jpg)$/i.test(imageNo)) return `/sjpt/part7/${imageNo}`;
   const id = FILE_ID_MAP[imageNo];
   // drive.google.com/uc?export=view는 Cross-Origin-Resource-Policy: same-site를 반환해
   // 외부 도메인의 <img>에서 차단됨 → CORS 허용되는 lh3 CDN 사용 (크기도 축소되어 더 빠름)
   return id ? `https://lh3.googleusercontent.com/d/${id}=w1000` : null;
 }
+
+// Part 7 — 로컬 JSON에서 로드 (20문항, 시험 시 1문항 랜덤 추출)
+const PART7_QUESTIONS = JSON.parse(
+  readFileSync(join(__apiDir, '../scripts/sjpt-part7/questions.json'), 'utf-8')
+).map(q => ({
+  id:       q.id,
+  part:     7,
+  text:     q.text,
+  imageUrl: getImageUrl(q.imageFile),
+  theme:    q.theme,
+  keywords: q.keywords,
+}));
 
 function parsePart(cell) {
   const m = String(cell || '').match(/(\d+)/);
@@ -125,6 +144,9 @@ export default async function handler(req, res) {
     if (img2.length) byPart[2] = img2;
     if (img3.length) byPart[3] = img3;
     if (img6.length) byPart[6] = img6;
+
+    // Part 7 — 로컬 JSON으로 고정 (Sheets 데이터 무시)
+    byPart[7] = PART7_QUESTIONS;
 
     // 시트에 동일 질문 텍스트가 여러 행(난이도별/이미지별)으로 중복 존재 →
     // 텍스트 기준으로 중복 제거한 풀에서만 추출해 같은 문제가 두 번 나오지 않도록 함

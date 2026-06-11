@@ -42,6 +42,8 @@ export function useSjptFlow() {
       partNum:  currentPart.part,
       question: currentQuestion.text,
       answer:   transcript || '(무응답)',
+      ...(currentQuestion.theme    && { theme:    currentQuestion.theme }),
+      ...(currentQuestion.keywords && { keywords: currentQuestion.keywords }),
     };
     setAnswers(prev => [...prev, ans]);
 
