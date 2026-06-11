@@ -79,13 +79,14 @@ export default function SjptExam() {
   const [ttsLoading, setTtsLoading] = useState(false);
   const [showPartIntro, setShowPartIntro] = useState(true);
   const [doneLabel, setDoneLabel] = useState("registering"); // "registering" | "registered"
+  const [textRevealed, setTextRevealed] = useState(false); // 이미지 문항: 문제듣기 클릭 시 자막 표시
   const timerRef = useRef(null);
   const handleNextRef = useRef(null);
   const q = flow.currentQuestion;
   const part = flow.currentPart?.part || 1;
   const cfg = getPartConfig(part);
 
-  useEffect(() => { setPhase("question"); setTtsLoading(false); setDoneLabel("registering"); }, [q?.id]);
+  useEffect(() => { setPhase("question"); setTtsLoading(false); setDoneLabel("registering"); setTextRevealed(false); }, [q?.id]);
   useEffect(() => () => clearInterval(timerRef.current), []);
 
   const startTimer = useCallback((sec, onEnd) => {
@@ -113,6 +114,7 @@ export default function SjptExam() {
   // 문제 음성 재생 → (준비 시간) → 신호음 → 답변 녹음 자동 시작 (실제 시험과 동일한 흐름)
   const handleSpeak = useCallback(async () => {
     if (!q?.text || ttsLoading || phase !== "question") return;
+    setTextRevealed(true); // 음성과 동시에 자막 표시
     setTtsLoading(true);
     try { await speakJapanese(q.text, 'ja-JP-Neural2-C'); } catch {}
     setTtsLoading(false);
@@ -230,7 +232,9 @@ export default function SjptExam() {
       <div className="screen">
         <div className="question-card">
           {q.imageUrl && <img src={q.imageUrl} alt="문제 이미지" className="sjpt-image"/>}
-          <p className="question-card__text" style={{marginBottom:12}}>{q.text}</p>
+          {(!q.imageUrl || textRevealed) && (
+            <p className="question-card__text" style={{marginBottom:12}}>{q.text}</p>
+          )}
           {phase === "question" && (
             <button className="btn btn--secondary btn--block" onClick={handleSpeak} disabled={ttsLoading}>
               {ttsLoading ? "재생 중..." : "🔊 문제 듣기"}
@@ -238,7 +242,9 @@ export default function SjptExam() {
           )}
           {phase === "question" && (
             <p style={{marginTop:8,fontSize:"var(--fs-xs)",color:"var(--on-surface-3)",textAlign:"center"}}>
-              버튼을 눌러 문제를 들으면, 준비 시간 후 신호음과 함께 답변이 자동으로 시작됩니다
+              {q.imageUrl && !textRevealed
+                ? "버튼을 누르면 음성과 함께 문제 자막이 표시됩니다"
+                : "준비 시간 후 신호음과 함께 답변이 자동으로 시작됩니다"}
             </p>
           )}
         </div>
