@@ -1256,7 +1256,7 @@ img { max-width: 100%; display: block; }
    7. SJPT 녹음 진행 (/sjpt/exam)
    ============================================================ */
 .sjpt-progress { font-size: var(--fs-sm); font-weight: var(--fw-extra); color: var(--on-surface-2); }
-.sjpt-image { width: 100%; max-height: 250px; object-fit: cover; border-radius: var(--r-md); margin-top: var(--sp-3); }
+.sjpt-image { width: 100%; height: auto; display: block; object-fit: contain; border-radius: var(--r-md); margin-top: var(--sp-3); }
 
 /* ── SJPT 부 전환 안내 화면 ── */
 .sjpt-part-intro {
