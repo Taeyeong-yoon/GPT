@@ -231,7 +231,7 @@ export default function SjptExam() {
       </div>
       <div className="screen">
         <div className="question-card">
-          {q.imageUrl && <img src={q.imageUrl} alt="문제 이미지" className="sjpt-image"/>}
+          {q.imageUrl && <img key={q.id} src={q.imageUrl} alt="문제 이미지" className="sjpt-image"/>}
           {(!q.imageUrl || textRevealed) && (
             <p className="question-card__text" style={{marginBottom:12}}>{q.text}</p>
           )}

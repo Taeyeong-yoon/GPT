@@ -98,9 +98,10 @@ export default async function handler(req, res) {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) return res.status(500).json({ ok: false, error: { code: 500, message: 'OpenAI 키 미설정' } });
 
+  // Part 7가 포함된 경우 표준 프롬프트에 보조 지침만 추가 (전체 부분 평가 기준은 유지)
   const part7 = parts.find(p => p.partNum === 7);
   const systemPrompt = part7
-    ? buildPart7SystemPrompt(part7.theme, part7.keywords)
+    ? SYSTEM_PROMPT + `\n\n【7부 추가 지침】7부는 4컷 만화 스토리 묘사 문제입니다.\n테마: ${part7.theme || ''}\n핵심 키워드: ${(part7.keywords || []).join('·')}\n- fluency 평가 시 4컷 스토리 전체 커버 여부를 중시하세요\n- vocabulary 평가 시 위 키워드 활용도를 반영하세요 (동의어 표현도 인정)\n- part_feedback의 part 7 코멘트에 커버된 장면 수와 키워드 활용 여부를 반드시 언급하세요`
     : SYSTEM_PROMPT;
 
   const messages = [
