@@ -79,7 +79,32 @@ export default function SjptResult() {
                 <span className={`chip chip--n3`}>제{pf.part}부분</span>
                 <span className={styles.toggleArrow}>{openPart === pf.part ? '▲' : '▼'}</span>
               </button>
-              {openPart === pf.part && <p className={styles.partComment}>{pf.comment}</p>}
+              {openPart === pf.part && (
+                <div className={styles.partDetail}>
+                  {(pf.strength && pf.strength !== '없음') && (
+                    <div className={styles.partRowStrength}>
+                      <span className={styles.partLabelGreen}>✓ 잘된 점</span>
+                      <p className={styles.partRowText}>{pf.strength}</p>
+                    </div>
+                  )}
+                  {pf.weakness && (
+                    <div className={styles.partRowWeakness}>
+                      <span className={styles.partLabelOrange}>△ 개선할 점</span>
+                      <p className={styles.partRowText}>{pf.weakness}</p>
+                    </div>
+                  )}
+                  {pf.tip && (
+                    <div className={styles.partRowTip}>
+                      <span className={styles.partLabelBlue}>💡 표현 팁</span>
+                      <p className={styles.partRowText}>{pf.tip}</p>
+                    </div>
+                  )}
+                  {/* 구버전 데이터 fallback */}
+                  {!pf.strength && !pf.weakness && !pf.tip && pf.comment && (
+                    <p className={styles.partComment}>{pf.comment}</p>
+                  )}
+                </div>
+              )}
             </div>
           ))}
         </div>

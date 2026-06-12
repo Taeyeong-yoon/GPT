@@ -16,7 +16,15 @@
 .partItem:last-child { border: none; }
 .partToggle   { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 10px 0; background: none; border: none; cursor: pointer; }
 .toggleArrow  { font-size: 12px; color: var(--text-light); }
-.partComment  { padding: 0 0 12px; font-size: 13px; color: var(--text); line-height: 1.7; }
+.partComment     { padding: 0 0 12px; font-size: 13px; color: var(--text); line-height: 1.7; }
+.partDetail      { padding: 4px 0 14px; display: flex; flex-direction: column; gap: 8px; }
+.partRowStrength { background: #F0FAF2; border-left: 3px solid #4CAF50; border-radius: 6px; padding: 8px 12px; }
+.partRowWeakness { background: #FFF7F0; border-left: 3px solid #FF8C42; border-radius: 6px; padding: 8px 12px; }
+.partRowTip      { background: #F2F3FF; border-left: 3px solid #7986CB; border-radius: 6px; padding: 8px 12px; }
+.partLabelGreen  { display: block; font-size: 11px; font-weight: 700; color: #3A8C4A; margin-bottom: 4px; }
+.partLabelOrange { display: block; font-size: 11px; font-weight: 700; color: #C96A1A; margin-bottom: 4px; }
+.partLabelBlue   { display: block; font-size: 11px; font-weight: 700; color: #5560B8; margin-bottom: 4px; }
+.partRowText     { font-size: 13px; color: var(--text); line-height: 1.65; margin: 0; }
 .improvements { padding: 18px 20px; }
 .improveList  { padding-left: 18px; display: flex; flex-direction: column; gap: 8px; }
 .improveItem  { font-size: 13px; color: var(--text); line-height: 1.6; }
