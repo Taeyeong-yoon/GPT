@@ -4,7 +4,7 @@ import {
 } from 'firebase/firestore';
 import { db } from './firebase';
 
-export const EXAM_LIMITS = { jlpt: 3, sjpt: 2 };
+export const EXAM_LIMITS = { jlpt: 2, sjpt: 1 };
 
 function monthKey() {
   const now = new Date();
