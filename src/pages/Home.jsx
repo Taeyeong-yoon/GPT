@@ -3,8 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
 import { useAuth } from '../context/AuthProvider';
 import { db } from '../services/firebase';
+import { openPlayStore } from '../components/AppBanner';
 import nekoStudy from '../assets/neko-cats/neko-cat-01-study.png';
 import nekoTeacher from '../assets/neko-cats/neko-cat-11-teacher.png';
+
+const isAndroid = /Android/i.test(navigator.userAgent);
+const fromApp   = new URLSearchParams(window.location.search).get('from') === 'app';
 
 export default function Home() {
   const { user } = useAuth();
@@ -102,6 +106,13 @@ export default function Home() {
         </button>
       </div>
 
+      {/* 앱 다운로드 링크 — Android, 앱 외부 접속 시만 표시 */}
+      {isAndroid && !fromApp && (
+        <button onClick={openPlayStore} className="home__app-link">
+          <span>📱</span> 네코짱 앱 다운로드 (Google Play)
+        </button>
+      )}
+
       {/* 하단 네비게이션 */}
       <div className="home__nav">
         <button className="is-active" onClick={() => navigate('/')}>
@@ -115,9 +126,6 @@ export default function Home() {
         </button>
         <button onClick={() => navigate('/sjpt')}>
           <span className="ico">✿</span>SJPT
-        </button>
-        <button onClick={() => navigate('/pricing')}>
-          <span className="ico">★</span>프리미엄
         </button>
       </div>
     </div>

@@ -1012,6 +1012,15 @@ img { max-width: 100%; display: block; }
 .recent__value { font-weight: var(--fw-extra); }
 .recent__prob { margin-left: auto; color: var(--sage); font-weight: var(--fw-extra); }
 
+.home__app-link {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  width: 100%; padding: 10px 16px;
+  background: none; border: 1.5px solid #4F46E5;
+  border-radius: 999px; color: #4F46E5;
+  font-size: var(--fs-sm); font-weight: var(--fw-extra);
+  cursor: pointer; margin-bottom: var(--sp-3);
+  letter-spacing: 0.01em;
+}
 .home__nav { display: flex; gap: var(--sp-6); justify-content: center; margin-top: auto; padding-top: var(--sp-4); }
 .home__nav button {
   background: none; border: none;
