@@ -1,5 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { signInWithRedirect, signInWithPopup, getRedirectResult, signOut, onAuthStateChanged } from 'firebase/auth';
+import {
+  signInWithRedirect, signInWithPopup, signInWithCustomToken,
+  getRedirectResult, signOut, onAuthStateChanged,
+} from 'firebase/auth';
 import { auth, firebaseReady, provider } from '../services/firebase';
 
 const AuthContext = createContext(null);
@@ -12,6 +15,27 @@ export function AuthProvider({ children }) {
     if (!firebaseReady || !auth) {
       setLoading(false);
       return undefined;
+    }
+
+    // 네코짱 JLPT 앱 SSO: URL에 idToken 파라미터가 있으면 자동 로그인
+    const params  = new URLSearchParams(window.location.search);
+    const idToken = params.get('idToken');
+    if (idToken) {
+      // 보안을 위해 URL에서 즉시 제거
+      window.history.replaceState({}, '', window.location.pathname);
+
+      fetch('/api/sso', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ idToken }),
+      })
+        .then(r => r.json())
+        .then(data => {
+          if (data.ok && data.customToken) {
+            return signInWithCustomToken(auth, data.customToken);
+          }
+        })
+        .catch(err => console.error('[SSO] 자동 로그인 실패:', err));
     }
 
     // 리다이렉트 로그인 결과 처리

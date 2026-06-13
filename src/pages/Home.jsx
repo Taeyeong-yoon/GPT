@@ -116,6 +116,9 @@ export default function Home() {
         <button onClick={() => navigate('/sjpt')}>
           <span className="ico">✿</span>SJPT
         </button>
+        <button onClick={() => navigate('/pricing')}>
+          <span className="ico">★</span>프리미엄
+        </button>
       </div>
     </div>
   );
