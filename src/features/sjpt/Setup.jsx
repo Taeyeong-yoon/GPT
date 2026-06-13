@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useSubscriptionGuard from '../../hooks/useSubscriptionGuard';
+import { openPlayStore } from '../../components/AppBanner';
 import nekoStudy from '../../assets/neko-cats/neko-cat-01-study.png';
 import nekoHeadset from '../../assets/neko-cats/neko-cat-05-headset.png';
 import nekoMicrophone from '../../assets/neko-cats/neko-cat-06-microphone.png';
@@ -103,7 +104,8 @@ export default function SjptSetup() {
         <div className="sub-gate sub-gate--locked">
           <p className="sub-gate__icon">🔒</p>
           <p className="sub-gate__title">Pro 구독이 필요합니다</p>
-          <p className="sub-gate__desc">SJPT 말하기 평가는 Pro 구독자만 이용 가능합니다.<br />네코짱 앱에서 구독 후 이용해주세요.</p>
+          <p className="sub-gate__desc">SJPT 말하기 평가는 Pro 구독자만 이용 가능합니다.</p>
+          <button className="btn btn--indigo btn--block" onClick={openPlayStore}>📱 네코짱 앱에서 구독하기</button>
         </div>
       )}
       {!guard.loading && guard.isPro && !guard.canStart && (

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useSubscriptionGuard from '../../hooks/useSubscriptionGuard';
+import { openPlayStore } from '../../components/AppBanner';
 import nekoStudy from '../../assets/neko-cats/neko-cat-01-study.png';
 import nekoHeart from '../../assets/neko-cats/neko-cat-02-heart-eyes.png';
 import nekoSunglasses from '../../assets/neko-cats/neko-cat-03-sunglasses.png';
@@ -47,7 +48,8 @@ export default function LevelSelect() {
         <div className="sub-gate sub-gate--locked">
           <p className="sub-gate__icon">🔒</p>
           <p className="sub-gate__title">Pro 구독이 필요합니다</p>
-          <p className="sub-gate__desc">JLPT 모의시험은 Pro 구독자만 이용 가능합니다.<br />네코짱 앱에서 구독 후 이용해주세요.</p>
+          <p className="sub-gate__desc">JLPT 모의시험은 Pro 구독자만 이용 가능합니다.</p>
+          <button className="btn btn--indigo btn--block" onClick={openPlayStore}>📱 네코짱 앱에서 구독하기</button>
         </div>
       )}
       {!guard.loading && guard.isPro && !guard.canStart && (
