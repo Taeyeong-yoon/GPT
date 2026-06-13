@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useSubscriptionGuard from '../../hooks/useSubscriptionGuard';
 import nekoStudy from '../../assets/neko-cats/neko-cat-01-study.png';
 import nekoHeadset from '../../assets/neko-cats/neko-cat-05-headset.png';
 import nekoMicrophone from '../../assets/neko-cats/neko-cat-06-microphone.png';
@@ -34,6 +35,7 @@ export default function SjptSetup() {
   const [micOk,   setMicOk]   = useState(null);
   const [testing, setTesting] = useState(false);
   const [parts,   setParts]   = useState([]);
+  const guard = useSubscriptionGuard('sjpt');
 
   useEffect(() => {
     fetch('/api/sjpt-questions')
@@ -97,9 +99,31 @@ export default function SjptSetup() {
         <p className="env-tip">⏱️ 부분마다 준비·답변 시간이 다릅니다 (위 카드 참고)</p>
       </div>
 
+      {!guard.loading && !guard.isPro && (
+        <div className="sub-gate sub-gate--locked">
+          <p className="sub-gate__icon">🔒</p>
+          <p className="sub-gate__title">Pro 구독이 필요합니다</p>
+          <p className="sub-gate__desc">SJPT 말하기 평가는 Pro 구독자만 이용 가능합니다.<br />네코짱 앱에서 구독 후 이용해주세요.</p>
+        </div>
+      )}
+      {!guard.loading && guard.isPro && !guard.canStart && (
+        <div className="sub-gate sub-gate--exhausted">
+          <p className="sub-gate__icon">📅</p>
+          <p className="sub-gate__title">이번 달 횟수를 모두 사용했습니다</p>
+          <p className="sub-gate__desc">SJPT 말하기 평가는 월 {guard.limit}회 제공됩니다.<br />({guard.used}/{guard.limit}회 사용) 다음 달에 다시 응시할 수 있습니다.</p>
+        </div>
+      )}
+
       <div className="cta-bar">
-        <button className="btn btn--primary btn--block" onClick={() => navigate('/sjpt/exam')}>
-          시작하기
+        {!guard.loading && guard.isPro && (
+          <p className="sub-usage">이번 달 SJPT 응시 {guard.used}/{guard.limit}회</p>
+        )}
+        <button
+          className="btn btn--primary btn--block"
+          disabled={guard.loading || !guard.canStart}
+          onClick={() => navigate('/sjpt/exam')}
+        >
+          {guard.loading ? '확인 중...' : !guard.isPro ? '구독 필요' : !guard.canStart ? '횟수 초과' : '시작하기'}
         </button>
       </div>
     </div>

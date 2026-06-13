@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import useExamGuard from '../../hooks/useExamGuard';
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { useAuth } from "../../context/AuthProvider";
 import { db } from "../../services/firebase";
+import { incrementUsage } from "../../services/subscription";
 import { speakJapanese } from "../../services/tts";
 import { useSjptFlow } from "./hooks/useSjptFlow";
 import { useRecorder } from "./hooks/useRecorder";
@@ -75,6 +77,8 @@ export default function SjptExam() {
   const flow = useSjptFlow();
   const recorder = useRecorder();
   const [phase, setPhase] = useState("question"); // question -> prep -> recording -> done
+  const [examDone, setExamDone] = useState(false);
+  useExamGuard(!examDone); // 제출 완료 전까지 새로고침·뒤로가기 차단
   const [countdown, setCountdown] = useState(0);
   const [ttsLoading, setTtsLoading] = useState(false);
   const [showPartIntro, setShowPartIntro] = useState(true);
@@ -158,8 +162,11 @@ export default function SjptExam() {
         const ref = await addDoc(collection(db, "users", user.uid, "results"), {
           type: "sjpt", level: "N3", answers: flow.answers, createdAt: serverTimestamp()
         });
+        await incrementUsage(user.uid, 'sjpt');
+        setExamDone(true);
         navigate("/sjpt/result/" + ref.id, { state: { answers: flow.answers } });
       } catch {
+        setExamDone(true);
         navigate("/sjpt/result/local", { state: { answers: flow.answers } });
       }
     })();

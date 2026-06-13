@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import useExamGuard from '../../hooks/useExamGuard';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { useAuth } from '../../context/AuthProvider';
 import { db } from '../../services/firebase';
+import { incrementUsage } from '../../services/subscription';
 import { useJlptQuestions } from './hooks/useJlptQuestions';
 import { scoreJlpt } from '../../utils/jlptScoring';
 import { storage } from '../../utils/storage';
@@ -23,6 +25,7 @@ export default function JlptExam() {
   const [revealed,   setRevealed]  = useState(false);
   const [timeLeft,   setTimeLeft]  = useState(TOTAL_TIME);
   const [submitting, setSubmitting]= useState(false);
+  useExamGuard(!submitting); // 제출 완료 전까지 새로고침·뒤로가기 차단
   const [ttsPlaying, setTtsPlaying]= useState(false);
   const [playCount,  setPlayCount] = useState(0);
   const [ttsError,   setTtsError]  = useState('');
@@ -97,6 +100,7 @@ export default function JlptExam() {
     try {
       const ref = await addDoc(collection(db,'users',user.uid,'results'),
         { type:'jlpt', level, ...result, createdAt: serverTimestamp() });
+      await incrementUsage(user.uid, 'jlpt');
       storage.remove(PROGRESS_KEY);
       navigate(`/jlpt/result/${ref.id}`, { state:{result,level} });
     } catch {
