@@ -8,6 +8,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700&display=swap');
 
 :root {
+  color-scheme: light only; /* 시스템·브라우저 다크모드 완전 차단 */
+
   /* --- Brand Color Palette (네코짱 시스템) --- */
   --cream:     #FFF8EF; /* 배경 */
   --pink:      #FFAFC7; /* 강조 */
@@ -99,44 +101,7 @@
   --z-modal:  400;
 }
 
-/* =============================================================
-   Dark Mode — 선택 구현
-   네코짱 톤(크림/핑크)을 유지하되 야간 가독성을 위해
-   배경만 어둡게 낮추고 브랜드 액센트는 보존하는 "warm dark" 방향.
-   .dark 클래스 또는 시스템 설정(prefers-color-scheme) 둘 다 지원.
-   ============================================================= */
-@media (prefers-color-scheme: dark) {
-  :root:not(.light) {
-    --bg:           #221A15;
-    --surface:      #2E241D;
-    --surface-2:    #362A22;
-    --border-soft:  #4A3A2E;
-    --track:        #3C2F26;
-    --on-surface:   #F3E9DF;
-    --on-surface-2: #D7C3B2;
-    --on-surface-3: #A98E78;
-    --primary:      #FF94B6; /* 어두운 배경에서 대비 확보를 위해 살짝 밝게 */
-    --disabled-bg:  #3A2E26;
-    --disabled-fg:  #6E5C4E;
-    --shadow-card:  0 2px 16px rgba(0,0,0,0.4);
-    --shadow-header:0 2px 8px rgba(0,0,0,0.4);
-  }
-}
-.dark {
-  --bg:           #221A15;
-  --surface:      #2E241D;
-  --surface-2:    #362A22;
-  --border-soft:  #4A3A2E;
-  --track:        #3C2F26;
-  --on-surface:   #F3E9DF;
-  --on-surface-2: #D7C3B2;
-  --on-surface-3: #A98E78;
-  --primary:      #FF94B6;
-  --disabled-bg:  #3A2E26;
-  --disabled-fg:  #6E5C4E;
-  --shadow-card:  0 2px 16px rgba(0,0,0,0.4);
-  --shadow-header:0 2px 8px rgba(0,0,0,0.4);
-}
+/* Dark Mode — 비활성화 (라이트모드 전용 서비스) */
 
 /* =============================================================
    Reset / Base
