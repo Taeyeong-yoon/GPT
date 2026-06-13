@@ -9,10 +9,11 @@ function getSupportedMimeType() {
 }
 
 export function useRecorder() {
-  const [isRecording, setIsRecording] = useState(false);
-  const [transcript,  setTranscript]  = useState('');
-  const [audioBlob,   setAudioBlob]   = useState(null);
-  const [error,       setError]       = useState(null);
+  const [isRecording,  setIsRecording]  = useState(false);
+  const [transcript,   setTranscript]   = useState('');
+  const [transcribing, setTranscribing] = useState(false);
+  const [audioBlob,    setAudioBlob]    = useState(null);
+  const [error,        setError]        = useState(null);
 
   const recorderRef = useRef(null);
   const chunksRef   = useRef([]);
@@ -47,7 +48,8 @@ export function useRecorder() {
 
       if (isTooShort(blob)) { setTranscript(''); return; }
 
-      // Whisper STT — 백그라운드 처리
+      // Whisper STT
+      setTranscribing(true);
       try {
         const base64 = await blobToBase64(blob);
         const { transcript: text } = await transcribe({
@@ -58,6 +60,8 @@ export function useRecorder() {
       } catch(e) {
         console.warn('Whisper STT 오류:', e.message);
         setTranscript('');
+      } finally {
+        setTranscribing(false);
       }
     };
 
@@ -70,5 +74,5 @@ export function useRecorder() {
     setIsRecording(false);
   }, []);
 
-  return { isRecording, transcript, audioBlob, startRecording, stopRecording, error };
+  return { isRecording, transcript, transcribing, audioBlob, startRecording, stopRecording, error };
 }

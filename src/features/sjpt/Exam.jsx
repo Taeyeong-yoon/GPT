@@ -143,13 +143,13 @@ export default function SjptExam() {
   // handleNext 최신 버전을 ref에 유지 (자동 진행 타이머에서 사용)
   useEffect(() => { handleNextRef.current = handleNext; }, [handleNext]);
 
-  // 답변 완료 시 자동 진행: 1초 "등록 중" → 1초 "완료" → 다음 문항
+  // 답변 완료 시 자동 진행 — STT 완료 후에만 타이머 시작
   useEffect(() => {
-    if (phase !== "done") return;
-    const t1 = setTimeout(() => setDoneLabel("registered"), 1800);
-    const t2 = setTimeout(() => handleNextRef.current?.(), 3500);
+    if (phase !== "done" || recorder.transcribing) return;
+    const t1 = setTimeout(() => setDoneLabel("registered"), 1200);
+    const t2 = setTimeout(() => handleNextRef.current?.(), 2500);
     return () => { clearTimeout(t1); clearTimeout(t2); };
-  }, [phase]);
+  }, [phase, recorder.transcribing]);
 
   useEffect(() => {
     if (!flow.isDone || flow.answers.length === 0) return;
@@ -275,19 +275,26 @@ export default function SjptExam() {
 
         {phase === "done" && (
           <div className="card" style={{padding:"var(--sp-5)"}}>
-            {recorder.transcript && (
+            {recorder.transcribing && (
+              <p style={{marginBottom:12,fontSize:"var(--fs-sm)",color:"var(--on-surface-3)",textAlign:"center"}}>
+                🎙️ 음성 인식 중...
+              </p>
+            )}
+            {!recorder.transcribing && recorder.transcript && (
               <p style={{marginBottom:12,fontSize:"var(--fs-sm)",color:"var(--on-surface-2)",lineHeight:1.6}}>
                 {recorder.transcript}
               </p>
             )}
-            {doneLabel === "registering" ? (
-              <p style={{fontSize:"var(--fs-sm)",color:"var(--on-surface-3)",textAlign:"center"}}>
-                답변을 등록하고 있습니다...
-              </p>
-            ) : (
-              <p style={{fontSize:"var(--fs-sm)",color:"var(--success,#2e7d32)",fontWeight:"var(--fw-semi)",textAlign:"center"}}>
-                등록이 완료되었습니다 ✓
-              </p>
+            {!recorder.transcribing && (
+              doneLabel === "registering" ? (
+                <p style={{fontSize:"var(--fs-sm)",color:"var(--on-surface-3)",textAlign:"center"}}>
+                  답변을 등록하고 있습니다...
+                </p>
+              ) : (
+                <p style={{fontSize:"var(--fs-sm)",color:"var(--success,#2e7d32)",fontWeight:"var(--fw-semi)",textAlign:"center"}}>
+                  등록이 완료되었습니다 ✓
+                </p>
+              )
             )}
           </div>
         )}
