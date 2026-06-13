@@ -101,7 +101,29 @@
   --z-modal:  400;
 }
 
-/* Dark Mode — 비활성화 (라이트모드 전용 서비스) */
+/* 다크모드 강제 차단 — 브라우저/시스템 설정 무시하고 라이트모드 고정 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: light;
+    --bg:           #FFF8EF;
+    --surface:      #FFFFFF;
+    --surface-2:    #FFFDFA;
+    --border-soft:  #EDD5B5;
+    --track:        #F0E6DC;
+    --on-surface:   #3D2B1F;
+    --on-surface-2: #7A5544;
+    --on-surface-3: #B89078;
+    --primary:      #F77FAA;
+    --disabled-bg:  #E8E0D8;
+    --disabled-fg:  #B4A89C;
+    --shadow-card:  0 2px 16px rgba(0,0,0,0.08);
+    --shadow-header:0 2px 8px rgba(61,43,31,0.06);
+  }
+  html, body {
+    background-color: #FFF8EF !important;
+    color: #3D2B1F !important;
+  }
+}
 
 /* =============================================================
    Reset / Base
