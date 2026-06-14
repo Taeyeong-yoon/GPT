@@ -63,8 +63,8 @@ export default function AppBanner() {
     setDownloadVisible(true);
   }, [fromApp]);
 
-  // Exam screens have their own back-guard; hide the return button there
-  const isExam = /\/(jlpt|sjpt)\/(mini\/)?exam/.test(location.pathname);
+  // 앱에서 접근 시 JLPT/SJPT 관련 페이지에서는 배너 숨김
+  const isExam = /\/(jlpt|sjpt)/.test(location.pathname);
 
   // cta-bar가 있는 화면에서 banner가 버튼을 가리지 않도록 body class 추가
   useEffect(() => {
