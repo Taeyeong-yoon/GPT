@@ -66,6 +66,16 @@ export default function AppBanner() {
   // Exam screens have their own back-guard; hide the return button there
   const isExam = /\/(jlpt|sjpt)\/(mini\/)?exam/.test(location.pathname);
 
+  // cta-bar가 있는 화면에서 banner가 버튼을 가리지 않도록 body class 추가
+  useEffect(() => {
+    if (fromApp && !isExam) {
+      document.body.classList.add('has-app-banner');
+    } else {
+      document.body.classList.remove('has-app-banner');
+    }
+    return () => document.body.classList.remove('has-app-banner');
+  }, [fromApp, isExam]);
+
   // ── fromApp 모드: 앱으로 이동 버튼 ──────────────────────────────
   if (fromApp && !isExam) {
     return (

@@ -47,7 +47,7 @@ export async function checkMiniAccess(uid, isPro, type) {
         if (monthUsed >= PRO_MONTHLY_JLPT) return { canStart: false, reason: 'monthly', used: monthUsed, limit: PRO_MONTHLY_JLPT };
         return { canStart: true, monthUsed, monthLimit: PRO_MONTHLY_JLPT };
       } else {
-        const weekUsed = (free.jlpt_week_start === curWeek) ? (free.jlpt_week_used ?? 0) : 0;
+        const weekUsed = (free.jlpt_week_start === curWeek) ? (Number(free.jlpt_week_used) || 0) : 0;
         if (weekUsed >= FREE_WEEKLY_JLPT) return { canStart: false, reason: 'weekly', used: weekUsed, limit: FREE_WEEKLY_JLPT };
         return { canStart: true, weekUsed, weekLimit: FREE_WEEKLY_JLPT };
       }
@@ -59,7 +59,7 @@ export async function checkMiniAccess(uid, isPro, type) {
         if (monthUsed >= PRO_MONTHLY_SJPT) return { canStart: false, reason: 'monthly', used: monthUsed, limit: PRO_MONTHLY_SJPT };
         return { canStart: true, monthUsed, monthLimit: PRO_MONTHLY_SJPT };
       } else {
-        const weekUsed = (free.sjpt_week_start === curWeek) ? (free.sjpt_week_used ?? 0) : 0;
+        const weekUsed = (free.sjpt_week_start === curWeek) ? (Number(free.sjpt_week_used) || 0) : 0;
         if (weekUsed >= FREE_WEEKLY_SJPT) return { canStart: false, reason: 'weekly', used: weekUsed, limit: FREE_WEEKLY_SJPT };
         return { canStart: true, weekUsed, weekLimit: FREE_WEEKLY_SJPT };
       }

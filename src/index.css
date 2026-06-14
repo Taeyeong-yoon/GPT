@@ -482,6 +482,9 @@ img { max-width: 100%; display: block; }
 }
 /* 하단 고정 CTA가 있는 화면은 바닥 여백 확보 */
 .screen--cta-pad { padding-bottom: calc(var(--cta-h) + var(--sp-8)); }
+/* 앱 배너(fromApp)가 활성화되면 cta-bar를 배너 위로 올림 */
+.has-app-banner .cta-bar { bottom: 68px; }
+.has-app-banner .screen--cta-pad { padding-bottom: calc(var(--cta-h) + 68px + var(--sp-8)); }
 
 .screen__title {
   font-size: var(--fs-2xl);
