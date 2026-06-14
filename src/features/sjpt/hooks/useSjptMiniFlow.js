@@ -9,7 +9,7 @@ export function useSjptMiniFlow() {
   const [answers,     setAnswers]     = useState([]);
 
   useEffect(() => {
-    fetch('/api/sjpt-questions')
+    fetch(`/api/sjpt-questions?t=${Date.now()}`)
       .then(r => r.json())
       .then(data => {
         if (!data.ok) throw new Error(data?.error?.message || '문제 로드 실패');

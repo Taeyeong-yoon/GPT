@@ -166,6 +166,7 @@ export default async function handler(req, res) {
       })).filter(p => p.questions.length > 0),
     ];
 
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
     return res.status(200).json({ ok: true, parts });
   } catch(e) {
     return res.status(502).json({ ok: false, error: { message: e.message } });
