@@ -1418,8 +1418,13 @@ img { max-width: 100%; display: block; }
   position: sticky; top: 0; z-index: 10;
 }
 .hm-header__brand { display: flex; align-items: center; gap: var(--sp-2); }
-.hm-header__logo  { width: 28px; height: 28px; object-fit: contain; flex-shrink: 0; }
-.hm-header__name  { font-size: 0.78rem; font-weight: var(--fw-black); color: var(--on-surface); letter-spacing: 0.06em; }
+.hm-header__logo  { width: 36px; height: 36px; object-fit: contain; flex-shrink: 0; }
+.hm-header__name  {
+  font-size: 1.01rem; font-weight: var(--fw-black); letter-spacing: 0.08em;
+  background: linear-gradient(135deg, #B8860B 0%, #E8C84A 45%, #C9A84C 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 .hm-header__avatar {
   width: 34px; height: 34px; border-radius: 50%;
   overflow: hidden; border: 2px solid var(--pink-l);

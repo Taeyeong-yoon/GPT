@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthProvider';
 import { getSubscriptionStatus } from '../../services/subscription';
-import { checkMiniAccess, FREE_SJPT, PRO_MONTHLY_SJPT, PRO_DAILY_SJPT } from '../../services/miniUsage';
+import { checkMiniAccess, FREE_SJPT, PRO_MONTHLY_SJPT } from '../../services/miniUsage';
 import { openPlayStore } from '../../components/AppBanner';
 import nekoStudy      from '../../assets/neko-cats/neko-cat-01-study.png';
 import nekoHeadset    from '../../assets/neko-cats/neko-cat-05-headset.png';
@@ -84,14 +84,7 @@ export default function SjptMiniSetup() {
         <div className="sub-gate sub-gate--exhausted">
           <p className="sub-gate__icon">📅</p>
           <p className="sub-gate__title">이번 달 한도 도달</p>
-          <p className="sub-gate__desc">이번 달 SJPT 미니 {access?.used}/{PRO_MONTHLY_SJPT}회 사용했습니다.</p>
-        </div>
-      )}
-      {!loading && blocked && reason === 'daily' && (
-        <div className="sub-gate sub-gate--exhausted">
-          <p className="sub-gate__icon">📅</p>
-          <p className="sub-gate__title">오늘 한도 도달</p>
-          <p className="sub-gate__desc">오늘 SJPT 미니 {access?.used}/{PRO_DAILY_SJPT}회 사용했습니다.<br/>내일 다시 이용할 수 있습니다.</p>
+          <p className="sub-gate__desc">이번 달 SJPT 미니 {access?.used}/{PRO_MONTHLY_SJPT}회를 모두 사용했습니다.</p>
         </div>
       )}
 
@@ -99,8 +92,8 @@ export default function SjptMiniSetup() {
         {!loading && access?.canStart && (
           <p className="sub-usage">
             {isPro
-              ? `이번 달 ${access.monthUsed}/${access.monthLimit}회 · 오늘 ${access.dailyUsed}/${access.dailyLimit}회`
-              : `누적 ${access.lifeUsed}/${access.lifeLimit}회 남음`}
+              ? `이번 달 ${access.monthUsed}/${access.monthLimit}회 사용`
+              : `무료 ${access.lifeUsed}/${access.lifeLimit}회 사용 · 남은 횟수 ${access.lifeLimit - access.lifeUsed}회`}
           </p>
         )}
         <button className="btn btn--primary btn--block"

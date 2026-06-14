@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthProvider';
 import { getSubscriptionStatus } from '../../services/subscription';
-import { checkMiniAccess, FREE_JLPT_PER_LEVEL, PRO_MONTHLY_JLPT, PRO_DAILY_JLPT, FREE_DAILY_JLPT } from '../../services/miniUsage';
+import { checkMiniAccess, FREE_JLPT_TOTAL, PRO_MONTHLY_JLPT } from '../../services/miniUsage';
 import { openPlayStore } from '../../components/AppBanner';
 import nekoStudy      from '../../assets/neko-cats/neko-cat-01-study.png';
 import nekoHeart      from '../../assets/neko-cats/neko-cat-02-heart-eyes.png';
@@ -30,14 +30,9 @@ export default function JlptMiniLevelSelect() {
     if (!user) return;
     getSubscriptionStatus(user.uid).then(sub => {
       setIsPro(sub.isPro);
-      return checkMiniAccess(user.uid, sub.isPro, 'jlpt', selected || 'N5');
+      return checkMiniAccess(user.uid, sub.isPro, 'jlpt');
     }).then(a => { setAccess(a); setLoading(false); });
   }, [user]);
-
-  useEffect(() => {
-    if (!user || !selected) return;
-    checkMiniAccess(user.uid, isPro, 'jlpt', selected).then(setAccess);
-  }, [selected, isPro, user]);
 
   const handleStart = () => {
     if (!selected || !access?.canStart) return;
@@ -70,34 +65,25 @@ export default function JlptMiniLevelSelect() {
       {!loading && blocked && reason === 'lifetime' && !isPro && (
         <div className="sub-gate sub-gate--exhausted">
           <p className="sub-gate__icon">🎓</p>
-          <p className="sub-gate__title">{selected} 무료 체험 횟수 소진</p>
-          <p className="sub-gate__desc">무료 {selected} 미니 테스트 {FREE_JLPT_PER_LEVEL}회를 모두 사용했습니다.<br/>Pro 구독으로 월 {PRO_MONTHLY_JLPT}회 이용하세요.</p>
+          <p className="sub-gate__title">무료 체험 횟수 소진</p>
+          <p className="sub-gate__desc">무료 JLPT 미니 테스트 {FREE_JLPT_TOTAL}회를 모두 사용했습니다.<br/>Pro 구독으로 월 {PRO_MONTHLY_JLPT}회 이용하세요.</p>
           <button className="btn btn--indigo btn--block" onClick={openPlayStore}>📱 네코짱 앱에서 구독하기</button>
-        </div>
-      )}
-      {!loading && blocked && reason === 'daily' && (
-        <div className="sub-gate sub-gate--exhausted">
-          <p className="sub-gate__icon">📅</p>
-          <p className="sub-gate__title">오늘 한도 도달</p>
-          <p className="sub-gate__desc">
-            오늘 JLPT 미니 {access?.used}/{isPro ? PRO_DAILY_JLPT : FREE_DAILY_JLPT}회 사용했습니다.<br/>내일 다시 이용할 수 있습니다.
-          </p>
         </div>
       )}
       {!loading && blocked && reason === 'monthly' && (
         <div className="sub-gate sub-gate--exhausted">
           <p className="sub-gate__icon">📅</p>
           <p className="sub-gate__title">이번 달 한도 도달</p>
-          <p className="sub-gate__desc">이번 달 JLPT 미니 {access?.used}/{PRO_MONTHLY_JLPT}회 사용했습니다.</p>
+          <p className="sub-gate__desc">이번 달 JLPT 미니 {access?.used}/{PRO_MONTHLY_JLPT}회를 모두 사용했습니다.</p>
         </div>
       )}
 
       <div className="cta-bar">
-        {!loading && access?.canStart && selected && (
+        {!loading && access?.canStart && (
           <p className="sub-usage">
             {isPro
-              ? `이번 달 ${access.monthUsed}/${access.monthLimit}회 · 오늘 ${access.dailyUsed}/${access.dailyLimit}회`
-              : `${selected} 누적 ${access.lifeUsed}/${access.lifeLimit}회 · 오늘 ${access.dailyUsed}/${access.dailyLimit}회`}
+              ? `이번 달 ${access.monthUsed}/${access.monthLimit}회 사용`
+              : `무료 ${access.lifeUsed}/${access.lifeLimit}회 사용 · 남은 횟수 ${access.lifeLimit - access.lifeUsed}회`}
           </p>
         )}
         <button className="btn btn--primary btn--block"

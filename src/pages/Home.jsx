@@ -4,13 +4,11 @@ import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
 import { useAuth } from '../context/AuthProvider';
 import { db } from '../services/firebase';
 import { openPlayStore } from '../components/AppBanner';
+import { isFromApp, IS_ANDROID } from '../utils/fromApp';
 import nekoStudy    from '../assets/neko-cats/neko-cat-01-study.png';
 import nekoTeacher  from '../assets/neko-cats/neko-cat-11-teacher.png';
 import nekoCelebrate from '../assets/neko-cats/neko-cat-09-celebrate.png';
 import nekoLogo     from '../assets/neko-cats/neko-cat-12-star-eyes.png';
-
-const isAndroid = /Android/i.test(navigator.userAgent);
-const fromApp   = new URLSearchParams(window.location.search).get('from') === 'app';
 
 export default function Home() {
   const { user } = useAuth();
@@ -103,7 +101,7 @@ export default function Home() {
       </div>
 
       {/* ── 앱 이동 ── */}
-      {isAndroid && !fromApp && (
+      {IS_ANDROID && !isFromApp() && (
         <button className="hm-applink" onClick={openPlayStore}>
           <span>📱 네코짱 앱 다운로드 (Google Play)</span>
         </button>
