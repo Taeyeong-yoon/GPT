@@ -177,22 +177,48 @@ export default function SjptMiniExam() {
         )}
 
         {phase === 'recording' && (
-          <div className="card" style={{padding:'var(--sp-6)'}}>
+          <div className="card" style={{padding:'var(--sp-5)'}}>
             <div className="recorder">
               <div className="rec-meter"><span className="rec-meter__dot"/><div className="rec-meter__wave"><span/><span/><span/><span/></div></div>
               <p style={{fontVariantNumeric:'tabular-nums',fontWeight:'var(--fw-extra)',color:'var(--danger)'}}>{countdown}초 남음</p>
-              {recorder.transcript && <p style={{fontSize:'var(--fs-sm)',color:'var(--on-surface-2)',textAlign:'center'}}>{recorder.transcript}</p>}
+
+              {/* STT 자막 */}
+              <div style={{
+                width:'100%', minHeight:72,
+                background:'var(--surface-2)', borderRadius:12, padding:'10px 14px',
+                border:'1px solid var(--border-soft)'
+              }}>
+                <p style={{fontSize:'0.68rem',color:'var(--on-surface-3)',marginBottom:4}}>내 답변 (실시간)</p>
+                <p style={{
+                  fontSize:'var(--fs-sm)', lineHeight:1.6,
+                  color: recorder.transcript ? 'var(--on-surface)' : 'var(--on-surface-3)',
+                  fontFamily:'var(--font-jp)'
+                }}>
+                  {recorder.transcript || '말하는 중...'}
+                </p>
+              </div>
+
               <button className="btn btn--primary btn--block" onClick={handleFinish}>답변 완료</button>
             </div>
           </div>
         )}
 
         {phase === 'done' && (
-          <div className="card" style={{padding:'var(--sp-5)',textAlign:'center'}}>
-            {recorder.transcribing
-              ? <p style={{color:'var(--on-surface-3)',fontSize:'var(--fs-sm)'}}>🎙️ 음성 인식 중...</p>
-              : <p style={{color:'var(--sage)',fontWeight:'var(--fw-black)'}}>{doneLabel === 'registered' ? '✅ 답변 저장됨' : '저장 중...'}</p>
-            }
+          <div className="card" style={{padding:'var(--sp-5)'}}>
+            {recorder.transcribing ? (
+              <p style={{color:'var(--on-surface-3)',fontSize:'var(--fs-sm)',textAlign:'center'}}>🎙️ 음성 인식 중...</p>
+            ) : (
+              <>
+                <p style={{color:'var(--sage)',fontWeight:'var(--fw-black)',marginBottom: recorder.transcript ? 8 : 0}}>
+                  {doneLabel === 'registered' ? '✅ 답변 저장됨' : '저장 중...'}
+                </p>
+                {recorder.transcript && (
+                  <p style={{fontSize:'var(--fs-sm)',color:'var(--on-surface-2)',lineHeight:1.6,fontFamily:'var(--font-jp)'}}>
+                    {recorder.transcript}
+                  </p>
+                )}
+              </>
+            )}
           </div>
         )}
       </div>

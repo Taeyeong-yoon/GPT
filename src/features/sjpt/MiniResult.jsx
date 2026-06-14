@@ -1,45 +1,159 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import nekoCelebrate from '../../assets/neko-cats/neko-cat-09-celebrate.png';
+import { requestFeedback } from '../../services/gpt';
+import styles from './Result.module.css';
+
+const SCORE_LABELS = { grammar:'문법', vocabulary:'어휘', fluency:'유창성', naturalness:'자연스러움' };
+const SCORE_COLORS = { grammar:'#9DC4A8', vocabulary:'#C5B8E8', fluency:'#FFAFC7', naturalness:'#FFE066' };
 
 export default function SjptMiniResult() {
   const navigate  = useNavigate();
   const location  = useLocation();
   const answers   = location.state?.answers || [];
-  const answered  = answers.filter(a => a.answer && a.answer !== '(무응답)').length;
+
+  const [feedback, setFeedback] = useState(null);
+  const [grading,  setGrading]  = useState(true);
+  const [error,    setError]    = useState(null);
+  const [openPart, setOpenPart] = useState(null);
+
+  useEffect(() => {
+    if (answers.length === 0) { setGrading(false); return; }
+    requestFeedback({ parts: answers, level: 'N3' })
+      .then(f => setFeedback(f))
+      .catch(e => setError(e.message))
+      .finally(() => setGrading(false));
+  }, []);
+
+  if (grading) return (
+    <div className="screen" style={{ alignItems:'center', justifyContent:'center', gap:'var(--sp-4)' }}>
+      <div style={{ width:48, height:48, borderRadius:'50%', border:'4px solid #F9C8DA', borderTopColor:'#E05C8A', animation:'spin 0.8s linear infinite' }} />
+      <p className={styles.gradingText}>AI 채점 중이에요...<br/>잠시만 기다려주세요</p>
+    </div>
+  );
+
+  if (error || !feedback) return (
+    <div className="screen" style={{ alignItems:'center', justifyContent:'center', gap:'var(--sp-4)' }}>
+      <p style={{ textAlign:'center', color:'var(--on-surface-2)', fontSize:'var(--fs-sm)' }}>
+        {error || '결과를 불러올 수 없습니다.'}
+      </p>
+      <button className="btn btn--primary" onClick={() => navigate('/')}>홈으로</button>
+    </div>
+  );
+
+  const { overall_score, grade, scores, part_feedback, improvements, model_expressions } = feedback;
+  const answered = answers.filter(a => a.answer && a.answer !== '(무응답)').length;
 
   return (
-    <div className="screen" style={{alignItems:'center',justifyContent:'center',gap:'var(--sp-5)',textAlign:'center',padding:'var(--sp-6)'}}>
-      <img src={nekoCelebrate} alt="완료" style={{width:120,height:120,objectFit:'contain'}} />
-      <div>
-        <p style={{fontSize:'var(--fs-xl)',fontWeight:'var(--fw-black)',color:'var(--on-surface)',marginBottom:4}}>미니 테스트 완료!</p>
-        <p style={{fontSize:'var(--fs-sm)',color:'var(--on-surface-2)'}}>총 {answers.length}문항 중 {answered}문항 답변</p>
+    <div className={styles.screen}>
+
+      {/* ── 종합 점수 ── */}
+      <div className={`card ${styles.hero}`}>
+        <p style={{ fontSize:'var(--fs-xs)', color:'var(--on-surface-3)', marginBottom:4 }}>
+          SJPT 미니 테스트 · {answers.length}문항 중 {answered}문항 답변
+        </p>
+        <p className={styles.scoreNum}>{overall_score}<span className={styles.scoreMax}>/100</span></p>
+        <span className={styles.grade}>{grade}</span>
+        <p className={styles.label}>AI 종합 점수</p>
       </div>
 
-      <div style={{width:'100%',background:'var(--surface)',borderRadius:16,border:'1.5px solid var(--border-soft)',padding:'16px 20px'}}>
-        <p style={{fontWeight:'var(--fw-black)',marginBottom:12,color:'var(--on-surface)'}}>파트별 답변 현황</p>
-        {[1,2,3,4,5,6,7].map(part => {
-          const partAnswers = answers.filter(a => a.partNum === part);
-          if (partAnswers.length === 0) return null;
-          const ok = partAnswers.filter(a => a.answer !== '(무응답)').length;
-          return (
-            <div key={part} style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'6px 0',borderBottom:'1px solid var(--border-soft)'}}>
-              <span style={{fontSize:'var(--fs-sm)',color:'var(--on-surface-2)'}}>제{part}부</span>
-              <span style={{fontSize:'var(--fs-sm)',fontWeight:'var(--fw-bold)',color: ok === partAnswers.length ? 'var(--sage)' : 'var(--on-surface-3)'}}>
-                {ok}/{partAnswers.length} 완료
-              </span>
+      {/* ── 4축 게이지 ── */}
+      <div className={`card ${styles.gauges}`}>
+        <h3 className={styles.sectionTitle}>영역별 점수</h3>
+        <div className={styles.gaugeGrid}>
+          {Object.entries(scores || {}).map(([key, val]) => (
+            <div key={key} className={styles.gauge}>
+              <div className={styles.gaugeCircle}
+                style={{ background:`conic-gradient(${SCORE_COLORS[key]} ${val / 25 * 100}%, #EDD5B5 0)` }}>
+                <span className={styles.gaugeVal}>{val}</span>
+              </div>
+              <p className={styles.gaugeLabel}>{SCORE_LABELS[key]}</p>
             </div>
-          );
-        })}
+          ))}
+        </div>
       </div>
 
-      <p style={{fontSize:'var(--fs-xs)',color:'var(--on-surface-3)',lineHeight:1.6}}>
-        AI 채점은 정식 SJPT 시험에서 제공됩니다.<br/>Pro 구독 후 전체 시험을 응시해보세요.
-      </p>
+      {/* ── 파트별 코멘트 ── */}
+      {(part_feedback || []).length > 0 && (
+        <div className={`card ${styles.partFeedback}`}>
+          <h3 className={styles.sectionTitle}>파트별 코멘트</h3>
+          {part_feedback.map(pf => (
+            <div key={pf.part} className={styles.partItem}>
+              <button className={styles.partToggle}
+                onClick={() => setOpenPart(openPart === pf.part ? null : pf.part)}>
+                <span className="chip chip--n3">제{pf.part}부분</span>
+                <span className={styles.toggleArrow}>{openPart === pf.part ? '▲' : '▼'}</span>
+              </button>
+              {openPart === pf.part && (
+                <div className={styles.partDetail}>
+                  {(pf.strength && pf.strength !== '없음') && (
+                    <div className={styles.partRowStrength}>
+                      <span className={styles.partLabelGreen}>✓ 잘된 점</span>
+                      <p className={styles.partRowText}>{pf.strength}</p>
+                    </div>
+                  )}
+                  {pf.weakness && (
+                    <div className={styles.partRowWeakness}>
+                      <span className={styles.partLabelOrange}>△ 개선할 점</span>
+                      <p className={styles.partRowText}>{pf.weakness}</p>
+                    </div>
+                  )}
+                  {pf.tip && (
+                    <div className={styles.partRowTip}>
+                      <span className={styles.partLabelBlue}>💡 표현 팁</span>
+                      <p className={styles.partRowText}>{pf.tip}</p>
+                    </div>
+                  )}
+                  {!pf.strength && !pf.weakness && !pf.tip && pf.comment && (
+                    <p className={styles.partComment}>{pf.comment}</p>
+                  )}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
 
-      <div style={{display:'flex',gap:10,width:'100%'}}>
-        <button className="btn btn--secondary" style={{flex:1}} onClick={() => navigate('/sjpt/mini')}>다시 하기</button>
-        <button className="btn btn--primary"   style={{flex:1}} onClick={() => navigate('/')}>홈으로</button>
+      {/* ── 핵심 개선 포인트 ── */}
+      {(improvements || []).length > 0 && (
+        <div className={`card ${styles.improvements}`}>
+          <h3 className={styles.sectionTitle}>핵심 개선 포인트</h3>
+          <ol className={styles.improveList}>
+            {improvements.map((imp, i) => (
+              <li key={i} className={styles.improveItem}>{imp}</li>
+            ))}
+          </ol>
+        </div>
+      )}
+
+      {/* ── 모범 표현 ── */}
+      {(model_expressions || []).length > 0 && (
+        <div className={`card ${styles.models}`}>
+          <h3 className={styles.sectionTitle}>더 자연스러운 표현</h3>
+          {model_expressions.map((m, i) => (
+            <div key={i} className={styles.modelItem}>
+              <p className={styles.modelSituation}>{m.situation}</p>
+              <p className={styles.modelExpr}>{m.natural_expression}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* ── 내 답변 STT ── */}
+      {answers.length > 0 && (
+        <div className={`card ${styles.myAnswers}`}>
+          <h3 className={styles.sectionTitle}>내 답변 (STT)</h3>
+          {answers.map((a, i) => (
+            <div key={i} className={styles.answerItem}>
+              <p className={styles.answerQ}>Part {a.partNum}: {a.question?.slice(0, 40)}…</p>
+              <p className={styles.answerA}>{a.answer || '(무응답)'}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div className={styles.actions}>
+        <button className="btn btn--secondary" onClick={() => navigate('/sjpt/mini')}>다시 하기</button>
+        <button className="btn btn--primary"   onClick={() => navigate('/')}>홈으로</button>
       </div>
     </div>
   );

@@ -44,7 +44,7 @@ export default function SjptMiniSetup() {
     <div className="screen screen--cta-pad">
       <div>
         <h2 className="screen__title">SJPT 미니 테스트</h2>
-        <p className="screen__sub">1부 전체 + 2~7부 각 1문항 · 채점 없음</p>
+        <p className="screen__sub">1부 전체 + 2~7부 각 1문항 · AI 채점 포함</p>
       </div>
 
       <div className="part-preview" style={{opacity: blocked ? 0.4 : 1}}>
@@ -68,7 +68,7 @@ export default function SjptMiniSetup() {
 
       <div className="card" style={{background:'var(--yellow-l)',border:'none',padding:'12px 16px',borderRadius:12}}>
         <p style={{fontSize:'var(--fs-sm)',color:'var(--on-surface-2)',textAlign:'center',margin:0}}>
-          🎙️ 말하기 연습용 · AI 채점 없이 녹음만 진행됩니다
+          🎙️ 녹음 후 AI가 문법·어휘·유창성·자연스러움을 채점합니다
         </p>
       </div>
 

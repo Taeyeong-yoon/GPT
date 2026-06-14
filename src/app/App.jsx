@@ -18,7 +18,7 @@ const JlptResult  = lazy(() => import('../features/jlpt/Result'));
 const SjptExam    = lazy(() => import('../features/sjpt/Exam'));
 const SjptResult  = lazy(() => import('../features/sjpt/Result'));
 const JlptMiniExam   = lazy(() => import('../features/jlpt/MiniExam'));
-const JlptMiniResult = lazy(() => import('../features/jlpt/Result'));
+const JlptMiniResult = lazy(() => import('../features/jlpt/MiniResult'));
 const SjptMiniExam   = lazy(() => import('../features/sjpt/MiniExam'));
 const SjptMiniResult = lazy(() => import('../features/sjpt/MiniResult'));
 const History = lazy(() => import('../pages/History'));

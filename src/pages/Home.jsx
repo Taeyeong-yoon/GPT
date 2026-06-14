@@ -87,7 +87,7 @@ export default function Home() {
 
       {/* ── 빠른 연습 ── */}
       <div className="hm-mini-wrap">
-        <p className="hm-mini-label">⚡ 빠른 연습</p>
+        <p className="hm-mini-label">🎯 실전 미니 테스트</p>
         <div className="hm-minicards">
           <button className="hm-minicard hm-minicard--jlpt" onClick={() => navigate('/jlpt/mini')}>
             <span className="hm-minicard__type">JLPT</span>
@@ -97,7 +97,7 @@ export default function Home() {
           <button className="hm-minicard hm-minicard--sjpt" onClick={() => navigate('/sjpt/mini')}>
             <span className="hm-minicard__type">SJPT</span>
             <p className="hm-minicard__badge">미니 연습</p>
-            <p className="hm-minicard__meta">10문항 · 채점없음</p>
+            <p className="hm-minicard__meta">10문항 · AI 채점</p>
           </button>
         </div>
       </div>

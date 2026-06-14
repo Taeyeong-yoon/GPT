@@ -1440,11 +1440,11 @@ img { max-width: 100%; display: block; }
 .hm-coach__img  { width: 68px; height: 68px; object-fit: contain; flex-shrink: 0; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.1)); }
 .hm-coach__body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 5px; }
 .hm-coach__label {
-  font-size: 0.72rem; font-weight: var(--fw-black);
-  color: #E05C8A; letter-spacing: 0.05em; margin: 0;
+  font-size: 0.95rem; font-weight: var(--fw-black);
+  color: #E05C8A; letter-spacing: 0.04em; margin: 0;
 }
 .hm-coach__msg {
-  font-size: 1.05rem; font-weight: var(--fw-black);
+  font-size: 1.28rem; font-weight: var(--fw-black);
   color: var(--on-surface); line-height: 1.35; margin: 0;
 }
 
