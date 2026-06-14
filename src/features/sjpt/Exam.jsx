@@ -174,7 +174,7 @@ export default function SjptExam() {
 
   if (flow.loading) return (
     <div className="nm-app" style={{alignItems:"center",justifyContent:"center",gap:16}}>
-      <p style={{fontSize:"3rem"}}>🐱</p><p>문제 불러오는 중...</p>
+      <div style={{width:32,height:32,borderRadius:'50%',border:'3px solid #F9C8DA',borderTopColor:'#E05C8A',animation:'spin 0.7s linear infinite'}} /><p>문제 불러오는 중...</p>
     </div>
   );
   if (flow.error) return (

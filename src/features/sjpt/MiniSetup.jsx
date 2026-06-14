@@ -4,6 +4,23 @@ import { useAuth } from '../../context/AuthProvider';
 import { getSubscriptionStatus } from '../../services/subscription';
 import { checkMiniAccess, FREE_SJPT, PRO_MONTHLY_SJPT, PRO_DAILY_SJPT } from '../../services/miniUsage';
 import { openPlayStore } from '../../components/AppBanner';
+import nekoStudy      from '../../assets/neko-cats/neko-cat-01-study.png';
+import nekoHeadset    from '../../assets/neko-cats/neko-cat-05-headset.png';
+import nekoMicrophone from '../../assets/neko-cats/neko-cat-06-microphone.png';
+import nekoSurprised  from '../../assets/neko-cats/neko-cat-07-surprised.png';
+import nekoThinking   from '../../assets/neko-cats/neko-cat-08-thinking.png';
+import nekoCelebrate  from '../../assets/neko-cats/neko-cat-09-celebrate.png';
+import nekoTeacher    from '../../assets/neko-cats/neko-cat-11-teacher.png';
+
+const PART_IMAGES = {
+  1: nekoStudy,
+  2: nekoHeadset,
+  3: nekoMicrophone,
+  4: nekoThinking,
+  5: nekoTeacher,
+  6: nekoSurprised,
+  7: nekoCelebrate,
+};
 
 export default function SjptMiniSetup() {
   const navigate = useNavigate();
@@ -41,6 +58,7 @@ export default function SjptMiniSetup() {
           { part:7, desc:'스토리 구성 1문항' },
         ].map(p => (
           <div key={p.part} className="part-tile">
+            <img src={PART_IMAGES[p.part]} alt="" className="part-tile__cat-img" />
             <div className="stack" style={{gap:2}}>
               <p className="part-tile__name">제{p.part}부 · {p.desc}</p>
             </div>

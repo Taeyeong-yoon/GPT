@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import nekoStar from '../assets/neko-cats/neko-cat-12-star-eyes.png';
 
 const PKG = 'com.nekochan.jlpt';
 const PLAY_URL = `https://play.google.com/store/apps/details?id=${PKG}`;
@@ -48,12 +49,10 @@ export default function AppBanner() {
       zIndex: 9999,
       boxSizing: 'border-box',
     }}>
-      <div style={{
+      <img src={nekoStar} alt="네코짱" style={{
         width: 44, height: 44, borderRadius: 12, flexShrink: 0,
-        background: 'rgba(255,255,255,0.15)',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        fontSize: '22px',
-      }}>🐱</div>
+        objectFit: 'contain',
+      }} />
 
       <div style={{ flex: 1, minWidth: 0 }}>
         <p style={{ margin: 0, fontWeight: 800, fontSize: '14px', lineHeight: 1.3 }}>

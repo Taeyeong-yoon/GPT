@@ -4,35 +4,29 @@ import { AuthProvider } from '../context/AuthProvider';
 import ProtectedRoute from './ProtectedRoute';
 import AppBanner from '../components/AppBanner';
 
-// 즉시 로드
-import Login from '../pages/Login';
-import Home  from '../pages/Home';
+// 즉시 로드 — 홈에서 바로 진입하는 화면은 클릭 즉시 표시되어야 함
+import Login              from '../pages/Login';
+import Home               from '../pages/Home';
+import LevelSelect        from '../features/jlpt/LevelSelect';
+import SjptSetup          from '../features/sjpt/Setup';
+import JlptMiniLevelSelect from '../features/jlpt/MiniLevelSelect';
+import SjptMiniSetup      from '../features/sjpt/MiniSetup';
 
-// 지연 로드 (Phase 2)
-const LevelSelect = lazy(() => import('../features/jlpt/LevelSelect'));
+// 지연 로드 — 시험 중 화면은 진입 전 준비 시간이 있어 lazy 허용
 const JlptExam    = lazy(() => import('../features/jlpt/Exam'));
 const JlptResult  = lazy(() => import('../features/jlpt/Result'));
-
-// 지연 로드 (Phase 3)
-const SjptSetup   = lazy(() => import('../features/sjpt/Setup'));
 const SjptExam    = lazy(() => import('../features/sjpt/Exam'));
 const SjptResult  = lazy(() => import('../features/sjpt/Result'));
-
-// 지연 로드 (미니 테스트)
-const JlptMiniLevelSelect = lazy(() => import('../features/jlpt/MiniLevelSelect'));
-const JlptMiniExam        = lazy(() => import('../features/jlpt/MiniExam'));
-const JlptMiniResult      = lazy(() => import('../features/jlpt/Result'));
-const SjptMiniSetup       = lazy(() => import('../features/sjpt/MiniSetup'));
-const SjptMiniExam        = lazy(() => import('../features/sjpt/MiniExam'));
-const SjptMiniResult      = lazy(() => import('../features/sjpt/MiniResult'));
-
-// 지연 로드 (서브 페이지)
+const JlptMiniExam   = lazy(() => import('../features/jlpt/MiniExam'));
+const JlptMiniResult = lazy(() => import('../features/jlpt/Result'));
+const SjptMiniExam   = lazy(() => import('../features/sjpt/MiniExam'));
+const SjptMiniResult = lazy(() => import('../features/sjpt/MiniResult'));
 const History = lazy(() => import('../pages/History'));
 const Profile = lazy(() => import('../pages/Profile'));
 
 const Fallback = () => (
-  <div className="nm-app" style={{ alignItems: 'center', justifyContent: 'center' }}>
-    <p style={{ fontSize: '3rem' }}>🐱</p>
+  <div style={{ display:'flex', alignItems:'center', justifyContent:'center', flex:1 }}>
+    <div style={{ width:28, height:28, borderRadius:'50%', border:'3px solid #F9C8DA', borderTopColor:'#E05C8A', animation:'spin 0.7s linear infinite' }} />
   </div>
 );
 

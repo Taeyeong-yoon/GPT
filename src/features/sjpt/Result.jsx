@@ -28,14 +28,14 @@ export default function SjptResult() {
 
   if (grading) return (
     <div className="screen" style={{alignItems:'center', justifyContent:'center', gap:'var(--sp-4)'}}>
-      <p className={styles.bounce} style={{fontSize:'3.5rem', lineHeight:1}}>🐱</p>
+      <div style={{width:48,height:48,borderRadius:'50%',border:'4px solid #F9C8DA',borderTopColor:'#E05C8A',animation:'spin 0.8s linear infinite'}} />
       <p className={styles.gradingText}>AI 채점 중이에요...<br/>잠시만 기다려주세요</p>
     </div>
   );
 
   if (error || !feedback) return (
     <div className="screen" style={{alignItems:'center', justifyContent:'center', gap:'var(--sp-4)'}}>
-      <p style={{fontSize:'2rem'}}>😿</p>
+      <div style={{width:36,height:36,borderRadius:'50%',border:'3px solid #F9C8DA',borderTopColor:'#E05C8A',animation:'spin 0.7s linear infinite'}} />
       <p style={{textAlign:'center', color:'var(--on-surface-2)', fontSize:'var(--fs-sm)'}}>{error || '결과를 불러올 수 없습니다.'}</p>
       <button className="btn btn--primary" onClick={() => navigate('/')}>홈으로</button>
     </div>

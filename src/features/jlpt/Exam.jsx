@@ -111,7 +111,7 @@ export default function JlptExam() {
 
   if (loading) return (
     <div className="nm-app" style={{alignItems:'center',justifyContent:'center',gap:16}}>
-      <p style={{fontSize:'3rem'}}>🐱</p><p>문제 준비 중...</p>
+      <div style={{width:32,height:32,borderRadius:'50%',border:'3px solid #F9C8DA',borderTopColor:'#E05C8A',animation:'spin 0.7s linear infinite'}} /><p>문제 준비 중...</p>
     </div>
   );
   if (error) return (

@@ -4,16 +4,27 @@ import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
 import { useAuth } from '../context/AuthProvider';
 import { db } from '../services/firebase';
 import { openPlayStore } from '../components/AppBanner';
-import nekoStudy from '../assets/neko-cats/neko-cat-01-study.png';
-import nekoTeacher from '../assets/neko-cats/neko-cat-11-teacher.png';
+import nekoStudy    from '../assets/neko-cats/neko-cat-01-study.png';
+import nekoTeacher  from '../assets/neko-cats/neko-cat-11-teacher.png';
+import nekoCelebrate from '../assets/neko-cats/neko-cat-09-celebrate.png';
+import nekoLogo     from '../assets/neko-cats/neko-cat-12-star-eyes.png';
 
 const isAndroid = /Android/i.test(navigator.userAgent);
 const fromApp   = new URLSearchParams(window.location.search).get('from') === 'app';
+
+const GREETINGS = [
+  '오늘도 일본어 실력을 쌓아봐요! 🐾',
+  '꾸준히 하면 반드시 합격해요! ✨',
+  '실전처럼 응시하고 시험처럼 통과하자! 🎯',
+  '오늘의 연습이 내일의 합격을 만들어요! 📚',
+];
 
 export default function Home() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [lastResult, setLastResult] = useState(null);
+  const greeting = GREETINGS[new Date().getDay() % GREETINGS.length];
+  const nickname = user?.displayName?.split(' ')[0] || '학습자';
 
   useEffect(() => {
     if (!user) return;
@@ -21,130 +32,122 @@ export default function Home() {
     getDocs(q).then(snap => { if (!snap.empty) setLastResult(snap.docs[0].data()); }).catch(() => {});
   }, [user]);
 
-  const nickname = user?.displayName?.split(' ')[0] || '학습자';
-
   return (
-    <div className="screen home-screen">
-      <div className="home-ornament home-ornament--left" />
-      <div className="home-ornament home-ornament--right" />
+    <div className="hm">
 
-      {/* 브랜드바 */}
-      <div className="home-brandbar">
-        <div>
-          <p className="home-brandbar__eyebrow">NEKOCHAN TEST</p>
-          <h1 className="home-brandbar__title">
-            日本語 <span>시험</span> 도전!!
-          </h1>
+      {/* ── 헤더 ── */}
+      <header className="hm-header">
+        <div className="hm-header__brand">
+          <img src={nekoLogo} alt="네코짱" className="hm-header__logo" />
+          <span className="hm-header__name">NEKOCHAN TEST</span>
         </div>
-        <button className="home-profile" onClick={() => navigate('/profile')} aria-label="프로필">
+        <button className="hm-header__avatar" onClick={() => navigate('/profile')} aria-label="프로필">
           {user?.photoURL
             ? <img src={user.photoURL} alt="" />
-            : <img src={nekoStudy} alt="네코짱" />}
+            : <img src={nekoStudy} alt="프로필" />}
         </button>
-      </div>
+      </header>
 
-      {/* 네코짱 응원 코치 */}
-      <section className="coach-card">
-        <div className="coach-card__avatar">
-          <img src={nekoTeacher} alt="네코짱" />
+      {/* ── 웰컴 배너 ── */}
+      <section className="hm-welcome">
+        <div className="hm-welcome__text">
+          <p className="hm-welcome__hi">안녕하세요, <strong>{nickname}</strong>님!</p>
+          <p className="hm-welcome__msg">{greeting}</p>
+          {lastResult && (
+            <button className="hm-recent" onClick={() => navigate('/history')}>
+              <span>{lastResult.type === 'sjpt' || lastResult.type === 'sjpt_mini' ? '🎙️' : '📝'}</span>
+              <span>
+                {lastResult.type?.replace('_mini','').toUpperCase()}
+                {lastResult.level ? ` ${lastResult.level}` : ''}
+                {lastResult.totalScore != null ? ` · ${lastResult.totalScore}점` : ''}
+              </span>
+              <span className="hm-recent__arrow">›</span>
+            </button>
+          )}
         </div>
-        <div>
-          <p className="coach-card__name">네코 코치</p>
-          <p className="coach-card__message">
-            실전처럼 응시하고,<br />시험처럼 통과하자! 🐾
-          </p>
+        <img src={nekoTeacher} alt="네코 코치" className="hm-welcome__cat" />
+      </section>
+
+      {/* ── 정식 시험 ── */}
+      <section className="hm-section">
+        <p className="hm-section__label">📋 정식 시험</p>
+        <div className="hm-cards">
+          <button className="hm-card hm-card--jlpt" onClick={() => navigate('/jlpt')}>
+            <span className="hm-card__badge">JLPT</span>
+            <p className="hm-card__title">모의고사</p>
+            <p className="hm-card__desc">일본어 능력 측정 공인 시험</p>
+            <p className="hm-card__meta">어휘·문법·독해·청해 · 40문항</p>
+            <div className="hm-card__footer">
+              <span className="hm-card__tag">N1~N5</span>
+              <span className="hm-card__arrow">→</span>
+            </div>
+          </button>
+
+          <button className="hm-card hm-card--sjpt" onClick={() => navigate('/sjpt')}>
+            <span className="hm-card__badge">SJPT</span>
+            <p className="hm-card__title">말하기</p>
+            <p className="hm-card__desc">일본어 구어 능력 공인 평가</p>
+            <p className="hm-card__meta">녹음·AI 채점 · 7부</p>
+            <div className="hm-card__footer">
+              <span className="hm-card__tag">AI 채점</span>
+              <span className="hm-card__arrow">→</span>
+            </div>
+          </button>
         </div>
       </section>
 
-      {/* 최근 응시 기록 */}
-      {lastResult && (
-        <button className="recent recent--action" onClick={() => navigate('/history')}>
-          <span className="recent__icon">{lastResult.type === 'sjpt' ? '🎙️' : '📝'}</span>
-          <div>
-            <p className="recent__label">마지막 응시</p>
-            <p className="recent__value">
-              {lastResult.type?.toUpperCase()} {lastResult.level || ''} · {lastResult.totalScore ?? '-'}점
-            </p>
-          </div>
-          <span className="recent__prob">›</span>
-        </button>
-      )}
-
-      {/* 시험 소개 — 진입 버튼 위로 */}
-      <div className="home-exam-info">
-        <div className="home-exam-info__item" onClick={() => navigate('/jlpt')}>
-          <span className="home-exam-info__badge home-exam-info__badge--jlpt">JLPT</span>
-          <div>
-            <p className="home-exam-info__title">일본어 능력시험이란?</p>
-            <p className="home-exam-info__desc">N1~N5 다섯 단계로 어휘·문법·독해·청해 능력을 측정하는 국제 공인 시험입니다.</p>
-          </div>
-        </div>
-        <div className="home-exam-info__divider" />
-        <div className="home-exam-info__item" onClick={() => navigate('/sjpt')}>
-          <span className="home-exam-info__badge home-exam-info__badge--sjpt">SJPT</span>
-          <div>
-            <p className="home-exam-info__title">일본어 말하기 시험이란?</p>
-            <p className="home-exam-info__desc">1~7부 구성으로 준비·녹음·AI 채점까지, 실제 시험과 동일한 흐름으로 말하기 실력을 진단합니다.</p>
-          </div>
-        </div>
-      </div>
-
-      {/* 시험 진입 카드 */}
-      <div className="home__entries">
-        <button className="entry-card entry-card--jlpt" onClick={() => navigate('/jlpt')}>
-          <span className="entry-card__badge">JLPT</span>
-          <p className="entry-card__title">모의고사</p>
-          <p className="entry-card__meta">어휘·문법·독해·청해<br />40문항 실전 풀이</p>
-          <span className="entry-card__arrow">시작하기 →</span>
-        </button>
-
-        <button className="entry-card entry-card--sjpt" onClick={() => navigate('/sjpt')}>
-          <span className="entry-card__badge">SJPT</span>
-          <p className="entry-card__title">말하기</p>
-          <p className="entry-card__meta">문제 청취·녹음·<br />AI 채점 피드백</p>
-          <span className="entry-card__arrow">응시하기 →</span>
-        </button>
-      </div>
-
-      {/* 미니 테스트 진입 */}
-      <div className="home__mini">
-        <p className="home__mini-label">⚡ 빠른 연습</p>
-        <div className="home__mini-btns">
-          <button className="mini-btn mini-btn--jlpt" onClick={() => navigate('/jlpt/mini')}>
-            <span className="mini-btn__badge">JLPT</span>
-            <span className="mini-btn__title">미니 테스트</span>
-            <span className="mini-btn__meta">8문항 · 15분</span>
+      {/* ── 미니 테스트 ── */}
+      <section className="hm-section">
+        <p className="hm-section__label">⚡ 빠른 연습 (무료)</p>
+        <div className="hm-minicards">
+          <button className="hm-minicard hm-minicard--jlpt" onClick={() => navigate('/jlpt/mini')}>
+            <div className="hm-minicard__top">
+              <span className="hm-minicard__badge">JLPT 미니</span>
+              <span className="hm-minicard__arrow">→</span>
+            </div>
+            <p className="hm-minicard__meta">8문항 · 15분 · 채점포함</p>
           </button>
-          <button className="mini-btn mini-btn--sjpt" onClick={() => navigate('/sjpt/mini')}>
-            <span className="mini-btn__badge">SJPT</span>
-            <span className="mini-btn__title">미니 연습</span>
-            <span className="mini-btn__meta">10문항 · 채점없음</span>
+          <button className="hm-minicard hm-minicard--sjpt" onClick={() => navigate('/sjpt/mini')}>
+            <div className="hm-minicard__top">
+              <span className="hm-minicard__badge">SJPT 미니</span>
+              <span className="hm-minicard__arrow">→</span>
+            </div>
+            <p className="hm-minicard__meta">10문항 · 말하기 연습</p>
           </button>
         </div>
-      </div>
+      </section>
 
-      {/* 앱 다운로드 링크 — Android, 앱 외부 접속 시만 표시 */}
+      {/* ── 앱 이동 ── */}
       {isAndroid && !fromApp && (
-        <button onClick={openPlayStore} className="home__app-link">
-          <span>📱</span> 네코짱 앱 다운로드 (Google Play)
+        <button className="hm-applink" onClick={openPlayStore}>
+          <img src={nekoCelebrate} alt="" className="hm-applink__cat" />
+          <div>
+            <p className="hm-applink__title">네코짱 JLPT 학습앱 이동</p>
+            <p className="hm-applink__sub">단어·문법·진단까지 — Google Play 무료</p>
+          </div>
+          <span className="hm-applink__chevron">›</span>
         </button>
       )}
 
-      {/* 하단 네비게이션 */}
-      <div className="home__nav">
-        <button className="is-active" onClick={() => navigate('/')}>
-          <span className="ico">⌂</span>홈
+      {/* ── 하단 네비게이션 ── */}
+      <nav className="hm-nav">
+        <button className="hm-nav__btn is-active" onClick={() => navigate('/')}>
+          <span className="hm-nav__ico">⌂</span>
+          <span>홈</span>
         </button>
-        <button onClick={() => navigate('/history')}>
-          <span className="ico">▤</span>기록
+        <button className="hm-nav__btn" onClick={() => navigate('/history')}>
+          <span className="hm-nav__ico">▤</span>
+          <span>기록</span>
         </button>
-        <button onClick={() => navigate('/jlpt')}>
-          <span className="ico">◇</span>JLPT
+        <button className="hm-nav__btn" onClick={() => navigate('/jlpt')}>
+          <span className="hm-nav__ico">◇</span>
+          <span>JLPT</span>
         </button>
-        <button onClick={() => navigate('/sjpt')}>
-          <span className="ico">✿</span>SJPT
+        <button className="hm-nav__btn" onClick={() => navigate('/sjpt')}>
+          <span className="hm-nav__ico">✿</span>
+          <span>SJPT</span>
         </button>
-      </div>
+      </nav>
     </div>
   );
 }
