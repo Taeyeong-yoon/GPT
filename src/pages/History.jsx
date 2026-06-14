@@ -6,7 +6,7 @@ import { db } from '../services/firebase';
 import { getSubscriptionStatus } from '../services/subscription';
 import {
   checkMiniAccess,
-  FREE_JLPT_TOTAL, FREE_SJPT,
+  FREE_WEEKLY_JLPT, FREE_WEEKLY_SJPT,
   PRO_MONTHLY_JLPT, PRO_MONTHLY_SJPT,
 } from '../services/miniUsage';
 
@@ -20,8 +20,8 @@ function getMiniCount(access, isPro) {
     };
   }
   return {
-    used:  access.lifeUsed  ?? access.used  ?? 0,
-    limit: access.lifeLimit ?? access.limit ?? FREE_JLPT_TOTAL,
+    used:  access.weekUsed ?? access.used ?? 0,
+    limit: access.weekLimit ?? access.limit ?? FREE_WEEKLY_JLPT,
   };
 }
 
@@ -106,21 +106,21 @@ export default function History() {
             <div className="hist-mini-card__row">
               <span className="chip chip--n3" style={{ fontSize: '0.7rem' }}>JLPT 미니</span>
               <span className="hist-mini-card__label">
-                {isPro ? '이번 달' : '전체'}
+                {isPro ? '이번 달' : '이번 주'}
               </span>
               <span className="hist-mini-card__count">
                 {miniStats.jlpt.used}
-                <span className="hist-mini-card__limit">/ {isPro ? PRO_MONTHLY_JLPT : FREE_JLPT_TOTAL}회</span>
+                <span className="hist-mini-card__limit">/ {isPro ? PRO_MONTHLY_JLPT : FREE_WEEKLY_JLPT}회</span>
               </span>
             </div>
             <div className="hist-mini-card__row">
               <span className="chip chip--sjpt" style={{ fontSize: '0.7rem' }}>SJPT 미니</span>
               <span className="hist-mini-card__label">
-                {isPro ? '이번 달' : '전체'}
+                {isPro ? '이번 달' : '이번 주'}
               </span>
               <span className="hist-mini-card__count">
                 {miniStats.sjpt.used}
-                <span className="hist-mini-card__limit">/ {isPro ? PRO_MONTHLY_SJPT : FREE_SJPT}회</span>
+                <span className="hist-mini-card__limit">/ {isPro ? PRO_MONTHLY_SJPT : FREE_WEEKLY_SJPT}회</span>
               </span>
             </div>
           </div>
