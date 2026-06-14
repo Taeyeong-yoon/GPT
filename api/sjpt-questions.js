@@ -105,11 +105,11 @@ function pick(arr, n) {
   return [...arr].sort(() => Math.random() - 0.5).slice(0, n);
 }
 
-// 문항 텍스트 기준 중복 제거 (시트에 동일 질문이 난이도별/이미지별로 여러 행 존재)
+// 중복 제거: 이미지 없는 문항은 텍스트 기준, 이미지 있는 문항은 (텍스트+이미지URL) 기준
 function dedupeByText(arr) {
   const seen = new Set();
   return arr.filter(q => {
-    const key = q.text.trim();
+    const key = q.imageUrl ? `${q.text.trim()}|${q.imageUrl}` : q.text.trim();
     if (seen.has(key)) return false;
     seen.add(key);
     return true;
