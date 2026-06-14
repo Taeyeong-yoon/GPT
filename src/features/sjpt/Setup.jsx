@@ -103,8 +103,8 @@ export default function SjptSetup() {
       {!guard.loading && !guard.isPro && (
         <div className="sub-gate sub-gate--locked">
           <p className="sub-gate__icon">🔒</p>
-          <p className="sub-gate__title">Pro 구독이 필요합니다</p>
-          <p className="sub-gate__desc">SJPT 말하기 평가는 Pro 구독자만 이용 가능합니다.</p>
+          <p className="sub-gate__title">Pro 전용 시험입니다</p>
+          <p className="sub-gate__desc">SJPT 정식 말하기 평가는 Pro 구독자만 이용 가능합니다.<br/>무료 회원은 <strong>미니 연습</strong>을 이용해보세요.</p>
           <button className="btn btn--indigo btn--block" onClick={openPlayStore}>📱 네코짱 앱에서 구독하기</button>
         </div>
       )}

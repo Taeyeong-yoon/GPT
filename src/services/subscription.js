@@ -4,7 +4,8 @@ import {
 } from 'firebase/firestore';
 import { db } from './firebase';
 
-export const EXAM_LIMITS = { jlpt: 2, sjpt: 1 };
+export const EXAM_LIMITS    = { jlpt: 2, sjpt: 1 };
+export const FREE_JLPT_FULL = 1; // 무료 회원 JLPT 정식시험 평생 횟수
 
 function monthKey() {
   const now = new Date();
@@ -43,6 +44,23 @@ export async function getMonthlyUsage(uid) {
   } catch {
     return { jlpt: 0, sjpt: 0 };
   }
+}
+
+/** 무료 회원 JLPT 정식시험 평생 사용 횟수 조회 */
+export async function getFreeJlptFullUsage(uid) {
+  if (!uid || !db) return 0;
+  try {
+    const snap = await getDoc(doc(db, 'users', uid, 'mini_free', 'quota'));
+    return snap.exists() ? (snap.data().jlpt_full ?? 0) : 0;
+  } catch { return 0; }
+}
+
+/** 무료 회원 JLPT 정식시험 완료 후 카운트 증가 */
+export async function incrementFreeJlptFullUsage(uid) {
+  if (!uid || !db) return;
+  try {
+    await setDoc(doc(db, 'users', uid, 'mini_free', 'quota'), { jlpt_full: increment(1) }, { merge: true });
+  } catch {}
 }
 
 export async function incrementUsage(uid, type) {

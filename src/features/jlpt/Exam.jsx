@@ -4,7 +4,7 @@ import useExamGuard from '../../hooks/useExamGuard';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { useAuth } from '../../context/AuthProvider';
 import { db } from '../../services/firebase';
-import { incrementUsage } from '../../services/subscription';
+import { incrementUsage, incrementFreeJlptFullUsage } from '../../services/subscription';
 import { useJlptQuestions } from './hooks/useJlptQuestions';
 import { scoreJlpt } from '../../utils/jlptScoring';
 import { storage } from '../../utils/storage';
@@ -18,6 +18,7 @@ export default function JlptExam() {
   const location  = useLocation();
   const { user }  = useAuth();
   const level     = location.state?.level || 'N5';
+  const isPro     = location.state?.isPro ?? false;
   const { examSet, loading, error } = useJlptQuestions(level);
 
   const [current,    setCurrent]   = useState(0);
@@ -100,7 +101,8 @@ export default function JlptExam() {
     try {
       const ref = await addDoc(collection(db,'users',user.uid,'results'),
         { type:'jlpt', level, ...result, createdAt: serverTimestamp() });
-      await incrementUsage(user.uid, 'jlpt');
+      if (isPro) await incrementUsage(user.uid, 'jlpt');
+      else        await incrementFreeJlptFullUsage(user.uid);
       storage.remove(PROGRESS_KEY);
       navigate(`/jlpt/result/${ref.id}`, { state:{result,level} });
     } catch {

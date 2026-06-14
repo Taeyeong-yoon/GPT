@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useSubscriptionGuard from '../../hooks/useSubscriptionGuard';
+import { EXAM_LIMITS } from '../../services/subscription';
 import { openPlayStore } from '../../components/AppBanner';
 import nekoStudy from '../../assets/neko-cats/neko-cat-01-study.png';
 import nekoHeart from '../../assets/neko-cats/neko-cat-02-heart-eyes.png';
@@ -44,14 +45,24 @@ export default function LevelSelect() {
         ))}
       </div>
 
-      {!guard.loading && !guard.isPro && (
+      {/* 무료 회원 — 체험 1회 남음 */}
+      {!guard.loading && !guard.isPro && guard.canStart && (
+        <div className="sub-gate" style={{background:'rgba(157,196,168,0.18)',border:'1.5px solid var(--sage)',borderRadius:14,padding:'14px 16px'}}>
+          <p className="sub-gate__icon">🎁</p>
+          <p className="sub-gate__title" style={{color:'var(--sage)'}}>무료 체험 1회 이용 가능</p>
+          <p className="sub-gate__desc">JLPT 모의시험을 1회 무료로 체험할 수 있습니다.<br />Pro 구독 시 매월 {EXAM_LIMITS.jlpt}회 응시 가능합니다.</p>
+        </div>
+      )}
+      {/* 무료 회원 — 체험 소진 */}
+      {!guard.loading && !guard.isPro && !guard.canStart && (
         <div className="sub-gate sub-gate--locked">
           <p className="sub-gate__icon">🔒</p>
-          <p className="sub-gate__title">Pro 구독이 필요합니다</p>
-          <p className="sub-gate__desc">JLPT 모의시험은 Pro 구독자만 이용 가능합니다.</p>
+          <p className="sub-gate__title">무료 체험을 모두 사용했습니다</p>
+          <p className="sub-gate__desc">JLPT 정식 모의시험은 Pro 구독자에게 매월 {EXAM_LIMITS.jlpt}회 제공됩니다.</p>
           <button className="btn btn--indigo btn--block" onClick={openPlayStore}>📱 네코짱 앱에서 구독하기</button>
         </div>
       )}
+      {/* Pro 회원 — 횟수 초과 */}
       {!guard.loading && guard.isPro && !guard.canStart && (
         <div className="sub-gate sub-gate--exhausted">
           <p className="sub-gate__icon">📅</p>
@@ -61,15 +72,18 @@ export default function LevelSelect() {
       )}
 
       <div className="cta-bar">
-        {!guard.loading && guard.isPro && (
+        {!guard.loading && guard.isPro && guard.canStart && (
           <p className="sub-usage">이번 달 JLPT 응시 {guard.used}/{guard.limit}회</p>
         )}
         <button
           className="btn btn--primary btn--block"
           disabled={!selected || guard.loading || !guard.canStart}
-          onClick={() => navigate('/jlpt/exam', { state: { level: selected } })}
+          onClick={() => navigate('/jlpt/exam', { state: { level: selected, isPro: guard.isPro } })}
         >
-          {guard.loading ? '확인 중...' : !guard.isPro ? '구독 필요' : !guard.canStart ? '횟수 초과' : selected ? `${selected} 시작하기` : '레벨을 선택해주세요'}
+          {guard.loading ? '확인 중...'
+            : !guard.canStart ? (guard.isPro ? '횟수 초과' : '체험 완료')
+            : selected ? `${selected} 시작하기`
+            : '레벨을 선택해주세요'}
         </button>
       </div>
     </div>
