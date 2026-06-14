@@ -18,7 +18,7 @@ export default function SjptMiniResult() {
 
   useEffect(() => {
     if (answers.length === 0) { setGrading(false); return; }
-    requestFeedback({ parts: answers, level: 'N3' })
+    requestFeedback({ parts: answers, level: 'N3', mini: true })
       .then(f => setFeedback(f))
       .catch(e => setError(e.message))
       .finally(() => setGrading(false));

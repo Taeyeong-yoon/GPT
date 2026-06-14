@@ -83,7 +83,7 @@ function stripCodeFence(text) {
   return text.replace(/^```(?:json)?\n?/, '').replace(/\n?```$/, '').trim();
 }
 
-async function callGpt(messages, apiKey) {
+async function callGpt(messages, apiKey, model = 'gpt-4o') {
   const res = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
     headers: {
@@ -91,7 +91,7 @@ async function callGpt(messages, apiKey) {
       'Authorization': `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
-      model: 'gpt-4o',
+      model,
       temperature: 0.3,
       response_format: { type: 'json_object' },
       messages,
@@ -105,13 +105,16 @@ async function callGpt(messages, apiKey) {
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ ok: false, error: { code: 405, message: 'Method not allowed' } });
 
-  const { parts, level } = req.body || {};
+  const { parts, level, mini = false } = req.body || {};
   if (!Array.isArray(parts) || parts.length === 0) {
     return res.status(400).json({ ok: false, error: { code: 400, message: 'parts 배열이 필요합니다.' } });
   }
 
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) return res.status(500).json({ ok: false, error: { code: 500, message: 'OpenAI 키 미설정' } });
+
+  // 미니 시험은 gpt-4o-mini (비용 절감), 정식 시험은 gpt-4o
+  const model = mini ? 'gpt-4o-mini' : 'gpt-4o';
 
   // Part 7가 포함된 경우 표준 프롬프트에 보조 지침만 추가 (전체 부분 평가 기준은 유지)
   const part7 = parts.find(p => p.partNum === 7);
@@ -126,13 +129,13 @@ export default async function handler(req, res) {
 
   let raw = '';
   try {
-    raw = await callGpt(messages, apiKey);
+    raw = await callGpt(messages, apiKey, model);
     const feedback = JSON.parse(stripCodeFence(raw));
     return res.status(200).json({ ok: true, feedback });
   } catch {
     // 1회 재시도
     try {
-      raw = await callGpt(messages, apiKey);
+      raw = await callGpt(messages, apiKey, model);
       const feedback = JSON.parse(stripCodeFence(raw));
       return res.status(200).json({ ok: true, feedback });
     } catch (e2) {
