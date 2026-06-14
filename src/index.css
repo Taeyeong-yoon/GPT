@@ -1413,103 +1413,153 @@ img { max-width: 100%; display: block; }
 /* ── 헤더 ── */
 .hm-header {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 10px var(--sp-4);
+  padding: 12px var(--sp-4);
   background: var(--surface); border-bottom: 1px solid var(--border-soft);
   position: sticky; top: 0; z-index: 10;
 }
 .hm-header__brand { display: flex; align-items: center; gap: var(--sp-2); }
-.hm-header__logo  { width: 26px; height: 26px; object-fit: contain; flex-shrink: 0; }
-.hm-header__name  { font-size: 0.72rem; font-weight: var(--fw-black); color: var(--on-surface); letter-spacing: 0.06em; }
+.hm-header__logo  { width: 28px; height: 28px; object-fit: contain; flex-shrink: 0; }
+.hm-header__name  { font-size: 0.78rem; font-weight: var(--fw-black); color: var(--on-surface); letter-spacing: 0.06em; }
 .hm-header__avatar {
-  width: 32px; height: 32px; border-radius: 50%;
+  width: 34px; height: 34px; border-radius: 50%;
   overflow: hidden; border: 2px solid var(--pink-l);
   background: var(--surface-2); cursor: pointer; flex-shrink: 0;
 }
 .hm-header__avatar img { width: 100%; height: 100%; object-fit: cover; }
 
-/* ── 웰컴 배너 ── */
-.hm-welcome {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 10px var(--sp-4);
-  background: linear-gradient(135deg, var(--pink-l) 0%, rgba(197,184,232,0.28) 100%);
-  gap: var(--sp-2);
+/* ── 네코 코치 카드 ── */
+.hm-coach {
+  display: flex; align-items: center; gap: 14px;
+  margin: 12px var(--sp-4) 0;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, #FFF5F8 0%, #FEE9D0 100%);
+  border-radius: 18px;
+  border: 1.5px solid rgba(224,92,138,0.15);
+  box-shadow: 0 2px 12px rgba(224,92,138,0.1);
 }
-.hm-welcome__text { flex: 1; min-width: 0; }
-.hm-welcome__hi   { font-size: var(--fs-sm); font-weight: var(--fw-extra); color: var(--on-surface); margin-bottom: 2px; }
-.hm-welcome__hi strong { color: var(--pink-d); font-weight: var(--fw-black); }
-.hm-welcome__msg  { font-size: 0.68rem; color: var(--on-surface-2); line-height: 1.4; margin-bottom: 5px; }
-.hm-welcome__cat  { width: 58px; height: 58px; object-fit: contain; flex-shrink: 0; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.1)); }
+.hm-coach__img  { width: 68px; height: 68px; object-fit: contain; flex-shrink: 0; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.1)); }
+.hm-coach__body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 5px; }
+.hm-coach__label {
+  font-size: 0.72rem; font-weight: var(--fw-black);
+  color: #E05C8A; letter-spacing: 0.05em; margin: 0;
+}
+.hm-coach__msg {
+  font-size: 1.05rem; font-weight: var(--fw-black);
+  color: var(--on-surface); line-height: 1.35; margin: 0;
+}
 
 .hm-recent {
   display: inline-flex; align-items: center; gap: 4px;
   background: var(--surface); border: 1.5px solid var(--border-soft);
-  border-radius: 16px; padding: 4px 9px;
-  font-size: 0.68rem; color: var(--on-surface-2); cursor: pointer;
+  border-radius: 16px; padding: 4px 10px;
+  font-size: 0.72rem; color: var(--on-surface-2); cursor: pointer;
   max-width: 100%; overflow: hidden;
 }
 .hm-recent__arrow { color: var(--on-surface-3); margin-left: 1px; }
 
-/* ── 섹션 ── */
-.hm-section { padding: 10px var(--sp-4); display: flex; flex-direction: column; gap: var(--sp-2); }
-.hm-section__label {
-  font-size: 0.62rem; font-weight: var(--fw-black);
-  color: var(--on-surface-3); letter-spacing: 0.07em; text-transform: uppercase;
+/* ── 정식 시험 통합 카드 2열 ── */
+.hm-cards {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; padding: 12px var(--sp-4) 0;
 }
-
-/* ── 정식 시험 카드 2열 ── */
-.hm-cards { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-2); }
 
 .hm-card {
   display: flex; flex-direction: column; align-items: flex-start;
-  gap: 5px; padding: 12px; border-radius: 16px;
-  border: none; cursor: pointer; text-align: left;
+  gap: 6px; padding: 14px 12px 12px;
+  border-radius: 18px; border: none; cursor: pointer; text-align: left;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 .hm-card:active { transform: scale(0.97); }
-.hm-card--jlpt { background: linear-gradient(145deg, #FFF9DC 0%, #FFE8A0 100%); box-shadow: 0 3px 12px rgba(230,170,40,0.16); }
-.hm-card--sjpt { background: linear-gradient(145deg, #F5E8FF 0%, #E3CBFF 100%); box-shadow: 0 3px 12px rgba(130,80,200,0.16); }
+.hm-card--jlpt { background: linear-gradient(150deg, #FFF8E0 0%, #FFE8A4 100%); box-shadow: 0 3px 14px rgba(230,170,40,0.18); }
+.hm-card--sjpt { background: linear-gradient(150deg, #F5EAFF 0%, #E2CCFF 100%); box-shadow: 0 3px 14px rgba(130,80,200,0.18); }
 
-.hm-card__badge  { font-size: 0.6rem; font-weight: var(--fw-black); letter-spacing: 0.08em; padding: 2px 7px; border-radius: 8px; background: rgba(255,255,255,0.65); color: var(--on-surface); }
-.hm-card__title  { font-size: var(--fs-sm); font-weight: var(--fw-black); color: var(--on-surface); line-height: 1.1; margin: 0; }
-.hm-card__desc   { font-size: 0.62rem; font-weight: var(--fw-bold); color: var(--on-surface); opacity: 0.7; margin: 0; line-height: 1.3; }
-.hm-card__meta   { font-size: 0.62rem; color: var(--on-surface-2); line-height: 1.45; margin: 0; flex: 1; }
-.hm-card__footer { display: flex; align-items: center; justify-content: space-between; width: 100%; margin-top: 2px; }
-.hm-card__tag    { font-size: 0.58rem; font-weight: var(--fw-bold); color: var(--on-surface-3); }
-.hm-card__arrow  { font-size: 0.72rem; font-weight: var(--fw-black); color: var(--on-surface-2); background: rgba(255,255,255,0.55); width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; }
+/* 배지 */
+.hm-card__badge {
+  font-size: 0.65rem; font-weight: var(--fw-black); letter-spacing: 0.08em;
+  padding: 2px 9px; border-radius: 8px; color: #fff;
+}
+.hm-card__badge--jlpt { background: #D4820A; }
+.hm-card__badge--sjpt { background: #7C3AED; }
 
-/* ── 미니 테스트 카드 2열 (정식 카드 대비 ~80% 크기로 균형 유지) ── */
-.hm-minicards { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-2); }
+/* 시험 소개 */
+.hm-card__subject {
+  font-size: 0.82rem; font-weight: var(--fw-black);
+  color: var(--on-surface); margin: 2px 0 0; line-height: 1.2;
+}
+.hm-card__desc {
+  font-size: 0.7rem; color: var(--on-surface-2);
+  line-height: 1.45; margin: 0;
+}
+
+/* 구분선 */
+.hm-card__divider {
+  width: 100%; height: 1px;
+  background: rgba(0,0,0,0.1);
+  margin: 4px 0;
+}
+
+/* 모의고사 / 말하기 타이틀 */
+.hm-card__title {
+  font-size: 1.22rem; font-weight: var(--fw-black);
+  color: var(--on-surface); line-height: 1.1; margin: 0;
+}
+
+/* 메타 */
+.hm-card__meta {
+  font-size: 0.7rem; color: var(--on-surface-2);
+  line-height: 1.5; margin: 0; flex: 1;
+}
+
+/* 시작하기 → */
+.hm-card__start {
+  font-size: 0.8rem; font-weight: var(--fw-black);
+  margin-top: 4px;
+}
+.hm-card--jlpt .hm-card__start { color: #B36A00; }
+.hm-card--sjpt .hm-card__start { color: #6D28D9; }
+
+/* ── 빠른 연습 ── */
+.hm-mini-wrap { padding: 12px var(--sp-4) 0; }
+.hm-mini-label {
+  font-size: 0.78rem; font-weight: var(--fw-black);
+  color: var(--on-surface); margin: 0 0 8px;
+  letter-spacing: 0.02em;
+}
+
+/* ── 미니 카드 2열 ── */
+.hm-minicards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
 .hm-minicard {
-  display: flex; flex-direction: column; gap: 5px;
-  padding: 11px 14px; border-radius: 14px;
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 13px 15px; border-radius: 16px;
   border: 1.5px solid var(--border-soft); cursor: pointer; text-align: left;
   background: var(--surface); transition: transform 0.15s ease;
 }
 .hm-minicard:active { transform: scale(0.97); }
-.hm-minicard--jlpt { border-color: rgba(230,165,30,0.28); background: rgba(255,248,205,0.5); }
-.hm-minicard--sjpt { border-color: rgba(130,80,200,0.2);  background: rgba(245,228,255,0.5); }
+.hm-minicard--jlpt { border-color: rgba(212,130,10,0.3); background: rgba(255,248,205,0.6); }
+.hm-minicard--sjpt { border-color: rgba(124,58,237,0.2); background: rgba(245,234,255,0.6); }
 
-.hm-minicard__top   { display: flex; align-items: center; justify-content: space-between; }
-.hm-minicard__badge { font-size: 0.86rem; font-weight: var(--fw-black); color: var(--on-surface); }
-.hm-minicard__arrow { font-size: 0.96rem; color: var(--on-surface-3); }
-.hm-minicard__meta  { font-size: 0.74rem; color: var(--on-surface-3); line-height: 1.35; margin: 0; }
-
-/* ── 앱 이동 배너 ── */
-.hm-applink {
-  display: flex; align-items: center; gap: var(--sp-2);
-  margin: 0 var(--sp-4) var(--sp-2);
-  padding: 9px 14px;
-  background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
-  border-radius: 14px; border: none; cursor: pointer; text-align: left;
-  box-shadow: 0 3px 14px rgba(79,70,229,0.25); transition: transform 0.15s;
+.hm-minicard__type {
+  font-size: 0.65rem; font-weight: var(--fw-black);
+  letter-spacing: 0.06em; color: var(--on-surface-3);
+  background: rgba(0,0,0,0.07); padding: 1px 7px; border-radius: 6px;
+  align-self: flex-start;
 }
-.hm-applink:active { transform: scale(0.97); }
-.hm-applink__cat { width: 36px; height: 36px; object-fit: contain; flex-shrink: 0; }
-.hm-applink > div { flex: 1; min-width: 0; }
-.hm-applink__title   { font-size: 0.72rem; font-weight: var(--fw-black); color: #fff; margin: 0 0 1px; }
-.hm-applink__sub     { font-size: 0.6rem; color: rgba(255,255,255,0.82); margin: 0; }
-.hm-applink__chevron { font-size: 1.2rem; color: rgba(255,255,255,0.7); flex-shrink: 0; }
+.hm-minicard__badge { font-size: 0.96rem; font-weight: var(--fw-black); color: var(--on-surface); margin: 2px 0 0; }
+.hm-minicard__meta  { font-size: 0.76rem; color: var(--on-surface-3); line-height: 1.35; margin: 0; }
+
+/* ── 앱 이동 버튼 ── */
+.hm-applink {
+  display: flex; align-items: center; justify-content: center; gap: var(--sp-2);
+  margin: 12px var(--sp-4) 0;
+  padding: 12px 16px;
+  background: transparent;
+  border: 1.5px solid #4F46E5;
+  border-radius: 14px; cursor: pointer; text-align: center;
+  transition: background 0.15s;
+}
+.hm-applink:active { background: rgba(79,70,229,0.06); }
+.hm-applink > span { font-size: 0.84rem; font-weight: var(--fw-black); color: #4F46E5; }
 
 /* ── 하단 네비게이션 ── */
 .hm-nav {
@@ -1522,13 +1572,13 @@ img { max-width: 100%; display: block; }
 .hm-nav__btn {
   flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px;
   padding: 5px 0; border: none; background: transparent; cursor: pointer;
-  font-size: 0.6rem; font-weight: var(--fw-bold); color: var(--on-surface-3);
+  font-size: 0.62rem; font-weight: var(--fw-bold); color: var(--on-surface-3);
   transition: color 0.15s; border-radius: 10px;
 }
 .hm-nav__btn.is-active { color: var(--pink-d); }
 .hm-nav__btn.is-active .hm-nav__ico { background: var(--pink-l); }
 .hm-nav__ico {
-  font-size: 1.05rem; width: 32px; height: 24px; border-radius: 10px;
+  font-size: 1.1rem; width: 34px; height: 26px; border-radius: 10px;
   display: grid; place-items: center; transition: background 0.15s;
 }
 
