@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthProvider';
 import { getSubscriptionStatus } from '../../services/subscription';
-import { checkMiniAccess, FREE_SJPT, PRO_MONTHLY_SJPT } from '../../services/miniUsage';
+import { checkMiniAccess, FREE_WEEKLY_SJPT, PRO_MONTHLY_SJPT } from '../../services/miniUsage';
 import { openPlayStore } from '../../components/AppBanner';
 import nekoStudy      from '../../assets/neko-cats/neko-cat-01-study.png';
 import nekoHeadset    from '../../assets/neko-cats/neko-cat-05-headset.png';
@@ -72,11 +72,11 @@ export default function SjptMiniSetup() {
         </p>
       </div>
 
-      {!loading && blocked && reason === 'lifetime' && !isPro && (
+      {!loading && blocked && reason === 'weekly' && !isPro && (
         <div className="sub-gate sub-gate--exhausted">
           <p className="sub-gate__icon">🎙️</p>
-          <p className="sub-gate__title">무료 체험 횟수 소진</p>
-          <p className="sub-gate__desc">무료 SJPT 미니 {FREE_SJPT}회를 모두 사용했습니다.<br/>Pro 구독으로 월 {PRO_MONTHLY_SJPT}회 이용하세요.</p>
+          <p className="sub-gate__title">이번 주 무료 횟수 소진</p>
+          <p className="sub-gate__desc">무료 SJPT 미니 테스트는 주 {FREE_WEEKLY_SJPT}회입니다.<br/>다음 주 월요일에 초기화되거나, Pro 구독으로 월 {PRO_MONTHLY_SJPT}회 이용하세요.</p>
           <button className="btn btn--indigo btn--block" onClick={openPlayStore}>📱 네코짱 앱에서 구독하기</button>
         </div>
       )}
@@ -93,7 +93,7 @@ export default function SjptMiniSetup() {
           <p className="sub-usage">
             {isPro
               ? `이번 달 ${access.monthUsed}/${access.monthLimit}회 사용`
-              : `무료 ${access.lifeUsed}/${access.lifeLimit}회 사용 · 남은 횟수 ${access.lifeLimit - access.lifeUsed}회`}
+              : `이번 주 ${access.weekUsed ?? 0}/${FREE_WEEKLY_SJPT}회 사용 · 남은 ${FREE_WEEKLY_SJPT - (access.weekUsed ?? 0)}회`}
           </p>
         )}
         <button className="btn btn--primary btn--block"
