@@ -106,6 +106,23 @@ export default function Home() {
         </button>
       </div>
 
+      {/* 미니 테스트 진입 */}
+      <div className="home__mini">
+        <p className="home__mini-label">⚡ 빠른 연습</p>
+        <div className="home__mini-btns">
+          <button className="mini-btn mini-btn--jlpt" onClick={() => navigate('/jlpt/mini')}>
+            <span className="mini-btn__badge">JLPT</span>
+            <span className="mini-btn__title">미니 테스트</span>
+            <span className="mini-btn__meta">8문항 · 15분</span>
+          </button>
+          <button className="mini-btn mini-btn--sjpt" onClick={() => navigate('/sjpt/mini')}>
+            <span className="mini-btn__badge">SJPT</span>
+            <span className="mini-btn__title">미니 연습</span>
+            <span className="mini-btn__meta">10문항 · 채점없음</span>
+          </button>
+        </div>
+      </div>
+
       {/* 앱 다운로드 링크 — Android, 앱 외부 접속 시만 표시 */}
       {isAndroid && !fromApp && (
         <button onClick={openPlayStore} className="home__app-link">

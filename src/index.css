@@ -1031,6 +1031,21 @@ img { max-width: 100%; display: block; }
 .sub-gate__desc  { margin: 0; font-size: var(--fs-sm); color: var(--on-surface-2); line-height: 1.6; }
 .sub-usage { margin: 0 0 6px; font-size: var(--fs-sm); color: var(--on-surface-2); text-align: center; font-weight: var(--fw-bold); }
 
+/* 미니 테스트 섹션 */
+.home__mini { width:100%; }
+.home__mini-label { font-size:var(--fs-xs); font-weight:var(--fw-black); color:var(--on-surface-3); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:var(--sp-2); }
+.home__mini-btns { display:flex; gap:var(--sp-3); }
+.mini-btn {
+  flex:1; display:flex; flex-direction:column; align-items:flex-start; gap:2px;
+  padding:12px 14px; border-radius:14px; border:none; cursor:pointer;
+  text-align:left;
+}
+.mini-btn--jlpt { background:linear-gradient(135deg,#EEF2FF,#E0E7FF); }
+.mini-btn--sjpt { background:linear-gradient(135deg,#FFF1F8,#FCE7F3); }
+.mini-btn__badge { font-size:10px; font-weight:var(--fw-black); color:var(--on-surface-3); letter-spacing:0.04em; }
+.mini-btn__title { font-size:var(--fs-sm); font-weight:var(--fw-black); color:var(--on-surface); }
+.mini-btn__meta  { font-size:11px; color:var(--on-surface-3); }
+
 .home__app-link {
   display: flex; align-items: center; justify-content: center; gap: 6px;
   width: 100%; padding: 10px 16px;

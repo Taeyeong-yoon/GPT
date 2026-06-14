@@ -25,3 +25,5 @@ build/
 css/
 js/
 output/
+
+.vercel

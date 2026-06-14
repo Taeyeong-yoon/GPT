@@ -7,7 +7,8 @@ import n1 from '../../../data/jlpt/n1.json';
 
 const DATA = { N5: n5, N4: n4, N3: n3, N2: n2, N1: n1 };
 
-const TARGETS = { vocabulary:12, grammar:12, reading:8, listening:8 };
+const TARGETS      = { vocabulary:12, grammar:12, reading:8, listening:8 };
+const MINI_TARGETS = { vocabulary:2,  grammar:2,  reading:2, listening:2 };
 
 function shuffled(arr) {
   const a = [...arr];
@@ -18,7 +19,7 @@ function shuffled(arr) {
   return a;
 }
 
-export function useJlptQuestions(level) {
+export function useJlptQuestions(level, mini = false) {
   const [examSet, setExamSet] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error,   setError]   = useState(null);
@@ -31,7 +32,8 @@ export function useJlptQuestions(level) {
       if (!data) throw new Error(`레벨 ${level} 데이터 없음`);
       const sections = data.sections;
       const selected = [];
-      for (const [sec, target] of Object.entries(TARGETS)) {
+      const targets = mini ? MINI_TARGETS : TARGETS;
+      for (const [sec, target] of Object.entries(targets)) {
         const pool   = sections[sec] || [];
         const picked = shuffled(pool).slice(0, target);
         if (picked.length < target)

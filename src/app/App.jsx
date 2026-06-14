@@ -18,6 +18,14 @@ const SjptSetup   = lazy(() => import('../features/sjpt/Setup'));
 const SjptExam    = lazy(() => import('../features/sjpt/Exam'));
 const SjptResult  = lazy(() => import('../features/sjpt/Result'));
 
+// 지연 로드 (미니 테스트)
+const JlptMiniLevelSelect = lazy(() => import('../features/jlpt/MiniLevelSelect'));
+const JlptMiniExam        = lazy(() => import('../features/jlpt/MiniExam'));
+const JlptMiniResult      = lazy(() => import('../features/jlpt/Result'));
+const SjptMiniSetup       = lazy(() => import('../features/sjpt/MiniSetup'));
+const SjptMiniExam        = lazy(() => import('../features/sjpt/MiniExam'));
+const SjptMiniResult      = lazy(() => import('../features/sjpt/MiniResult'));
+
 // 지연 로드 (서브 페이지)
 const History = lazy(() => import('../pages/History'));
 const Profile = lazy(() => import('../pages/Profile'));
@@ -62,6 +70,28 @@ export default function App() {
               } />
               <Route path="/sjpt/result/:id" element={
                 <ProtectedRoute><SjptResult /></ProtectedRoute>
+              } />
+
+              {/* 미니 테스트 — JLPT */}
+              <Route path="/jlpt/mini" element={
+                <ProtectedRoute><JlptMiniLevelSelect /></ProtectedRoute>
+              } />
+              <Route path="/jlpt/mini/exam" element={
+                <ProtectedRoute><JlptMiniExam /></ProtectedRoute>
+              } />
+              <Route path="/jlpt/mini/result/:id" element={
+                <ProtectedRoute><JlptMiniResult /></ProtectedRoute>
+              } />
+
+              {/* 미니 테스트 — SJPT */}
+              <Route path="/sjpt/mini" element={
+                <ProtectedRoute><SjptMiniSetup /></ProtectedRoute>
+              } />
+              <Route path="/sjpt/mini/exam" element={
+                <ProtectedRoute><SjptMiniExam /></ProtectedRoute>
+              } />
+              <Route path="/sjpt/mini/result" element={
+                <ProtectedRoute><SjptMiniResult /></ProtectedRoute>
               } />
 
               <Route path="/history" element={
