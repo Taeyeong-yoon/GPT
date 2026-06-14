@@ -1480,15 +1480,15 @@ img { max-width: 100%; display: block; }
 
 /* 배지 */
 .hm-card__badge {
-  font-size: 0.65rem; font-weight: var(--fw-black); letter-spacing: 0.08em;
-  padding: 2px 9px; border-radius: 8px; color: #fff;
+  font-size: 0.78rem; font-weight: var(--fw-black); letter-spacing: 0.08em;
+  padding: 3px 10px; border-radius: 8px; color: #fff;
 }
 .hm-card__badge--jlpt { background: #D4820A; }
 .hm-card__badge--sjpt { background: #7C3AED; }
 
 /* 시험 소개 */
 .hm-card__subject {
-  font-size: 0.82rem; font-weight: var(--fw-black);
+  font-size: 1.22rem; font-weight: var(--fw-black);
   color: var(--on-surface); margin: 2px 0 0; line-height: 1.2;
 }
 .hm-card__desc {

@@ -59,7 +59,7 @@ export default function Home() {
 
         <button className="hm-card hm-card--jlpt" onClick={() => navigate('/jlpt')}>
           <span className="hm-card__badge hm-card__badge--jlpt">JLPT</span>
-          <p className="hm-card__subject">일본어 능력시험이란?</p>
+          <p className="hm-card__subject">능력 시험이란?</p>
           <p className="hm-card__desc">
             N1~N5 다섯 단계로 어휘·문법·독해·청해 능력을 측정하는 국제 공인 시험입니다.
           </p>
@@ -71,7 +71,7 @@ export default function Home() {
 
         <button className="hm-card hm-card--sjpt" onClick={() => navigate('/sjpt')}>
           <span className="hm-card__badge hm-card__badge--sjpt">SJPT</span>
-          <p className="hm-card__subject">일본어 말하기 시험이란?</p>
+          <p className="hm-card__subject">말하기 시험이란?</p>
           <p className="hm-card__desc">
             1~7부 구성으로 준비·녹음·AI 채점까지, 실제 시험과 동일한 흐름으로 말하기 실력을 진단합니다.
           </p>
