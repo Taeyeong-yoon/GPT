@@ -47,7 +47,8 @@ const FILE_ID_MAP = {
 };
 
 function getImageUrl(imageNo) {
-  // Part 6·7 이미지는 Vercel public 폴더에서 서빙 (Drive 불필요)
+  // Part 2·6·7 이미지는 Vercel public 폴더에서 서빙 (Drive 불필요)
+  if (/^part2-\d+\.(png|jpg)$/i.test(imageNo)) return `/sjpt/part2/${imageNo}`;
   if (/^part6-\d+\.(png|jpg)$/i.test(imageNo)) return `/sjpt/part6/${imageNo}`;
   if (/^part7-\d+\.(png|jpg)$/i.test(imageNo)) return `/sjpt/part7/${imageNo}`;
   const id = FILE_ID_MAP[imageNo];
