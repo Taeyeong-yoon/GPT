@@ -303,6 +303,55 @@ img { max-width: 100%; display: block; }
 .chip--n3 { background: var(--sage-l); }
 .chip--n2 { background: var(--lavender); }
 .chip--n1 { background: var(--pink-l); }
+.chip--sjpt { background: #EDE9FE; color: #5B21B6; }
+
+/* ── 응시 기록 ── */
+.hist-mini-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border-soft);
+  border-radius: var(--r-lg);
+  padding: 16px 18px;
+  margin-bottom: 4px;
+}
+.hist-mini-card__heading {
+  font-size: var(--fs-sm); font-weight: var(--fw-extra);
+  color: var(--on-surface); margin: 0 0 12px;
+}
+.hist-mini-card__loading {
+  font-size: var(--fs-sm); color: var(--on-surface-2); margin: 0;
+}
+.hist-mini-card__rows { display: flex; flex-direction: column; gap: 10px; }
+.hist-mini-card__row  { display: flex; align-items: center; gap: 10px; }
+.hist-mini-card__label {
+  font-size: var(--fs-xs); color: var(--on-surface-2);
+  font-weight: var(--fw-bold); min-width: 44px;
+}
+.hist-mini-card__count {
+  margin-left: auto;
+  font-size: 1rem; font-weight: var(--fw-black); color: var(--on-surface);
+}
+.hist-mini-card__limit {
+  font-size: var(--fs-xs); color: var(--on-surface-2);
+  font-weight: var(--fw-bold); margin-left: 2px;
+}
+
+.hist-section-label {
+  font-size: var(--fs-sm); font-weight: var(--fw-extra);
+  color: var(--on-surface); margin: 8px 0 4px;
+}
+
+.hist-result-row {
+  display: flex; align-items: center; gap: 12px; cursor: pointer;
+  transition: opacity 0.15s;
+}
+.hist-result-row:active { opacity: 0.7; }
+.hist-result-row__score {
+  flex: 1; font-weight: var(--fw-extra); color: var(--on-surface);
+}
+.hist-result-row__date {
+  font-size: var(--fs-sm); color: var(--on-surface-2);
+}
+.hist-result-row__arrow { color: var(--on-surface-2); }
 
 /* 누적 응시 배지 */
 .badge-count {
