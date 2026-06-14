@@ -103,15 +103,15 @@ export default function SjptMiniExam() {
     return () => { clearTimeout(t1); clearTimeout(t2); };
   }, [phase, recorder.transcribing]);
 
-  // 전체 완료 → 결과 페이지 (채점 없음)
+  // 전체 완료 → 결과 페이지
   useEffect(() => {
     if (!flow.isDone || flow.answers.length === 0) return;
-    (async () => {
-      await incrementMiniUsage(user.uid, isPro, 'sjpt');
-      setDone(true);
+    setDone(true);
+    // incrementMiniUsage 실패해도 반드시 결과 페이지로 이동
+    incrementMiniUsage(user?.uid, isPro, 'sjpt').catch(() => {}).finally(() => {
       navigate('/sjpt/mini/result', { state: { answers: flow.answers } });
-    })();
-  }, [flow.isDone]);
+    });
+  }, [flow.isDone]); // eslint-disable-line
 
   if (flow.loading) return (
     <div className="nm-app" style={{alignItems:'center',justifyContent:'center',gap:16}}>

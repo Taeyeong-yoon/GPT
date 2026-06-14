@@ -32,11 +32,18 @@ export default function SjptMiniResult() {
   );
 
   if (error || !feedback) return (
-    <div className="screen" style={{ alignItems:'center', justifyContent:'center', gap:'var(--sp-4)' }}>
-      <p style={{ textAlign:'center', color:'var(--on-surface-2)', fontSize:'var(--fs-sm)' }}>
-        {error || '결과를 불러올 수 없습니다.'}
+    <div className="screen" style={{ alignItems:'center', justifyContent:'center', gap:'var(--sp-4)', padding:'32px 24px' }}>
+      <p style={{ fontSize:'2rem' }}>😿</p>
+      <p style={{ textAlign:'center', fontWeight:700, color:'var(--on-surface)', fontSize:'var(--fs-md)' }}>
+        AI 채점에 실패했어요
       </p>
-      <button className="btn btn--primary" onClick={() => navigate('/')}>홈으로</button>
+      <p style={{ textAlign:'center', color:'var(--on-surface-2)', fontSize:'var(--fs-sm)', lineHeight:1.6 }}>
+        {error || '채점 결과를 받아오지 못했습니다.'}<br/>잠시 후 다시 시도해 주세요.
+      </p>
+      <div style={{ display:'flex', gap:10 }}>
+        <button className="btn btn--secondary" onClick={() => navigate('/sjpt/mini')}>다시 하기</button>
+        <button className="btn btn--primary"   onClick={() => navigate('/')}>홈으로</button>
+      </div>
     </div>
   );
 
