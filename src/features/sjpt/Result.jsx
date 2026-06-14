@@ -7,6 +7,8 @@ import styles from './Result.module.css';
 const SCORE_LABELS = { grammar: '문법', vocabulary: '어휘', fluency: '유창성', naturalness: '자연스러움' };
 const SCORE_COLORS = { grammar: '#9DC4A8', vocabulary: '#C5B8E8', fluency: '#FFAFC7', naturalness: '#FFE066' };
 
+const GRADING_STEPS = ['답변 분석 중...', '문법 검토 중...', '유창성 평가 중...', '점수 계산 중...'];
+
 export default function SjptResult() {
   const navigate  = useNavigate();
   const location  = useLocation();
@@ -16,6 +18,15 @@ export default function SjptResult() {
   const [grading,  setGrading]  = useState(true);
   const [error,    setError]    = useState(null);
   const [openPart, setOpenPart] = useState(null);
+  const [stepIdx,  setStepIdx]  = useState(0);
+  const [elapsed,  setElapsed]  = useState(0);
+
+  useEffect(() => {
+    if (!grading) return;
+    const t1 = setInterval(() => setElapsed(s => s + 1), 1000);
+    const t2 = setInterval(() => setStepIdx(i => (i + 1) % GRADING_STEPS.length), 3500);
+    return () => { clearInterval(t1); clearInterval(t2); };
+  }, [grading]);
 
   useEffect(() => {
     if (answers.length === 0) { setGrading(false); return; }
@@ -29,7 +40,8 @@ export default function SjptResult() {
   if (grading) return (
     <div className="screen" style={{alignItems:'center', justifyContent:'center', gap:'var(--sp-4)'}}>
       <div style={{width:48,height:48,borderRadius:'50%',border:'4px solid #F9C8DA',borderTopColor:'#E05C8A',animation:'spin 0.8s linear infinite'}} />
-      <p className={styles.gradingText}>AI 채점 중이에요...<br/>잠시만 기다려주세요</p>
+      <p className={styles.gradingText}>{GRADING_STEPS[stepIdx]}</p>
+      <p style={{fontSize:'var(--fs-xs)',color:'var(--on-surface-3)'}}>{elapsed}초 경과</p>
     </div>
   );
 

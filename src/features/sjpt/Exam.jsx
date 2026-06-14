@@ -240,7 +240,7 @@ export default function SjptExam() {
         <div className="question-card">
           {q.imageUrl && <img key={q.id} src={q.imageUrl} alt="문제 이미지" className="sjpt-image"/>}
           {(!q.imageUrl || textRevealed) && (
-            <p className="question-card__text" style={{marginBottom:12}}>{q.text}</p>
+            <p className="question-card__text" style={{marginBottom:12}}>{(q.text || '').replace('下の', '上の')}</p>
           )}
           {phase === "question" && (
             <button className="btn btn--secondary btn--block" onClick={handleSpeak} disabled={ttsLoading}>
@@ -274,7 +274,11 @@ export default function SjptExam() {
                 <div className="rec-meter__wave"><span/><span/><span/><span/></div>
               </div>
               <p style={{fontVariantNumeric:"tabular-nums",fontWeight:"var(--fw-extra)",color:"var(--danger)"}}>{countdown}초 남음</p>
-              {recorder.transcript && <p style={{fontSize:"var(--fs-sm)",color:"var(--on-surface-2)",textAlign:"center"}}>{recorder.transcript}</p>}
+              <div style={{width:'100%',maxHeight:72,overflowY:'auto',background:'var(--surface-2)',borderRadius:8,padding:'6px 10px',border:'1px solid var(--border-soft)'}}>
+                <p style={{fontSize:'var(--fs-sm)',color:recorder.transcript?'var(--on-surface)':'var(--on-surface-3)',lineHeight:1.6,fontFamily:'var(--font-jp)'}}>
+                  {recorder.transcript || '말하는 중...'}
+                </p>
+              </div>
               <button className="btn btn--primary btn--block" onClick={handleFinish}>답변 완료</button>
             </div>
           </div>

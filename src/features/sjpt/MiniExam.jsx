@@ -161,7 +161,7 @@ export default function SjptMiniExam() {
       <div className="screen">
         <div className="question-card">
           {q.imageUrl && <img key={q.id} src={q.imageUrl} alt="문제 이미지" className="sjpt-image"/>}
-          {(!q.imageUrl || textRevealed) && <p className="question-card__text" style={{marginBottom:12}}>{q.text}</p>}
+          {(!q.imageUrl || textRevealed) && <p className="question-card__text" style={{marginBottom:12}}>{(q.text || '').replace('下の', '上の')}</p>}
           {phase === 'question' && (
             <button className="btn btn--secondary btn--block" onClick={handleSpeak} disabled={ttsLoading}>
               {ttsLoading ? '재생 중...' : '🔊 문제 듣기'}
@@ -184,7 +184,7 @@ export default function SjptMiniExam() {
 
               {/* STT 자막 */}
               <div style={{
-                width:'100%', minHeight:72,
+                width:'100%', minHeight:72, maxHeight:80, overflowY:'auto',
                 background:'var(--surface-2)', borderRadius:12, padding:'10px 14px',
                 border:'1px solid var(--border-soft)'
               }}>
