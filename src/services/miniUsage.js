@@ -1,26 +1,17 @@
 import { doc, getDoc, setDoc, increment } from 'firebase/firestore';
 import { db } from './firebase';
 
-// 무료 한도 (주간 초기화)
-export const FREE_WEEKLY_JLPT = 5;   // 주 5회
-export const FREE_WEEKLY_SJPT = 2;   // 주 2회
+// 무료 한도: 3일 3회
+export const FREE_TRIAL_DAYS = 3;
+export const FREE_TRIAL_COUNT = 3;
 
 // 유료 한도 (월별)
-export const PRO_MONTHLY_JLPT = 60;
+export const PRO_MONTHLY_JLPT = 30;
 export const PRO_MONTHLY_SJPT = 10;
 
 function monthKey() {
   const d = new Date();
   return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
-}
-
-// 이번 주 월요일 날짜 문자열 (주간 리셋 기준)
-function weekStart() {
-  const d   = new Date();
-  const day = d.getDay();
-  const diff = d.getDate() - day + (day === 0 ? -6 : 1);
-  const mon  = new Date(d.getFullYear(), d.getMonth(), diff);
-  return `${mon.getFullYear()}-${String(mon.getMonth()+1).padStart(2,'0')}-${String(mon.getDate()).padStart(2,'0')}`;
 }
 
 async function getRaw(uid) {
@@ -34,12 +25,36 @@ async function getRaw(uid) {
   };
 }
 
+/** 무료 유저 3일 3회 체험 유효 여부 */
+function checkFreeTrial(free, type) {
+  const startedKey = `${type}_trial_started_at`;
+  const usedKey    = `${type}_trial_used`;
+
+  const startedAt = free[startedKey];
+  const used      = Number(free[usedKey]) || 0;
+
+  if (!startedAt) {
+    // 아직 시작 전 → 첫 번째 사용 허용
+    return { canStart: true, used: 0, limit: FREE_TRIAL_COUNT, isNew: true };
+  }
+
+  const startedDate = new Date(startedAt);
+  const daysPassed  = Math.floor((Date.now() - startedDate.getTime()) / 86400000);
+
+  if (daysPassed >= FREE_TRIAL_DAYS) {
+    return { canStart: false, reason: 'trial_expired', used, limit: FREE_TRIAL_COUNT };
+  }
+  if (used >= FREE_TRIAL_COUNT) {
+    return { canStart: false, reason: 'trial_count', used, limit: FREE_TRIAL_COUNT };
+  }
+  return { canStart: true, used, limit: FREE_TRIAL_COUNT };
+}
+
 /** 미니 시험 접근 가능 여부 반환 */
 export async function checkMiniAccess(uid, isPro, type) {
   if (!uid || !db) return { canStart: false, reason: 'login' };
   try {
     const { free, month } = await getRaw(uid);
-    const curWeek = weekStart();
 
     if (type === 'jlpt') {
       if (isPro) {
@@ -47,9 +62,7 @@ export async function checkMiniAccess(uid, isPro, type) {
         if (monthUsed >= PRO_MONTHLY_JLPT) return { canStart: false, reason: 'monthly', used: monthUsed, limit: PRO_MONTHLY_JLPT };
         return { canStart: true, monthUsed, monthLimit: PRO_MONTHLY_JLPT };
       } else {
-        const weekUsed = (free.jlpt_week_start === curWeek) ? (Number(free.jlpt_week_used) || 0) : 0;
-        if (weekUsed >= FREE_WEEKLY_JLPT) return { canStart: false, reason: 'weekly', used: weekUsed, limit: FREE_WEEKLY_JLPT };
-        return { canStart: true, weekUsed, weekLimit: FREE_WEEKLY_JLPT };
+        return checkFreeTrial(free, 'jlpt');
       }
     }
 
@@ -59,9 +72,7 @@ export async function checkMiniAccess(uid, isPro, type) {
         if (monthUsed >= PRO_MONTHLY_SJPT) return { canStart: false, reason: 'monthly', used: monthUsed, limit: PRO_MONTHLY_SJPT };
         return { canStart: true, monthUsed, monthLimit: PRO_MONTHLY_SJPT };
       } else {
-        const weekUsed = (free.sjpt_week_start === curWeek) ? (Number(free.sjpt_week_used) || 0) : 0;
-        if (weekUsed >= FREE_WEEKLY_SJPT) return { canStart: false, reason: 'weekly', used: weekUsed, limit: FREE_WEEKLY_SJPT };
-        return { canStart: true, weekUsed, weekLimit: FREE_WEEKLY_SJPT };
+        return checkFreeTrial(free, 'sjpt');
       }
     }
   } catch { return { canStart: true }; }
@@ -70,33 +81,30 @@ export async function checkMiniAccess(uid, isPro, type) {
 /** 미니 시험 완료 후 카운트 증가 */
 export async function incrementMiniUsage(uid, isPro, type) {
   if (!uid || !db) return;
-  const month   = monthKey();
-  const curWeek = weekStart();
+  const month = monthKey();
   try {
-    if (type === 'jlpt') {
-      if (isPro) {
-        await setDoc(doc(db, 'users', uid, 'usage', month), { jlpt_mini: increment(1) }, { merge: true });
+    if (isPro) {
+      const field = type === 'jlpt' ? 'jlpt_mini' : 'sjpt_mini';
+      await setDoc(doc(db, 'users', uid, 'usage', month), { [field]: increment(1) }, { merge: true });
+    } else {
+      const startedKey = `${type}_trial_started_at`;
+      const usedKey    = `${type}_trial_used`;
+      const snap = await getDoc(doc(db, 'users', uid, 'mini_free', 'quota'));
+      const data = snap.exists() ? snap.data() : {};
+
+      if (!data[startedKey]) {
+        // 첫 사용 → 시작 시각 기록 + 카운트 1
+        await setDoc(
+          doc(db, 'users', uid, 'mini_free', 'quota'),
+          { [startedKey]: new Date().toISOString(), [usedKey]: 1 },
+          { merge: true },
+        );
       } else {
-        const snap = await getDoc(doc(db, 'users', uid, 'mini_free', 'quota'));
-        const data = snap.exists() ? snap.data() : {};
-        if (data.jlpt_week_start === curWeek) {
-          await setDoc(doc(db, 'users', uid, 'mini_free', 'quota'), { jlpt_week_used: increment(1) }, { merge: true });
-        } else {
-          await setDoc(doc(db, 'users', uid, 'mini_free', 'quota'), { jlpt_week_start: curWeek, jlpt_week_used: 1 }, { merge: true });
-        }
-      }
-    }
-    if (type === 'sjpt') {
-      if (isPro) {
-        await setDoc(doc(db, 'users', uid, 'usage', month), { sjpt_mini: increment(1) }, { merge: true });
-      } else {
-        const snap = await getDoc(doc(db, 'users', uid, 'mini_free', 'quota'));
-        const data = snap.exists() ? snap.data() : {};
-        if (data.sjpt_week_start === curWeek) {
-          await setDoc(doc(db, 'users', uid, 'mini_free', 'quota'), { sjpt_week_used: increment(1) }, { merge: true });
-        } else {
-          await setDoc(doc(db, 'users', uid, 'mini_free', 'quota'), { sjpt_week_start: curWeek, sjpt_week_used: 1 }, { merge: true });
-        }
+        await setDoc(
+          doc(db, 'users', uid, 'mini_free', 'quota'),
+          { [usedKey]: increment(1) },
+          { merge: true },
+        );
       }
     }
   } catch {}

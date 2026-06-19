@@ -15,6 +15,16 @@ function monthKey() {
 export async function getSubscriptionStatus(uid) {
   if (!uid || !db) return { isPro: false };
   try {
+    // 1) 앱 인앱결제 → users/{uid}.plan == 'PREMIUM' 확인
+    const userSnap = await getDoc(doc(db, 'users', uid));
+    if (userSnap.exists()) {
+      const plan = userSnap.data().plan ?? '';
+      if (plan.toUpperCase() === 'PREMIUM') {
+        return { isPro: true, plan: 'app', source: 'app' };
+      }
+    }
+
+    // 2) 웹 직접결제 → subscriptions 컬렉션 확인
     const snap = await getDocs(
       query(
         collection(db, 'subscriptions'),
