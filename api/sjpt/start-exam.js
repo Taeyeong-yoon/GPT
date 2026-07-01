@@ -9,7 +9,7 @@ import { FieldValue } from 'firebase-admin/firestore';
 import { verifySjptToken, sjptDb } from './_sjpt-admin.js';
 
 const KNOWN_PRODUCT_IDS = new Set([
-  'sjpt_mini_basic',
+  'sjpt_basic', // 미니 기본권 (Play에서 sjpt_mini_basic 삭제→재사용 불가라 sjpt_basic 사용)
   'sjpt_mini_plus',
   'sjpt_mini_pro',
   'sjpt_mock_exam',
