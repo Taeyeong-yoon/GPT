@@ -44,19 +44,27 @@ export default async function handler(req, res) {
   const sessionsRef = userRef.collection('exam_sessions');
 
   // 1) 재개 가능한 진행중 세션 확인 (추가 차감 없음)
-  const cutoff = new Date(Date.now() - RESUME_WINDOW_MS);
-  const resumeSnap = await sessionsRef
+  //    startedAt 컷오프·정렬은 코드에서 처리 → Firestore 복합색인 불필요(equality 2개만 쿼리).
+  //    (진행중 세션은 상품당 소수라 클라이언트 정렬 부담 없음)
+  const cutoff = Date.now() - RESUME_WINDOW_MS;
+  const inProgSnap = await sessionsRef
     .where('productId', '==', productId)
     .where('status', '==', 'in_progress')
-    .where('startedAt', '>=', cutoff)
-    .orderBy('startedAt', 'desc')
-    .limit(1)
     .get();
-  if (!resumeSnap.empty) {
-    const doc = resumeSnap.docs[0];
+  let resumeDoc = null;
+  let resumeTs = 0;
+  inProgSnap.forEach((d) => {
+    const st = d.get('startedAt');
+    const ms = st?.toMillis ? st.toMillis() : st ? new Date(st).getTime() : 0;
+    if (ms >= cutoff && ms >= resumeTs) {
+      resumeTs = ms;
+      resumeDoc = d;
+    }
+  });
+  if (resumeDoc) {
     const userSnap = await userRef.get();
     const remaining = userSnap.exists ? (userSnap.data().credits?.[productId] ?? 0) : 0;
-    return res.status(200).json({ ok: true, sessionId: doc.id, resumed: true, remaining });
+    return res.status(200).json({ ok: true, sessionId: resumeDoc.id, resumed: true, remaining });
   }
 
   // 2) 신규 시작 → 트랜잭션으로 1회 차감 + 세션 생성
