@@ -71,7 +71,9 @@ export default async function handler(req, res) {
   try {
     const partNums = [2, 3, 4, 5, 6, 7];
     const results = await Promise.all(
-      partNums.map((p) => fetchSheet(`${TABS[p]}!A:E`, apiKey).then((rows) => parseTab(rows, p))),
+      // 탭이 아직 없거나 비어도 전체가 실패하지 않도록 파트별로 개별 처리
+      partNums.map((p) =>
+        fetchSheet(`${TABS[p]}!A:E`, apiKey).then((rows) => parseTab(rows, p)).catch(() => [])),
     );
 
     const parts = [{ part: 1, questions: PART1_FIXED }];
