@@ -5,7 +5,13 @@
     "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
     "imageFile": "part7-001.png",
     "theme": "약속에 늦다",
-    "keywords": ["約束", "遅刻", "急ぐ", "謝る", "許す"],
+    "keywords": [
+      "約束",
+      "遅刻",
+      "急ぐ",
+      "謝る",
+      "許す"
+    ],
     "story": {
       "panel1": "두 친구가 카페 앞에서 오후 3시에 만나기로 약속하며 기뻐하고 있다",
       "panel2": "주인공이 집에서 낮잠을 자다 3시 30분에 깜짝 놀라 일어난다",
@@ -20,7 +26,14 @@
     "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
     "imageFile": "part7-002.png",
     "theme": "지갑을 잃어버리다",
-    "keywords": ["財布", "落とす", "気づく", "探す", "見つかる", "安心する"],
+    "keywords": [
+      "財布",
+      "落とす",
+      "気づく",
+      "探す",
+      "見つかる",
+      "安心する"
+    ],
     "story": {
       "panel1": "주인공이 쇼핑몰에서 물건을 사며 지갑을 꺼내고 있다",
       "panel2": "레스토랑에서 계산하려는데 가방에 지갑이 없어 당황한다",
@@ -35,7 +48,13 @@
     "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
     "imageFile": "part7-003.png",
     "theme": "전철을 지나치다",
-    "keywords": ["乗り過ごす", "眠る", "気づく", "慌てる", "戻る"],
+    "keywords": [
+      "乗り過ごす",
+      "眠る",
+      "気づく",
+      "慌てる",
+      "戻る"
+    ],
     "story": {
       "panel1": "주인공이 전철 안에서 스마트폰을 보며 편안하게 앉아 있다",
       "panel2": "어느새 잠이 들었고, 창밖으로 낯선 역 이름이 보인다",
@@ -50,7 +69,14 @@
     "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
     "imageFile": "part7-004.png",
     "theme": "요리에 실패하다",
-    "keywords": ["料理", "焦げる", "失敗する", "仕方ない", "注文する", "笑う"],
+    "keywords": [
+      "料理",
+      "焦げる",
+      "失敗する",
+      "仕方ない",
+      "注文する",
+      "笑う"
+    ],
     "story": {
       "panel1": "주인공이 친구를 위해 요리하겠다며 신나게 재료를 준비한다",
       "panel2": "요리 중 스마트폰을 보느라 한눈을 파는 사이 냄비에서 연기가 피어오른다",
@@ -65,7 +91,14 @@
     "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
     "imageFile": "part7-005.png",
     "theme": "우산을 잊고 비를 맞다",
-    "keywords": ["傘", "忘れる", "突然", "雨に濡れる", "助ける", "一緒に"],
+    "keywords": [
+      "傘",
+      "忘れる",
+      "突然",
+      "雨に濡れる",
+      "助ける",
+      "一緒に"
+    ],
     "story": {
       "panel1": "맑은 아침, 주인공이 기분 좋게 집을 나서며 우산을 현관에 두고 간다",
       "panel2": "갑자기 먹구름이 몰려오고 폭우가 내려 주인공이 흠뻑 젖는다",
@@ -80,7 +113,14 @@
     "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
     "imageFile": "part7-006.png",
     "theme": "카페에서 음료를 쏟다",
-    "keywords": ["こぼす", "慌てる", "拭く", "申し訳ない", "助かる", "ほっとする"],
+    "keywords": [
+      "こぼす",
+      "慌てる",
+      "拭く",
+      "申し訳ない",
+      "助かる",
+      "ほっとする"
+    ],
     "story": {
       "panel1": "주인공이 카페에서 노트북과 커피를 두고 공부하고 있다",
       "panel2": "팔꿈치가 걸려 커피가 노트북 위로 쏟아진다",
@@ -95,7 +135,14 @@
     "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
     "imageFile": "part7-007.png",
     "theme": "스마트폰을 잃어버리다",
-    "keywords": ["なくす", "焦る", "探す", "届ける", "親切", "感謝する"],
+    "keywords": [
+      "なくす",
+      "焦る",
+      "探す",
+      "届ける",
+      "親切",
+      "感謝する"
+    ],
     "story": {
       "panel1": "주인공이 공원 벤치에 앉아 스마트폰으로 사진을 찍으며 즐기고 있다",
       "panel2": "자리를 떠난 뒤 폰이 없다는 것을 깨닫고 허둥지둥 찾는다",
@@ -110,7 +157,14 @@
     "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
     "imageFile": "part7-008.png",
     "theme": "선물을 잊다",
-    "keywords": ["誕生日", "プレゼント", "忘れる", "慌てる", "買いに行く", "喜ぶ"],
+    "keywords": [
+      "誕生日",
+      "プレゼント",
+      "忘れる",
+      "慌てる",
+      "買いに行く",
+      "喜ぶ"
+    ],
     "story": {
       "panel1": "친구의 생일 파티에 신나게 도착한 주인공, 그런데 선물이 없다는 것을 깨닫는다",
       "panel2": "다들 선물을 드리는 상황에서 주인공만 빈손이라 당황한다",
@@ -125,7 +179,14 @@
     "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
     "imageFile": "part7-009.png",
     "theme": "길을 잃다",
-    "keywords": ["迷う", "困る", "尋ねる", "親切", "やっと", "着く"],
+    "keywords": [
+      "迷う",
+      "困る",
+      "尋ねる",
+      "親切",
+      "やっと",
+      "着く"
+    ],
     "story": {
       "panel1": "주인공이 스마트폰 지도를 보며 새 레스토랑을 찾아가고 있다",
       "panel2": "배터리가 방전되어 지도가 꺼지고 낯선 골목에서 완전히 길을 잃는다",
@@ -140,7 +201,14 @@
     "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
     "imageFile": "part7-010.png",
     "theme": "자전거 타이어가 펑크나다",
-    "keywords": ["パンク", "困る", "遅刻しそう", "助ける", "間に合う", "ほっとする"],
+    "keywords": [
+      "パンク",
+      "困る",
+      "遅刻しそう",
+      "助ける",
+      "間に合う",
+      "ほっとする"
+    ],
     "story": {
       "panel1": "주인공이 자전거를 타고 학교나 회사로 즐겁게 출발한다",
       "panel2": "갑자기 타이어가 펑크 나서 길가에 멈춰 서고 당황한다",
@@ -155,7 +223,14 @@
     "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
     "imageFile": "part7-011.png",
     "theme": "시험 전날 밤에 잠들다",
-    "keywords": ["試験", "準備する", "眠る", "焦る", "急いで", "間に合う"],
+    "keywords": [
+      "試験",
+      "準備する",
+      "眠る",
+      "焦る",
+      "急いで",
+      "間に合う"
+    ],
     "story": {
       "panel1": "시험 전날 밤, 주인공이 책상 앞에 앉아 열심히 공부를 시작한다",
       "panel2": "공부하다 어느새 잠이 들어버린다",
@@ -170,7 +245,14 @@
     "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
     "imageFile": "part7-012.png",
     "theme": "이사 짐을 옮기다 실수하다",
-    "keywords": ["引越し", "手伝う", "重い", "落とす", "一緒に", "お礼"],
+    "keywords": [
+      "引越し",
+      "手伝う",
+      "重い",
+      "落とす",
+      "一緒に",
+      "お礼"
+    ],
     "story": {
       "panel1": "친구가 이사를 도와달라고 부탁하고, 주인공이 흔쾌히 수락한다",
       "panel2": "무거운 짐을 나르다 발이 걸려 박스를 떨어뜨린다",
@@ -185,7 +267,14 @@
     "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
     "imageFile": "part7-013.png",
     "theme": "병원 대기 시간이 너무 길다",
-    "keywords": ["具合が悪い", "待つ", "長い", "やっと", "診察", "元気になる"],
+    "keywords": [
+      "具合が悪い",
+      "待つ",
+      "長い",
+      "やっと",
+      "診察",
+      "元気になる"
+    ],
     "story": {
       "panel1": "주인공이 몸이 안 좋아 병원을 찾아간다",
       "panel2": "대기실이 꽉 차있고 대기 번호표가 한참 남아 지루하고 힘들다",
@@ -200,7 +289,14 @@
     "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
     "imageFile": "part7-014.png",
     "theme": "소풍 중 벌레가 나타나다",
-    "keywords": ["ピクニック", "虫", "驚く", "困る", "解決する", "楽しむ"],
+    "keywords": [
+      "ピクニック",
+      "虫",
+      "驚く",
+      "困る",
+      "解決する",
+      "楽しむ"
+    ],
     "story": {
       "panel1": "친구들과 공원에서 즐겁게 도시락을 펴고 피크닉을 즐기고 있다",
       "panel2": "개미 떼가 음식으로 몰려들어 모두 깜짝 놀라 당황한다",
@@ -215,7 +311,14 @@
     "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
     "imageFile": "part7-015.png",
     "theme": "영화관에서 자리를 잘못 앉다",
-    "keywords": ["映画", "座席", "間違える", "気づく", "謝る", "ちょうど間に合う"],
+    "keywords": [
+      "映画",
+      "座席",
+      "間違える",
+      "気づく",
+      "謝る",
+      "ちょうど間に合う"
+    ],
     "story": {
       "panel1": "커플이 기대하던 영화를 보러 신나게 영화관에 입장한다",
       "panel2": "자리에 앉았는데 다른 사람이 와서 자기 자리라고 한다",
@@ -230,7 +333,14 @@
     "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
     "imageFile": "part7-016.png",
     "theme": "스포츠 대회에서 팀원이 부상을 입다",
-    "keywords": ["試合", "けが", "心配する", "協力する", "乗り越える", "勝つ"],
+    "keywords": [
+      "試合",
+      "けが",
+      "心配する",
+      "協力する",
+      "乗り越える",
+      "勝つ"
+    ],
     "story": {
       "panel1": "팀원들이 스포츠 대회를 앞두고 열정적으로 준비운동을 한다",
       "panel2": "주요 선수가 워밍업 중 발목을 삐어 쓰러진다",
@@ -245,7 +355,14 @@
     "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
     "imageFile": "part7-017.png",
     "theme": "여행 중 막차를 놓치다",
-    "keywords": ["旅行", "バス", "乗り遅れる", "困る", "タクシー", "無事に帰る"],
+    "keywords": [
+      "旅行",
+      "バス",
+      "乗り遅れる",
+      "困る",
+      "タクシー",
+      "無事に帰る"
+    ],
     "story": {
       "panel1": "관광지에서 친구와 사진을 찍으며 즐겁게 구경하고 있다",
       "panel2": "시간 가는 줄 모르다 막차 버스가 떠나는 것을 발견하고 달려가지만 놓친다",
@@ -260,7 +377,14 @@
     "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
     "imageFile": "part7-018.png",
     "theme": "정전이 되다",
-    "keywords": ["停電", "暗くなる", "ろうそく", "集まる", "楽しむ", "電気が戻る"],
+    "keywords": [
+      "停電",
+      "暗くなる",
+      "ろうそく",
+      "集まる",
+      "楽しむ",
+      "電気が戻る"
+    ],
     "story": {
       "panel1": "가족이 거실에서 TV를 보며 즐겁게 시간을 보내고 있다",
       "panel2": "갑자기 정전이 되어 온 집이 캄캄해지고 모두 놀란다",
@@ -275,7 +399,14 @@
     "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
     "imageFile": "part7-019.png",
     "theme": "분실물을 경찰서에 신고하다",
-    "keywords": ["落とし物", "拾う", "警察署", "届ける", "感謝する", "断る"],
+    "keywords": [
+      "落とし物",
+      "拾う",
+      "警察署",
+      "届ける",
+      "感謝する",
+      "断る"
+    ],
     "story": {
       "panel1": "길을 걷던 주인공이 바닥에 지갑이 떨어져 있는 것을 발견한다",
       "panel2": "지갑 안을 열어보니 신분증과 돈이 들어있어 어떻게 할지 고민한다",
@@ -290,7 +421,14 @@
     "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
     "imageFile": "part7-020.png",
     "theme": "요리 교실에서 실수하다",
-    "keywords": ["料理教室", "失敗する", "助ける", "協力する", "完成する", "喜ぶ"],
+    "keywords": [
+      "料理教室",
+      "失敗する",
+      "助ける",
+      "協力する",
+      "完成する",
+      "喜ぶ"
+    ],
     "story": {
       "panel1": "주인공이 처음으로 요리 교실에 참가해 설레는 마음으로 앞치마를 두른다",
       "panel2": "레시피를 따라 하지만 순서를 헷갈려 강사가 걱정스러운 눈빛으로 바라본다",
@@ -298,5 +436,320 @@
       "panel4": "완성된 요리를 모두 함께 맛보며 기뻐하고 주인공도 뿌듯한 표정을 짓는다"
     },
     "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, anime-style illustration, thick black borders between panels, no speech bubbles, no text, bright clear colors, white background. CRITICAL RULE: The MAIN CHARACTER is THE SAME YOUNG WOMAN in all 4 panels — she has shoulder-length dark hair pulled back in a small ponytail, and wears a PINK BLOUSE under a WHITE APRON. This EXACT SAME young woman with pink blouse and white apron must appear in panels 1, 2, 3, AND 4 without any change. Top-left panel: The young woman with shoulder-length dark hair, pink blouse, white apron ties her apron excitedly at a bright cooking class kitchen, looking eager. Top-right panel: The SAME young woman in pink blouse and white apron looks confused at a recipe card, making mistakes at her cooking station, while an instructor nearby watches with concern. Bottom-left panel: The SAME young woman in pink blouse and white apron receives help from friendly classmates around the cooking station, everyone cooperating cheerfully. Bottom-right panel: The SAME young woman in pink blouse and white apron stands proudly at the table where the completed dish is placed, everyone tasting it and smiling, the young woman beaming with pride. Professional quality, suitable for Japanese language examination."
+  },
+  {
+    "id": "sjpt-7-021",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-021.png",
+    "theme": "공원 — 아이가 풍선을 놓쳤다가 새 풍선을 받음",
+    "keywords": [
+      "風船",
+      "なくす",
+      "泣く",
+      "もらう",
+      "喜ぶ"
+    ],
+    "story": {
+      "panel1": "아이가 공원에서 빨간 풍선을 손에 들고 즐거워한다",
+      "panel2": "아이가 실수로 풍선 줄을 놓쳐 풍선이 하늘로 날아간다",
+      "panel3": "아이가 하늘로 올라간 풍선을 올려다보며 운다",
+      "panel4": "노점 아저씨가 새 빨간 풍선을 주자 아이가 활짝 웃는다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, thick black borders between the four panels, no speech bubbles.\n\nART STYLE (keep it consistent across all four panels): a polished modern Japanese anime / webtoon (manhwa) illustration style, like a clean professional 4-panel web-comic. Use warm, natural, gently saturated colors (appealing and clear — NOT neon, NOT dull grey/washed-out), soft cel shading with subtle gradients and gentle light highlights, clean medium-weight black outlines, and realistic natural body proportions (NOT chibi, NOT super-deformed). Faces are expressive with medium-large eyes but natural, never overly cartoonish. Backgrounds are detailed yet clean and softly lit. High-quality professional finish, with the exact same character design and coloring in every panel.\n\nABSOLUTELY NO TEXT ANYWHERE IN THE IMAGE: no Japanese kanji, no hiragana, no katakana, no Chinese characters, no English letters, no numbers, no words, no writing, no signboard text, no shop signs, no station names, no labels, no clock numbers, no logos. Any signs, boards, screens, calendars or posters that appear MUST be completely blank. Do not draw wall clocks unless a panel explicitly asks for one.\n\nSTORY CLARITY — THE MOST IMPORTANT RULE: the four panels must tell ONE continuous, engaging story with a clear setup, a problem or unexpected twist, rising tension, and a satisfying resolution — understandable with NO words at all, read in order top-left, top-right, bottom-left, bottom-right. Each panel must clearly follow from the previous one. The key object that drives the story MUST be clearly visible in every panel where it matters. The MAIN CHARACTER must appear in ALL FOUR panels so the viewer follows the same person through the whole story. Use clear body language, motion lines and strong facial expressions (surprise, panic, relief, joy). Keep the same location and background across panels unless a panel says otherwise.\n\nMAIN CHARACTER — must look EXACTLY THE SAME in all four panels (identical face, identical hairstyle and hair color, identical clothes and colors, identical accessories such as hat, bag, shoes; never add or remove them between panels). The character does NOT wear glasses in any panel: a little Japanese boy about 6 with short black hair and a red cap, a yellow t-shirt, blue shorts and white sneakers.\n\nTop-left panel: in a park, the boy in the red cap and yellow t-shirt happily holds a red balloon by its string. Top-right panel: the same boy accidentally lets go; the red balloon floats up into the sky as he reaches up after it, shocked. Bottom-left panel: the same boy stands crying, looking up at the red balloon now high in the sky, big tears falling. Bottom-right panel: a friendly vendor hands the same boy a new red balloon; the boy beams with joy holding it.\n\nFRAMING: each panel is a wide full shot with generous empty margin around the subjects. Every character and every important object must be fully visible and well inside the panel borders — do NOT crop or cut off any head, body, limbs or objects at the panel edges.\n\nReminder: NO letters/kanji/numbers anywhere; NO glasses; the main character wears the EXACT SAME clothes in the EXACT SAME colors in all four panels; the same main character appears in every panel; use the warm natural webtoon art style throughout; tell an engaging story with a clear twist and resolution that reads without words. Professional quality, suitable for a Japanese speaking examination."
+  },
+  {
+    "id": "sjpt-7-022",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-022.png",
+    "theme": "호텔 — 방문이 안 열려 낑낑대다 층을 착각한 걸 깨달음",
+    "keywords": [
+      "ホテル",
+      "カードキー",
+      "開かない",
+      "間違い",
+      "解決"
+    ],
+    "story": {
+      "panel1": "남자가 호텔 복도 방문에 카드키를 대며 열리길 기대한다",
+      "panel2": "카드키가 계속 안 먹혀 남자가 문을 밀며 낑낑대고 짜증낸다",
+      "panel3": "직원이 지나가며 층을 잘못 왔다고 알려주자 남자가 머쓱해한다",
+      "panel4": "남자가 제대로 된 층의 방문을 열고 침대에 털썩 누워 안도한다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, thick black borders between the four panels, no speech bubbles.\n\nART STYLE (keep it consistent across all four panels): a polished modern Japanese anime / webtoon (manhwa) illustration style, like a clean professional 4-panel web-comic. Use warm, natural, gently saturated colors (appealing and clear — NOT neon, NOT dull grey/washed-out), soft cel shading with subtle gradients and gentle light highlights, clean medium-weight black outlines, and realistic natural body proportions (NOT chibi, NOT super-deformed). Faces are expressive with medium-large eyes but natural, never overly cartoonish. Backgrounds are detailed yet clean and softly lit. High-quality professional finish, with the exact same character design and coloring in every panel.\n\nABSOLUTELY NO TEXT ANYWHERE IN THE IMAGE: no Japanese kanji, no hiragana, no katakana, no Chinese characters, no English letters, no numbers, no words, no writing, no signboard text, no shop signs, no station names, no labels, no clock numbers, no logos. Any signs, boards, screens, calendars or posters that appear MUST be completely blank. Do not draw wall clocks unless a panel explicitly asks for one.\n\nSTORY CLARITY — THE MOST IMPORTANT RULE: the four panels must tell ONE continuous, engaging story with a clear setup, a problem or unexpected twist, rising tension, and a satisfying resolution — understandable with NO words at all, read in order top-left, top-right, bottom-left, bottom-right. Each panel must clearly follow from the previous one. The key object that drives the story MUST be clearly visible in every panel where it matters. The MAIN CHARACTER must appear in ALL FOUR panels so the viewer follows the same person through the whole story. Use clear body language, motion lines and strong facial expressions (surprise, panic, relief, joy). Keep the same location and background across panels unless a panel says otherwise.\n\nMAIN CHARACTER — must look EXACTLY THE SAME in all four panels (identical face, identical hairstyle and hair color, identical clothes and colors, identical accessories such as hat, bag, shoes; never add or remove them between panels). The character does NOT wear glasses in any panel: a Japanese man in his 30s with short black hair, a teal polo shirt, beige pants and brown shoes, with a small suitcase.\n\nTop-left panel: in a bright hotel hallway, the man in the teal polo taps his keycard on a room door, expecting it to open, suitcase beside him. Top-right panel: the keycard keeps failing; the same man in the teal polo pushes and jiggles the door, straining and getting annoyed. Bottom-left panel: a passing hotel staff kindly points out that he is on the wrong floor; the same man in the teal polo looks sheepish and embarrassed. Bottom-right panel: the same man in the teal polo opens the correct room on the right floor and flops onto the bed with a relieved sigh.\n\nFRAMING: each panel is a wide full shot with generous empty margin around the subjects. Every character and every important object must be fully visible and well inside the panel borders — do NOT crop or cut off any head, body, limbs or objects at the panel edges.\n\nReminder: NO letters/kanji/numbers anywhere; NO glasses; the main character wears the EXACT SAME clothes in the EXACT SAME colors in all four panels; the same main character appears in every panel; use the warm natural webtoon art style throughout; tell an engaging story with a clear twist and resolution that reads without words. Professional quality, suitable for a Japanese speaking examination."
+  },
+  {
+    "id": "sjpt-7-023",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-023.png",
+    "theme": "마트 — 높은 선반 물건을 꺼내려다 물건들이 쏟아짐",
+    "keywords": [
+      "スーパー",
+      "棚",
+      "届かない",
+      "崩れる",
+      "店員"
+    ],
+    "story": {
+      "panel1": "여자가 마트에서 높은 선반의 물건에 손을 뻗지만 닿지 않는다",
+      "panel2": "여자가 무리하게 잡아당기다 선반 위 물건들이 우르르 쏟아진다",
+      "panel3": "쏟아진 물건에 여자가 놀라고, 직원이 달려와 함께 줍는다",
+      "panel4": "직원이 원하던 물건을 꺼내 건네자 여자가 멋쩍게 웃으며 고마워한다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, thick black borders between the four panels, no speech bubbles.\n\nART STYLE (keep it consistent across all four panels): a polished modern Japanese anime / webtoon (manhwa) illustration style, like a clean professional 4-panel web-comic. Use warm, natural, gently saturated colors (appealing and clear — NOT neon, NOT dull grey/washed-out), soft cel shading with subtle gradients and gentle light highlights, clean medium-weight black outlines, and realistic natural body proportions (NOT chibi, NOT super-deformed). Faces are expressive with medium-large eyes but natural, never overly cartoonish. Backgrounds are detailed yet clean and softly lit. High-quality professional finish, with the exact same character design and coloring in every panel.\n\nABSOLUTELY NO TEXT ANYWHERE IN THE IMAGE: no Japanese kanji, no hiragana, no katakana, no Chinese characters, no English letters, no numbers, no words, no writing, no signboard text, no shop signs, no station names, no labels, no clock numbers, no logos. Any signs, boards, screens, calendars or posters that appear MUST be completely blank. Do not draw wall clocks unless a panel explicitly asks for one.\n\nSTORY CLARITY — THE MOST IMPORTANT RULE: the four panels must tell ONE continuous, engaging story with a clear setup, a problem or unexpected twist, rising tension, and a satisfying resolution — understandable with NO words at all, read in order top-left, top-right, bottom-left, bottom-right. Each panel must clearly follow from the previous one. The key object that drives the story MUST be clearly visible in every panel where it matters. The MAIN CHARACTER must appear in ALL FOUR panels so the viewer follows the same person through the whole story. Use clear body language, motion lines and strong facial expressions (surprise, panic, relief, joy). Keep the same location and background across panels unless a panel says otherwise.\n\nMAIN CHARACTER — must look EXACTLY THE SAME in all four panels (identical face, identical hairstyle and hair color, identical clothes and colors, identical accessories such as hat, bag, shoes; never add or remove them between panels). The character does NOT wear glasses in any panel: a short Japanese woman in her 30s with a black bob, a green cardigan and a yellow blouse, pushing a shopping cart.\n\nTop-left panel: in a supermarket aisle, the woman in the green cardigan stands on the floor reaching up for a product on a high shelf but cannot reach it; her shopping cart sits off to one side, clearly separate from her body. Top-right panel: the same woman in the green cardigan yanks at it too hard and several products come tumbling down off the shelf; she still stands on the floor, the cart off to the side (she is NOT inside or climbing the cart). Bottom-left panel: the same woman in the green cardigan, standing on the floor with the cart to one side, is startled by the fallen products while a store clerk rushes over to help pick them up. Bottom-right panel: the clerk hands the same woman in the green cardigan the product she wanted; she laughs sheepishly and thanks him, the cart beside her.\n\nFRAMING: each panel is a wide full shot with generous empty margin around the subjects. Every character and every important object must be fully visible and well inside the panel borders — do NOT crop or cut off any head, body, limbs or objects at the panel edges.\n\nReminder: NO letters/kanji/numbers anywhere; NO glasses; the main character wears the EXACT SAME clothes in the EXACT SAME colors in all four panels; the same main character appears in every panel; use the warm natural webtoon art style throughout; tell an engaging story with a clear twist and resolution that reads without words. Professional quality, suitable for a Japanese speaking examination."
+  },
+  {
+    "id": "sjpt-7-024",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-024.png",
+    "theme": "시장 — 장바구니가 터져 물건이 쏟아졌다가 상인이 도와줌",
+    "keywords": [
+      "市場",
+      "買い物",
+      "袋",
+      "破れる",
+      "感謝"
+    ],
+    "story": {
+      "panel1": "여자가 전통시장에서 과일을 사서 오른손에 과일 봉지 하나만 들고 있다(왼손은 비어 있다)",
+      "panel2": "무게를 못 이겨 과일 봉지가 터지며 과일이 바닥에 쏟아진다",
+      "panel3": "상인이 얼른 달려와 여자와 함께 흩어진 과일을 줍는다",
+      "panel4": "상인이 튼튼한 새 봉투에 담아 덤까지 얹어주자 여자가 고마워한다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, thick black borders between the four panels, no speech bubbles.\n\nART STYLE (keep it consistent across all four panels): a polished modern Japanese anime / webtoon (manhwa) illustration style, like a clean professional 4-panel web-comic. Use warm, natural, gently saturated colors (appealing and clear — NOT neon, NOT dull grey/washed-out), soft cel shading with subtle gradients and gentle light highlights, clean medium-weight black outlines, and realistic natural body proportions (NOT chibi, NOT super-deformed). Faces are expressive with medium-large eyes but natural, never overly cartoonish. Backgrounds are detailed yet clean and softly lit. High-quality professional finish, with the exact same character design and coloring in every panel.\n\nABSOLUTELY NO TEXT ANYWHERE IN THE IMAGE: no Japanese kanji, no hiragana, no katakana, no Chinese characters, no English letters, no numbers, no words, no writing, no signboard text, no shop signs, no station names, no labels, no clock numbers, no logos. Any signs, boards, screens, calendars or posters that appear MUST be completely blank. Do not draw wall clocks unless a panel explicitly asks for one.\n\nSTORY CLARITY — THE MOST IMPORTANT RULE: the four panels must tell ONE continuous, engaging story with a clear setup, a problem or unexpected twist, rising tension, and a satisfying resolution — understandable with NO words at all, read in order top-left, top-right, bottom-left, bottom-right. Each panel must clearly follow from the previous one. The key object that drives the story MUST be clearly visible in every panel where it matters. The MAIN CHARACTER must appear in ALL FOUR panels so the viewer follows the same person through the whole story. Use clear body language, motion lines and strong facial expressions (surprise, panic, relief, joy). Keep the same location and background across panels unless a panel says otherwise.\n\nMAIN CHARACTER — must look EXACTLY THE SAME in all four panels (identical face, identical hairstyle and hair color, identical clothes and colors, identical accessories such as hat, bag, shoes; never add or remove them between panels). The character does NOT wear glasses in any panel: a Japanese woman in her 40s with a low bun, a purple blouse and a brown skirt, carrying full shopping bags.\n\nTop-left panel: at a lively traditional market, the woman in the purple blouse has just bought fruit and holds a single bag containing only fruit in her right hand, while her left hand is empty (holding nothing). Top-right panel: the fruit bag rips and the fruit spills and rolls across the ground; the same woman in the purple blouse gasps in dismay. Bottom-left panel: a market vendor quickly rushes over and helps the same woman in the purple blouse gather the scattered fruit. Bottom-right panel: the vendor repacks everything into a sturdy new bag with a bonus item; the same woman in the purple blouse thanks him warmly.\n\nFRAMING: each panel is a wide full shot with generous empty margin around the subjects. Every character and every important object must be fully visible and well inside the panel borders — do NOT crop or cut off any head, body, limbs or objects at the panel edges.\n\nReminder: NO letters/kanji/numbers anywhere; NO glasses; the main character wears the EXACT SAME clothes in the EXACT SAME colors in all four panels; the same main character appears in every panel; use the warm natural webtoon art style throughout; tell an engaging story with a clear twist and resolution that reads without words. Professional quality, suitable for a Japanese speaking examination."
+  },
+  {
+    "id": "sjpt-7-025",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-025.png",
+    "theme": "동물원 — 원숭이가 모자를 뺏어가 쫓다가 사육사 도움으로 되찾음",
+    "keywords": [
+      "動物園",
+      "サル",
+      "帽子",
+      "取られる",
+      "取り戻す"
+    ],
+    "story": {
+      "panel1": "소년이 동물원 원숭이 우리 앞 난간에 기대는데(모자는 머리에 쓴 상태, 손에는 아무것도 없음) 원숭이가 머리에서 파란 모자를 낚아챈다",
+      "panel2": "원숭이가 파란 모자를 들고 달아나고 소년이 놀라 손을 뻗는다",
+      "panel3": "사육사가 원숭이를 달래 소년의 파란 모자를 돌려받게 도와준다",
+      "panel4": "소년이 파란 모자를 다시 쓰고 사육사에게 고마워하며 웃는다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, thick black borders between the four panels, no speech bubbles.\n\nART STYLE (keep it consistent across all four panels): a polished modern Japanese anime / webtoon (manhwa) illustration style, like a clean professional 4-panel web-comic. Use warm, natural, gently saturated colors (appealing and clear — NOT neon, NOT dull grey/washed-out), soft cel shading with subtle gradients and gentle light highlights, clean medium-weight black outlines, and realistic natural body proportions (NOT chibi, NOT super-deformed). Faces are expressive with medium-large eyes but natural, never overly cartoonish. Backgrounds are detailed yet clean and softly lit. High-quality professional finish, with the exact same character design and coloring in every panel.\n\nABSOLUTELY NO TEXT ANYWHERE IN THE IMAGE: no Japanese kanji, no hiragana, no katakana, no Chinese characters, no English letters, no numbers, no words, no writing, no signboard text, no shop signs, no station names, no labels, no clock numbers, no logos. Any signs, boards, screens, calendars or posters that appear MUST be completely blank. Do not draw wall clocks unless a panel explicitly asks for one.\n\nSTORY CLARITY — THE MOST IMPORTANT RULE: the four panels must tell ONE continuous, engaging story with a clear setup, a problem or unexpected twist, rising tension, and a satisfying resolution — understandable with NO words at all, read in order top-left, top-right, bottom-left, bottom-right. Each panel must clearly follow from the previous one. The key object that drives the story MUST be clearly visible in every panel where it matters. The MAIN CHARACTER must appear in ALL FOUR panels so the viewer follows the same person through the whole story. Use clear body language, motion lines and strong facial expressions (surprise, panic, relief, joy). Keep the same location and background across panels unless a panel says otherwise.\n\nMAIN CHARACTER — must look EXACTLY THE SAME in all four panels (identical face, identical hairstyle and hair color, identical clothes and colors, identical accessories such as hat, bag, shoes; never add or remove them between panels). The character does NOT wear glasses in any panel: a Japanese boy about 10 with short black hair, a blue baseball cap, an orange t-shirt, green shorts and sneakers.\n\nTop-left panel: at a zoo in front of a monkey enclosure, the boy in the orange t-shirt wears his blue cap ON HIS HEAD and leans on the rail with both hands empty; a cheeky monkey reaches out and snatches the blue cap right off his head (the boy is NOT holding any cap in his hands). Top-right panel: the same boy in the orange t-shirt reaches out shocked as the monkey scampers off holding up his blue cap. Bottom-left panel: a zookeeper helps the same boy in the orange t-shirt by coaxing the monkey to hand the blue cap back. Bottom-right panel: the same boy in the orange t-shirt happily puts the blue cap back on his head, thanking the zookeeper.\n\nFRAMING: each panel is a wide full shot with generous empty margin around the subjects. Every character and every important object must be fully visible and well inside the panel borders — do NOT crop or cut off any head, body, limbs or objects at the panel edges.\n\nReminder: NO letters/kanji/numbers anywhere; NO glasses; the main character wears the EXACT SAME clothes in the EXACT SAME colors in all four panels; the same main character appears in every panel; use the warm natural webtoon art style throughout; tell an engaging story with a clear twist and resolution that reads without words. Professional quality, suitable for a Japanese speaking examination."
+  },
+  {
+    "id": "sjpt-7-026",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-026.png",
+    "theme": "헬스장 — 무거운 역기에 자신만만하다 실패, 트레이너 도움으로 성공",
+    "keywords": [
+      "ジム",
+      "バーベル",
+      "重い",
+      "トレーナー",
+      "成功"
+    ],
+    "story": {
+      "panel1": "남자가 헬스장에서 무거운 역기 앞에 자신만만하게 선다",
+      "panel2": "남자가 혼자 역기를 들려 하지만 꿈쩍 않고 얼굴이 빨개진다",
+      "panel3": "트레이너가 다가와 함께 역기를 받쳐 올려준다",
+      "panel4": "남자가 역기를 머리 위로 들어 올려 성공하고 활짝 웃는다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, thick black borders between the four panels, no speech bubbles.\n\nART STYLE (keep it consistent across all four panels): a polished modern Japanese anime / webtoon (manhwa) illustration style, like a clean professional 4-panel web-comic. Use warm, natural, gently saturated colors (appealing and clear — NOT neon, NOT dull grey/washed-out), soft cel shading with subtle gradients and gentle light highlights, clean medium-weight black outlines, and realistic natural body proportions (NOT chibi, NOT super-deformed). Faces are expressive with medium-large eyes but natural, never overly cartoonish. Backgrounds are detailed yet clean and softly lit. High-quality professional finish, with the exact same character design and coloring in every panel.\n\nABSOLUTELY NO TEXT ANYWHERE IN THE IMAGE: no Japanese kanji, no hiragana, no katakana, no Chinese characters, no English letters, no numbers, no words, no writing, no signboard text, no shop signs, no station names, no labels, no clock numbers, no logos. Any signs, boards, screens, calendars or posters that appear MUST be completely blank. Do not draw wall clocks unless a panel explicitly asks for one.\n\nSTORY CLARITY — THE MOST IMPORTANT RULE: the four panels must tell ONE continuous, engaging story with a clear setup, a problem or unexpected twist, rising tension, and a satisfying resolution — understandable with NO words at all, read in order top-left, top-right, bottom-left, bottom-right. Each panel must clearly follow from the previous one. The key object that drives the story MUST be clearly visible in every panel where it matters. The MAIN CHARACTER must appear in ALL FOUR panels so the viewer follows the same person through the whole story. Use clear body language, motion lines and strong facial expressions (surprise, panic, relief, joy). Keep the same location and background across panels unless a panel says otherwise.\n\nMAIN CHARACTER — must look EXACTLY THE SAME in all four panels (identical face, identical hairstyle and hair color, identical clothes and colors, identical accessories such as hat, bag, shoes; never add or remove them between panels). The character does NOT wear glasses in any panel: a slim Japanese man in his 20s with spiky black hair, a red tank top, black shorts and white sneakers.\n\nTop-left panel: in a gym, the man in the red tank top confidently steps up to a heavy barbell, fired up. Top-right panel: the same man in the red tank top strains to lift the barbell alone but it will not budge, his face turning red. Bottom-left panel: a trainer steps in and spots the same man in the red tank top, helping guide the barbell upward together. Bottom-right panel: the same man in the red tank top lifts the barbell overhead successfully, grinning, as the trainer cheers.\n\nFRAMING: each panel is a wide full shot with generous empty margin around the subjects. Every character and every important object must be fully visible and well inside the panel borders — do NOT crop or cut off any head, body, limbs or objects at the panel edges.\n\nReminder: NO letters/kanji/numbers anywhere; NO glasses; the main character wears the EXACT SAME clothes in the EXACT SAME colors in all four panels; the same main character appears in every panel; use the warm natural webtoon art style throughout; tell an engaging story with a clear twist and resolution that reads without words. Professional quality, suitable for a Japanese speaking examination."
+  },
+  {
+    "id": "sjpt-7-027",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-027.png",
+    "theme": "도서관 — 찾던 책이 없어 실망하다 방금 반납된 책을 받음",
+    "keywords": [
+      "図書館",
+      "本",
+      "ない",
+      "返却",
+      "喜ぶ"
+    ],
+    "story": {
+      "panel1": "학생이 도서관 책장에서 찾던 책이 꽂혀 있어야 할 자리가 텅 빈 걸 보고 실망한다",
+      "panel2": "학생이 사서에게 그 책이 있는지 물어본다",
+      "panel3": "사서가 방금 반납된 책 수레에서 바로 그 책을 발견해 건네준다",
+      "panel4": "학생이 원하던 책을 받고 활짝 웃으며 사서에게 고마워한다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, thick black borders between the four panels, no speech bubbles.\n\nART STYLE (keep it consistent across all four panels): a polished modern Japanese anime / webtoon (manhwa) illustration style, like a clean professional 4-panel web-comic. Use warm, natural, gently saturated colors (appealing and clear — NOT neon, NOT dull grey/washed-out), soft cel shading with subtle gradients and gentle light highlights, clean medium-weight black outlines, and realistic natural body proportions (NOT chibi, NOT super-deformed). Faces are expressive with medium-large eyes but natural, never overly cartoonish. Backgrounds are detailed yet clean and softly lit. High-quality professional finish, with the exact same character design and coloring in every panel.\n\nABSOLUTELY NO TEXT ANYWHERE IN THE IMAGE: no Japanese kanji, no hiragana, no katakana, no Chinese characters, no English letters, no numbers, no words, no writing, no signboard text, no shop signs, no station names, no labels, no clock numbers, no logos. Any signs, boards, screens, calendars or posters that appear MUST be completely blank. Do not draw wall clocks unless a panel explicitly asks for one.\n\nSTORY CLARITY — THE MOST IMPORTANT RULE: the four panels must tell ONE continuous, engaging story with a clear setup, a problem or unexpected twist, rising tension, and a satisfying resolution — understandable with NO words at all, read in order top-left, top-right, bottom-left, bottom-right. Each panel must clearly follow from the previous one. The key object that drives the story MUST be clearly visible in every panel where it matters. The MAIN CHARACTER must appear in ALL FOUR panels so the viewer follows the same person through the whole story. Use clear body language, motion lines and strong facial expressions (surprise, panic, relief, joy). Keep the same location and background across panels unless a panel says otherwise.\n\nMAIN CHARACTER — must look EXACTLY THE SAME in all four panels (identical face, identical hairstyle and hair color, identical clothes and colors, identical accessories such as hat, bag, shoes; never add or remove them between panels). The character does NOT wear glasses in any panel: a Japanese male student with short brown hair, a green sweater, beige pants and sneakers, holding a notebook.\n\nTop-left panel: at a library shelf, the student in the green sweater finds the exact spot where his book should be is empty, looking disappointed. Top-right panel: the same student in the green sweater asks a librarian whether the book is available. Bottom-left panel: the librarian spots that very book on a just-returned book cart and hands it to the same student in the green sweater. Bottom-right panel: the same student in the green sweater happily receives the book and thanks the librarian with a big smile.\n\nFRAMING: each panel is a wide full shot with generous empty margin around the subjects. Every character and every important object must be fully visible and well inside the panel borders — do NOT crop or cut off any head, body, limbs or objects at the panel edges.\n\nReminder: NO letters/kanji/numbers anywhere; NO glasses; the main character wears the EXACT SAME clothes in the EXACT SAME colors in all four panels; the same main character appears in every panel; use the warm natural webtoon art style throughout; tell an engaging story with a clear twist and resolution that reads without words. Professional quality, suitable for a Japanese speaking examination."
+  },
+  {
+    "id": "sjpt-7-028",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-028.png",
+    "theme": "수영장 — 물이 무서워 못 들어가다 강사 도움으로 헤엄쳐 성공",
+    "keywords": [
+      "プール",
+      "怖い",
+      "水",
+      "コーチ",
+      "泳ぐ"
+    ],
+    "story": {
+      "panel1": "소녀가 수영장 가장자리에서 물이 무서워 들어가길 망설인다",
+      "panel2": "소녀가 물가에 붙어 발끝만 담그며 긴장한다",
+      "panel3": "강사가 소녀의 손을 잡고 헤엄치도록 도와준다",
+      "panel4": "소녀가 혼자 헤엄치며 자랑스럽게 활짝 웃고 강사가 박수친다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, thick black borders between the four panels, no speech bubbles.\n\nART STYLE (keep it consistent across all four panels): a polished modern Japanese anime / webtoon (manhwa) illustration style, like a clean professional 4-panel web-comic. Use warm, natural, gently saturated colors (appealing and clear — NOT neon, NOT dull grey/washed-out), soft cel shading with subtle gradients and gentle light highlights, clean medium-weight black outlines, and realistic natural body proportions (NOT chibi, NOT super-deformed). Faces are expressive with medium-large eyes but natural, never overly cartoonish. Backgrounds are detailed yet clean and softly lit. High-quality professional finish, with the exact same character design and coloring in every panel.\n\nABSOLUTELY NO TEXT ANYWHERE IN THE IMAGE: no Japanese kanji, no hiragana, no katakana, no Chinese characters, no English letters, no numbers, no words, no writing, no signboard text, no shop signs, no station names, no labels, no clock numbers, no logos. Any signs, boards, screens, calendars or posters that appear MUST be completely blank. Do not draw wall clocks unless a panel explicitly asks for one.\n\nSTORY CLARITY — THE MOST IMPORTANT RULE: the four panels must tell ONE continuous, engaging story with a clear setup, a problem or unexpected twist, rising tension, and a satisfying resolution — understandable with NO words at all, read in order top-left, top-right, bottom-left, bottom-right. Each panel must clearly follow from the previous one. The key object that drives the story MUST be clearly visible in every panel where it matters. The MAIN CHARACTER must appear in ALL FOUR panels so the viewer follows the same person through the whole story. Use clear body language, motion lines and strong facial expressions (surprise, panic, relief, joy). Keep the same location and background across panels unless a panel says otherwise.\n\nMAIN CHARACTER — must look EXACTLY THE SAME in all four panels (identical face, identical hairstyle and hair color, identical clothes and colors, identical accessories such as hat, bag, shoes; never add or remove them between panels). The character does NOT wear glasses in any panel: a Japanese girl about 9 with black twin tails, a pink swimsuit, a swim cap and orange arm floaties.\n\nTop-left panel: at the edge of a swimming pool, the girl in the pink swimsuit hesitates, scared to go into the water. Top-right panel: the same girl in the pink swimsuit dips a toe in nervously, clinging to the pool edge. Bottom-left panel: a swim instructor holds the hands of the same girl in the pink swimsuit and gently guides her as she starts to paddle. Bottom-right panel: the same girl in the pink swimsuit swims happily on her own with a big proud smile while the instructor claps.\n\nFRAMING: each panel is a wide full shot with generous empty margin around the subjects. Every character and every important object must be fully visible and well inside the panel borders — do NOT crop or cut off any head, body, limbs or objects at the panel edges.\n\nReminder: NO letters/kanji/numbers anywhere; NO glasses; the main character wears the EXACT SAME clothes in the EXACT SAME colors in all four panels; the same main character appears in every panel; use the warm natural webtoon art style throughout; tell an engaging story with a clear twist and resolution that reads without words. Professional quality, suitable for a Japanese speaking examination."
+  },
+  {
+    "id": "sjpt-7-029",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-029.png",
+    "theme": "해변 — 튜브를 타고 놀다 먼바다로 떠내려가 구조됨",
+    "keywords": [
+      "海",
+      "浮き輪",
+      "流される",
+      "救助",
+      "安心"
+    ],
+    "story": {
+      "panel1": "소년이 바닷가에서 노란 튜브를 타고 해변 근처에서 즐거워한다",
+      "panel2": "소년이 어느새 먼 바다로 떠내려가 겁에 질려 손을 흔든다",
+      "panel3": "안전요원이 소년의 노란 튜브를 향해 힘차게 헤엄쳐 온다",
+      "panel4": "안전요원이 소년을 해변까지 데려오고 소년이 안도하며 웃는다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, thick black borders between the four panels, no speech bubbles.\n\nART STYLE (keep it consistent across all four panels): a polished modern Japanese anime / webtoon (manhwa) illustration style, like a clean professional 4-panel web-comic. Use warm, natural, gently saturated colors (appealing and clear — NOT neon, NOT dull grey/washed-out), soft cel shading with subtle gradients and gentle light highlights, clean medium-weight black outlines, and realistic natural body proportions (NOT chibi, NOT super-deformed). Faces are expressive with medium-large eyes but natural, never overly cartoonish. Backgrounds are detailed yet clean and softly lit. High-quality professional finish, with the exact same character design and coloring in every panel.\n\nABSOLUTELY NO TEXT ANYWHERE IN THE IMAGE: no Japanese kanji, no hiragana, no katakana, no Chinese characters, no English letters, no numbers, no words, no writing, no signboard text, no shop signs, no station names, no labels, no clock numbers, no logos. Any signs, boards, screens, calendars or posters that appear MUST be completely blank. Do not draw wall clocks unless a panel explicitly asks for one.\n\nSTORY CLARITY — THE MOST IMPORTANT RULE: the four panels must tell ONE continuous, engaging story with a clear setup, a problem or unexpected twist, rising tension, and a satisfying resolution — understandable with NO words at all, read in order top-left, top-right, bottom-left, bottom-right. Each panel must clearly follow from the previous one. The key object that drives the story MUST be clearly visible in every panel where it matters. The MAIN CHARACTER must appear in ALL FOUR panels so the viewer follows the same person through the whole story. Use clear body language, motion lines and strong facial expressions (surprise, panic, relief, joy). Keep the same location and background across panels unless a panel says otherwise.\n\nMAIN CHARACTER — must look EXACTLY THE SAME in all four panels (identical face, identical hairstyle and hair color, identical clothes and colors, identical accessories such as hat, bag, shoes; never add or remove them between panels). The character does NOT wear glasses in any panel: a Japanese boy about 10 with short black hair, bare-chested wearing only red swim trunks (no shirt in any panel), on a yellow ring float.\n\nTop-left panel: at a sunny beach near the shore, the boy in red swim trunks floats happily on a yellow ring float. Top-right panel: the same boy in red swim trunks on the yellow float has drifted far out to sea and waves his arms, scared. Bottom-left panel: a lifeguard swims out strongly through the waves toward the same boy in red swim trunks on the yellow float. Bottom-right panel: the lifeguard brings the same boy in red swim trunks safely back to the beach; he smiles with relief.\n\nFRAMING: each panel is a wide full shot with generous empty margin around the subjects. Every character and every important object must be fully visible and well inside the panel borders — do NOT crop or cut off any head, body, limbs or objects at the panel edges.\n\nReminder: NO letters/kanji/numbers anywhere; NO glasses; the main character wears the EXACT SAME clothes in the EXACT SAME colors in all four panels; the same main character appears in every panel; use the warm natural webtoon art style throughout; tell an engaging story with a clear twist and resolution that reads without words. Professional quality, suitable for a Japanese speaking examination."
+  },
+  {
+    "id": "sjpt-7-030",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-030.png",
+    "theme": "박물관 — 일행을 놓쳐 헤매다 안내원 도움으로 다시 만남",
+    "keywords": [
+      "博物館",
+      "はぐれる",
+      "迷う",
+      "案内",
+      "再会"
+    ],
+    "story": {
+      "panel1": "소녀가 넓은 박물관 홀에 혼자 남아 낯선 사람들 속에서 가족을 애타게 두리번거리며 불안해한다",
+      "panel2": "소녀가 커다란 전시물 사이를 헤매며 울먹이고 가족을 부른다",
+      "panel3": "안내원이 무릎을 굽혀 소녀를 달래고 손을 잡고 이끈다",
+      "panel4": "소녀가 가족과 다시 만나 기뻐하고 모두 안도한다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, thick black borders between the four panels, no speech bubbles.\n\nART STYLE (keep it consistent across all four panels): a polished modern Japanese anime / webtoon (manhwa) illustration style, like a clean professional 4-panel web-comic. Use warm, natural, gently saturated colors (appealing and clear — NOT neon, NOT dull grey/washed-out), soft cel shading with subtle gradients and gentle light highlights, clean medium-weight black outlines, and realistic natural body proportions (NOT chibi, NOT super-deformed). Faces are expressive with medium-large eyes but natural, never overly cartoonish. Backgrounds are detailed yet clean and softly lit. High-quality professional finish, with the exact same character design and coloring in every panel.\n\nABSOLUTELY NO TEXT ANYWHERE IN THE IMAGE: no Japanese kanji, no hiragana, no katakana, no Chinese characters, no English letters, no numbers, no words, no writing, no signboard text, no shop signs, no station names, no labels, no clock numbers, no logos. Any signs, boards, screens, calendars or posters that appear MUST be completely blank. Do not draw wall clocks unless a panel explicitly asks for one.\n\nSTORY CLARITY — THE MOST IMPORTANT RULE: the four panels must tell ONE continuous, engaging story with a clear setup, a problem or unexpected twist, rising tension, and a satisfying resolution — understandable with NO words at all, read in order top-left, top-right, bottom-left, bottom-right. Each panel must clearly follow from the previous one. The key object that drives the story MUST be clearly visible in every panel where it matters. The MAIN CHARACTER must appear in ALL FOUR panels so the viewer follows the same person through the whole story. Use clear body language, motion lines and strong facial expressions (surprise, panic, relief, joy). Keep the same location and background across panels unless a panel says otherwise.\n\nMAIN CHARACTER — must look EXACTLY THE SAME in all four panels (identical face, identical hairstyle and hair color, identical clothes and colors, identical accessories such as hat, bag, shoes; never add or remove them between panels). The character does NOT wear glasses in any panel: a Japanese girl about 8 with a brown bob, a red dress, a white cardigan and a small yellow bag.\n\nTop-left panel: in a big museum hall, the girl in the red dress stands alone among unfamiliar strangers, looking around frantically for her family, anxious and frightened, no family in sight. Top-right panel: the same girl in the red dress wanders lost among big exhibits, on the verge of tears, calling out for her family. Bottom-left panel: a museum guide kneels to reassure the same girl in the red dress and leads her by the hand. Bottom-right panel: the same girl in the red dress happily reunites with her family, everyone relieved.\n\nFRAMING: each panel is a wide full shot with generous empty margin around the subjects. Every character and every important object must be fully visible and well inside the panel borders — do NOT crop or cut off any head, body, limbs or objects at the panel edges.\n\nReminder: NO letters/kanji/numbers anywhere; NO glasses; the main character wears the EXACT SAME clothes in the EXACT SAME colors in all four panels; the same main character appears in every panel; use the warm natural webtoon art style throughout; tell an engaging story with a clear twist and resolution that reads without words. Professional quality, suitable for a Japanese speaking examination."
+  },
+  {
+    "id": "sjpt-7-031",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-031.png",
+    "theme": "놀이공원 — 롤러코스터가 무서워 떨다 타고 나서 신나함",
+    "keywords": [
+      "遊園地",
+      "ジェットコースター",
+      "怖い",
+      "乗る",
+      "楽しい"
+    ],
+    "story": {
+      "panel1": "소녀가 놀이공원에서 거대한 롤러코스터를 올려다보며 무서워 벌벌 떤다",
+      "panel2": "소녀가 롤러코스터 좌석에서 안전바를 잡고 겁에 질려 오른다",
+      "panel3": "롤러코스터가 급강하하고 소녀가 두 팔을 들고 비명을 지른다",
+      "panel4": "소녀가 내려서 활짝 웃으며 신나 또 타고 싶어 한다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, thick black borders between the four panels, no speech bubbles.\n\nART STYLE (keep it consistent across all four panels): a polished modern Japanese anime / webtoon (manhwa) illustration style, like a clean professional 4-panel web-comic. Use warm, natural, gently saturated colors (appealing and clear — NOT neon, NOT dull grey/washed-out), soft cel shading with subtle gradients and gentle light highlights, clean medium-weight black outlines, and realistic natural body proportions (NOT chibi, NOT super-deformed). Faces are expressive with medium-large eyes but natural, never overly cartoonish. Backgrounds are detailed yet clean and softly lit. High-quality professional finish, with the exact same character design and coloring in every panel.\n\nABSOLUTELY NO TEXT ANYWHERE IN THE IMAGE: no Japanese kanji, no hiragana, no katakana, no Chinese characters, no English letters, no numbers, no words, no writing, no signboard text, no shop signs, no station names, no labels, no clock numbers, no logos. Any signs, boards, screens, calendars or posters that appear MUST be completely blank. Do not draw wall clocks unless a panel explicitly asks for one.\n\nSTORY CLARITY — THE MOST IMPORTANT RULE: the four panels must tell ONE continuous, engaging story with a clear setup, a problem or unexpected twist, rising tension, and a satisfying resolution — understandable with NO words at all, read in order top-left, top-right, bottom-left, bottom-right. Each panel must clearly follow from the previous one. The key object that drives the story MUST be clearly visible in every panel where it matters. The MAIN CHARACTER must appear in ALL FOUR panels so the viewer follows the same person through the whole story. Use clear body language, motion lines and strong facial expressions (surprise, panic, relief, joy). Keep the same location and background across panels unless a panel says otherwise.\n\nMAIN CHARACTER — must look EXACTLY THE SAME in all four panels (identical face, identical hairstyle and hair color, identical clothes and colors, identical accessories such as hat, bag, shoes; never add or remove them between panels). The character does NOT wear glasses in any panel: a Japanese girl in her teens with a high ponytail, a yellow t-shirt and denim shorts.\n\nTop-left panel: at an amusement park, the girl in the yellow t-shirt looks up at a huge roller coaster, trembling and scared. Top-right panel: the same girl in the yellow t-shirt sits strapped in the coaster car gripping the safety bar, terrified as it climbs. Bottom-left panel: the same girl in the yellow t-shirt throws her arms up screaming as the coaster zooms down a steep drop. Bottom-right panel: the same girl in the yellow t-shirt gets off grinning ear to ear, thrilled and eager to ride again.\n\nFRAMING: each panel is a wide full shot with generous empty margin around the subjects. Every character and every important object must be fully visible and well inside the panel borders — do NOT crop or cut off any head, body, limbs or objects at the panel edges.\n\nReminder: NO letters/kanji/numbers anywhere; NO glasses; the main character wears the EXACT SAME clothes in the EXACT SAME colors in all four panels; the same main character appears in every panel; use the warm natural webtoon art style throughout; tell an engaging story with a clear twist and resolution that reads without words. Professional quality, suitable for a Japanese speaking examination."
+  },
+  {
+    "id": "sjpt-7-032",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-032.png",
+    "theme": "동물병원 — 아픈 강아지를 데려가 진료받아 낫고 기뻐함",
+    "keywords": [
+      "動物病院",
+      "犬",
+      "病気",
+      "診察",
+      "元気"
+    ],
+    "story": {
+      "panel1": "소녀가 집에서 축 처진 아픈 갈색 강아지를 안고 걱정한다",
+      "panel2": "소녀가 강아지를 안고 동물병원으로 데려간다",
+      "panel3": "수의사가 갈색 강아지를 진찰하고 약을 주며, 소녀가 지켜본다",
+      "panel4": "소녀가 건강해진 갈색 강아지를 안고 안도하며 활짝 웃는다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, thick black borders between the four panels, no speech bubbles.\n\nART STYLE (keep it consistent across all four panels): a polished modern Japanese anime / webtoon (manhwa) illustration style, like a clean professional 4-panel web-comic. Use warm, natural, gently saturated colors (appealing and clear — NOT neon, NOT dull grey/washed-out), soft cel shading with subtle gradients and gentle light highlights, clean medium-weight black outlines, and realistic natural body proportions (NOT chibi, NOT super-deformed). Faces are expressive with medium-large eyes but natural, never overly cartoonish. Backgrounds are detailed yet clean and softly lit. High-quality professional finish, with the exact same character design and coloring in every panel.\n\nABSOLUTELY NO TEXT ANYWHERE IN THE IMAGE: no Japanese kanji, no hiragana, no katakana, no Chinese characters, no English letters, no numbers, no words, no writing, no signboard text, no shop signs, no station names, no labels, no clock numbers, no logos. Any signs, boards, screens, calendars or posters that appear MUST be completely blank. Do not draw wall clocks unless a panel explicitly asks for one.\n\nSTORY CLARITY — THE MOST IMPORTANT RULE: the four panels must tell ONE continuous, engaging story with a clear setup, a problem or unexpected twist, rising tension, and a satisfying resolution — understandable with NO words at all, read in order top-left, top-right, bottom-left, bottom-right. Each panel must clearly follow from the previous one. The key object that drives the story MUST be clearly visible in every panel where it matters. The MAIN CHARACTER must appear in ALL FOUR panels so the viewer follows the same person through the whole story. Use clear body language, motion lines and strong facial expressions (surprise, panic, relief, joy). Keep the same location and background across panels unless a panel says otherwise.\n\nMAIN CHARACTER — must look EXACTLY THE SAME in all four panels (identical face, identical hairstyle and hair color, identical clothes and colors, identical accessories such as hat, bag, shoes; never add or remove them between panels). The character does NOT wear glasses in any panel: a Japanese girl about 12 with a brown ponytail, a pink hoodie and jeans, holding a small brown puppy.\n\nTop-left panel: at home, the girl in the pink hoodie looks worried holding her sick, droopy brown puppy. Top-right panel: the same girl in the pink hoodie carries the brown puppy into a bright animal clinic. Bottom-left panel: a vet examines the brown puppy and gives it medicine while the same girl in the pink hoodie watches hopefully. Bottom-right panel: the same girl in the pink hoodie hugs the now-healthy, happy brown puppy, smiling with relief.\n\nFRAMING: each panel is a wide full shot with generous empty margin around the subjects. Every character and every important object must be fully visible and well inside the panel borders — do NOT crop or cut off any head, body, limbs or objects at the panel edges.\n\nReminder: NO letters/kanji/numbers anywhere; NO glasses; the main character wears the EXACT SAME clothes in the EXACT SAME colors in all four panels; the same main character appears in every panel; use the warm natural webtoon art style throughout; tell an engaging story with a clear twist and resolution that reads without words. Professional quality, suitable for a Japanese speaking examination."
+  },
+  {
+    "id": "sjpt-7-033",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-033.png",
+    "theme": "지하철 — 닫히는 문에 가방끈이 끼여 씨름하다 빠져나옴",
+    "keywords": [
+      "電車",
+      "ドア",
+      "挟まる",
+      "引っ張る",
+      "ほっとする"
+    ],
+    "story": {
+      "panel1": "남자가 닫히려는 지하철 문 안으로 급히 뛰어든다",
+      "panel2": "문이 닫히며 남자의 배낭끈이 문틈에 끼여버린다",
+      "panel3": "남자가 끼인 가방끈을 잡아당기며 쩔쩔맨다",
+      "panel4": "문이 잠깐 열려 남자가 가방을 빼내고 안도하며 자리에 앉는다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, thick black borders between the four panels, no speech bubbles.\n\nART STYLE (keep it consistent across all four panels): a polished modern Japanese anime / webtoon (manhwa) illustration style, like a clean professional 4-panel web-comic. Use warm, natural, gently saturated colors (appealing and clear — NOT neon, NOT dull grey/washed-out), soft cel shading with subtle gradients and gentle light highlights, clean medium-weight black outlines, and realistic natural body proportions (NOT chibi, NOT super-deformed). Faces are expressive with medium-large eyes but natural, never overly cartoonish. Backgrounds are detailed yet clean and softly lit. High-quality professional finish, with the exact same character design and coloring in every panel.\n\nABSOLUTELY NO TEXT ANYWHERE IN THE IMAGE: no Japanese kanji, no hiragana, no katakana, no Chinese characters, no English letters, no numbers, no words, no writing, no signboard text, no shop signs, no station names, no labels, no clock numbers, no logos. Any signs, boards, screens, calendars or posters that appear MUST be completely blank. Do not draw wall clocks unless a panel explicitly asks for one.\n\nSTORY CLARITY — THE MOST IMPORTANT RULE: the four panels must tell ONE continuous, engaging story with a clear setup, a problem or unexpected twist, rising tension, and a satisfying resolution — understandable with NO words at all, read in order top-left, top-right, bottom-left, bottom-right. Each panel must clearly follow from the previous one. The key object that drives the story MUST be clearly visible in every panel where it matters. The MAIN CHARACTER must appear in ALL FOUR panels so the viewer follows the same person through the whole story. Use clear body language, motion lines and strong facial expressions (surprise, panic, relief, joy). Keep the same location and background across panels unless a panel says otherwise.\n\nMAIN CHARACTER — must look EXACTLY THE SAME in all four panels (identical face, identical hairstyle and hair color, identical clothes and colors, identical accessories such as hat, bag, shoes; never add or remove them between panels). The character does NOT wear glasses in any panel: a Japanese man in his 20s with short brown hair, a green hoodie, dark jeans and a backpack.\n\nTop-left panel: the man in the green hoodie dashes into a subway car just as the doors begin to close. Top-right panel: the doors shut and the backpack strap of the same man in the green hoodie gets caught in the door gap. Bottom-left panel: the same man in the green hoodie tugs and pulls at the trapped strap, stuck and panicking. Bottom-right panel: the doors briefly reopen and the same man in the green hoodie yanks the bag free, then sits down with relief.\n\nFRAMING: each panel is a wide full shot with generous empty margin around the subjects. Every character and every important object must be fully visible and well inside the panel borders — do NOT crop or cut off any head, body, limbs or objects at the panel edges.\n\nReminder: NO letters/kanji/numbers anywhere; NO glasses; the main character wears the EXACT SAME clothes in the EXACT SAME colors in all four panels; the same main character appears in every panel; use the warm natural webtoon art style throughout; tell an engaging story with a clear twist and resolution that reads without words. Professional quality, suitable for a Japanese speaking examination."
+  },
+  {
+    "id": "sjpt-7-034",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-034.png",
+    "theme": "길 — 앞사람이 떨어뜨린 지갑을 주워 쫓아가 돌려줌",
+    "keywords": [
+      "財布",
+      "落とす",
+      "拾う",
+      "届ける",
+      "感謝"
+    ],
+    "story": {
+      "panel1": "여자가 길을 걷다 앞서가던 사람이 지갑을 떨어뜨리는 걸 본다",
+      "panel2": "여자가 바닥의 지갑을 주워 들고 멀어지는 사람을 부른다",
+      "panel3": "여자가 그 사람을 뛰어가 따라잡고 지갑을 건넨다",
+      "panel4": "그 사람이 놀라며 고마워하고 여자가 환하게 웃으며 손을 젓는다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, thick black borders between the four panels, no speech bubbles.\n\nART STYLE (keep it consistent across all four panels): a polished modern Japanese anime / webtoon (manhwa) illustration style, like a clean professional 4-panel web-comic. Use warm, natural, gently saturated colors (appealing and clear — NOT neon, NOT dull grey/washed-out), soft cel shading with subtle gradients and gentle light highlights, clean medium-weight black outlines, and realistic natural body proportions (NOT chibi, NOT super-deformed). Faces are expressive with medium-large eyes but natural, never overly cartoonish. Backgrounds are detailed yet clean and softly lit. High-quality professional finish, with the exact same character design and coloring in every panel.\n\nABSOLUTELY NO TEXT ANYWHERE IN THE IMAGE: no Japanese kanji, no hiragana, no katakana, no Chinese characters, no English letters, no numbers, no words, no writing, no signboard text, no shop signs, no station names, no labels, no clock numbers, no logos. Any signs, boards, screens, calendars or posters that appear MUST be completely blank. Do not draw wall clocks unless a panel explicitly asks for one.\n\nSTORY CLARITY — THE MOST IMPORTANT RULE: the four panels must tell ONE continuous, engaging story with a clear setup, a problem or unexpected twist, rising tension, and a satisfying resolution — understandable with NO words at all, read in order top-left, top-right, bottom-left, bottom-right. Each panel must clearly follow from the previous one. The key object that drives the story MUST be clearly visible in every panel where it matters. The MAIN CHARACTER must appear in ALL FOUR panels so the viewer follows the same person through the whole story. Use clear body language, motion lines and strong facial expressions (surprise, panic, relief, joy). Keep the same location and background across panels unless a panel says otherwise.\n\nMAIN CHARACTER — must look EXACTLY THE SAME in all four panels (identical face, identical hairstyle and hair color, identical clothes and colors, identical accessories such as hat, bag, shoes; never add or remove them between panels). The character does NOT wear glasses in any panel: a young Japanese woman with a brown ponytail, a denim jacket, a white t-shirt and jeans.\n\nTop-left panel: on a street, the woman in the denim jacket sees a wallet drop from a person walking ahead of her. Top-right panel: the same woman in the denim jacket picks the wallet up and calls out to the person walking away. Bottom-left panel: the same woman in the denim jacket runs to catch up and holds out the wallet to them. Bottom-right panel: the person is surprised and grateful, bowing, while the same woman in the denim jacket smiles and waves it off.\n\nFRAMING: each panel is a wide full shot with generous empty margin around the subjects. Every character and every important object must be fully visible and well inside the panel borders — do NOT crop or cut off any head, body, limbs or objects at the panel edges.\n\nReminder: NO letters/kanji/numbers anywhere; NO glasses; the main character wears the EXACT SAME clothes in the EXACT SAME colors in all four panels; the same main character appears in every panel; use the warm natural webtoon art style throughout; tell an engaging story with a clear twist and resolution that reads without words. Professional quality, suitable for a Japanese speaking examination."
+  },
+  {
+    "id": "sjpt-7-035",
+    "part": 7,
+    "text": "下の4コマを見て、登場人物の行動や気持ちを説明しながら、ストーリーを日本語で話してください。",
+    "imageFile": "part7-035.png",
+    "theme": "축구장 — 지고 있던 시합에서 결정적 역전골을 넣어 환호",
+    "keywords": [
+      "サッカー",
+      "負ける",
+      "ゴール",
+      "逆転",
+      "喜ぶ"
+    ],
+    "story": {
+      "panel1": "소년이 축구장에서 지고 있어 긴장한 얼굴로 공을 몬다",
+      "panel2": "소년이 수비수들을 제치고 골대를 향해 돌파한다",
+      "panel3": "소년이 힘껏 슛을 날려 공이 골 그물에 꽂힌다",
+      "panel4": "역전골에 소년이 환호하고 팀원들이 달려와 얼싸안는다"
+    },
+    "imagePrompt": "A high-quality 4-panel comic strip in a clean 2x2 grid layout, thick black borders between the four panels, no speech bubbles.\n\nART STYLE (keep it consistent across all four panels): a polished modern Japanese anime / webtoon (manhwa) illustration style, like a clean professional 4-panel web-comic. Use warm, natural, gently saturated colors (appealing and clear — NOT neon, NOT dull grey/washed-out), soft cel shading with subtle gradients and gentle light highlights, clean medium-weight black outlines, and realistic natural body proportions (NOT chibi, NOT super-deformed). Faces are expressive with medium-large eyes but natural, never overly cartoonish. Backgrounds are detailed yet clean and softly lit. High-quality professional finish, with the exact same character design and coloring in every panel.\n\nABSOLUTELY NO TEXT ANYWHERE IN THE IMAGE: no Japanese kanji, no hiragana, no katakana, no Chinese characters, no English letters, no numbers, no words, no writing, no signboard text, no shop signs, no station names, no labels, no clock numbers, no logos. Any signs, boards, screens, calendars or posters that appear MUST be completely blank. Do not draw wall clocks unless a panel explicitly asks for one.\n\nSTORY CLARITY — THE MOST IMPORTANT RULE: the four panels must tell ONE continuous, engaging story with a clear setup, a problem or unexpected twist, rising tension, and a satisfying resolution — understandable with NO words at all, read in order top-left, top-right, bottom-left, bottom-right. Each panel must clearly follow from the previous one. The key object that drives the story MUST be clearly visible in every panel where it matters. The MAIN CHARACTER must appear in ALL FOUR panels so the viewer follows the same person through the whole story. Use clear body language, motion lines and strong facial expressions (surprise, panic, relief, joy). Keep the same location and background across panels unless a panel says otherwise.\n\nMAIN CHARACTER — must look EXACTLY THE SAME in all four panels (identical face, identical hairstyle and hair color, identical clothes and colors, identical accessories such as hat, bag, shoes; never add or remove them between panels). The character does NOT wear glasses in any panel: a Japanese boy about 12 with short black hair, a blue soccer jersey, white shorts and cleats.\n\nTop-left panel: on a soccer field, the boy in the blue soccer jersey dribbles the ball with a tense face, his team behind in the game. Top-right panel: the same boy in the blue soccer jersey breaks past defenders, charging toward the goal. Bottom-left panel: the same boy in the blue soccer jersey shoots hard and the ball slams into the back of the net. Bottom-right panel: the same boy in the blue soccer jersey cheers at the winning goal as teammates run over to hug him.\n\nFRAMING: each panel is a wide full shot with generous empty margin around the subjects. Every character and every important object must be fully visible and well inside the panel borders — do NOT crop or cut off any head, body, limbs or objects at the panel edges.\n\nReminder: NO letters/kanji/numbers anywhere; NO glasses; the main character wears the EXACT SAME clothes in the EXACT SAME colors in all four panels; the same main character appears in every panel; use the warm natural webtoon art style throughout; tell an engaging story with a clear twist and resolution that reads without words. Professional quality, suitable for a Japanese speaking examination."
   }
 ]
