@@ -1,14 +1,13 @@
-// POST /api/baoya/:action  (action = verify-purchase | start-exam | complete-exam)
-// Hobby 플랜 함수 개수(12) 제한 때문에 바오야 결제 3종을 동적 라우트 1개로 합침.
-// 클라이언트(tsc_backend.dart)의 호출 경로(/api/baoya/verify-purchase 등)는 그대로다.
+// POST /api/baoya-exam  { action: 'verify-purchase' | 'start-exam' | 'complete-exam', ... }
+// Hobby 플랜 함수 개수(12) 제한 + 동적 라우트가 vercel.json 재작성과 충돌하는 문제 때문에,
+// 바오야 결제 3종을 리터럴 단일 함수로 통합하고 body의 action 으로 분기한다.
 import { google } from 'googleapis';
 import { createHash } from 'node:crypto';
 import { FieldValue } from 'firebase-admin/firestore';
-import { verifyBaoyaToken, baoyaDb } from './_baoya-admin.js';
+import { verifyBaoyaToken, baoyaDb } from './baoya/_baoya-admin.js';
 
 const PACKAGE_NAME = process.env.BAOYA_ANDROID_PACKAGE_NAME || 'com.baoya.tsc';
 
-// package_model.dart 의 productId 와 일치해야 한다.
 const KNOWN_PRODUCT_IDS = new Set([
   'tsc_basic',
   'tsc_mini_plus',
@@ -16,7 +15,6 @@ const KNOWN_PRODUCT_IDS = new Set([
   'tsc_mock_exam',
 ]);
 
-// 사고 이탈 후 재개 허용 시간
 const RESUME_WINDOW_MS = 3 * 60 * 60 * 1000;
 
 let _publisher;
@@ -44,9 +42,8 @@ export default async function handler(req, res) {
     return res.status(405).json({ ok: false, error: 'Method not allowed' });
   }
 
-  const action = req.query.action;
+  const action = (req.body || {}).action;
 
-  // 신원 (세 액션 모두 IDToken 필수)
   let uid;
   try {
     uid = await verifyBaoyaToken(req);
@@ -126,7 +123,6 @@ async function startExam(req, res, uid) {
   const userRef = db.collection('users').doc(uid);
   const sessionsRef = userRef.collection('exam_sessions');
 
-  // 재개 가능한 진행중 세션 (복합색인 불필요 — equality 2개만 쿼리, 정렬·컷오프는 코드에서)
   const cutoff = Date.now() - RESUME_WINDOW_MS;
   const inProgSnap = await sessionsRef
     .where('productId', '==', productId)
