@@ -28,7 +28,7 @@ async function fetchSheet(range, apiKey) {
 function imageUrl(cell) {
   const s = String(cell || '').trim();
   if (!s) return null;
-  if (/^https?:\/\//i.test(s)) return s; // 이미 완성된 http URL은 그대로 통과
+  if (/^https?:\/\//i.test(s) || s.startsWith('/')) return s; // 완성 URL·상대경로(/sjpt/..)는 그대로 통과(클라이언트가 절대경로화)
   const m = s.match(/\/d\/([^/?]+)/) || s.match(/[?&]id=([^&]+)/);
   const id = m ? m[1] : (/^[\w-]{20,}$/.test(s) ? s : null);
   return id ? `https://lh3.googleusercontent.com/d/${id}=w1000` : null;
