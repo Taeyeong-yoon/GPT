@@ -1,21 +1,30 @@
-// GET /api/baoya-questions — 바오야(TSC) 6부 문제를 구글 시트(바오야_1부~6부)에서 읽어 제공.
-// 응답: { ok, parts: [{ part, questions: [{ id, text, imageUrl }] }] }
-// 클라이언트(question_service)가 파트별로 셔플·티어수만큼 추출하므로 여기선 풀 전체를 내려준다.
+// GET /api/baoya-questions — 바오야(TSC) 7부 문제 제공 (SJPT와 동일 7파트 쌍둥이).
+// 1부: 고정 4문항(자기소개). 2~7부: 구글 시트(바오야_2부~7부)에서 읽음.
+// 응답: { ok, parts: [{ part, questions: [{ id, text, imageUrl, theme?, keywords? }] }] }
+// 클라이언트(question_service)가 파트별로 셔플·티어수만큼 추출한다.
 const SHEETS_BASE = 'https://sheets.googleapis.com/v4/spreadsheets';
 const SHEET_ID    = process.env.GOOGLE_SHEETS_ID || '1jtfUtckNAAJJGLCQpUhR-J539Tk0i_OPz-jCV-HT4yY';
 
-// 파트 순서대로 시트 탭 이름
-const TABS = ['바오야_1부', '바오야_2부', '바오야_3부', '바오야_4부', '바오야_5부', '바오야_6부'];
-const IMAGE_PARTS = new Set([2, 3, 6]); // 이미지 있는 파트
+// 1부 고정 질문 4개 (SJPT 이름/주소/생일/취미의 중국어 쌍둥이)
+const PART1_FIXED = [
+  { id: 'baoya-1-name',     part: 1, text: '请问您叫什么名字？',      imageUrl: null },
+  { id: 'baoya-1-address',  part: 1, text: '您住在哪里？',            imageUrl: null },
+  { id: 'baoya-1-birthday', part: 1, text: '您的生日是什么时候？',    imageUrl: null },
+  { id: 'baoya-1-hobby',    part: 1, text: '您有什么爱好？',          imageUrl: null },
+];
+
+// 2~7부 시트 탭 이름
+const TABS = { 2: '바오야_2부', 3: '바오야_3부', 4: '바오야_4부', 5: '바오야_5부', 6: '바오야_6부', 7: '바오야_7부' };
+const IMAGE_PARTS = new Set([2, 3, 6, 7]); // 이미지 있는 파트
 
 async function fetchSheet(range, apiKey) {
   const url = `${SHEETS_BASE}/${SHEET_ID}/values/${encodeURIComponent(range)}?key=${apiKey}`;
   const res = await fetch(url);
-  if (!res.ok) throw new Error(`Sheets 오류: ${await res.text()}`);
+  if (!res.ok) throw new Error(`Sheets 오류(${range}): ${await res.text()}`);
   return (await res.json()).values || [];
 }
 
-// Drive 링크/파일ID → CORS 허용되는 lh3 CDN URL (외부 <img>·Flutter Image.network 로드 가능)
+// Drive 링크/파일ID → CORS 허용 lh3 CDN URL
 function imageUrl(cell) {
   const s = String(cell || '').trim();
   if (!s) return null;
@@ -24,12 +33,14 @@ function imageUrl(cell) {
   return id ? `https://lh3.googleusercontent.com/d/${id}=w1000` : null;
 }
 
-function parseTab(rows, partNum, hasImage) {
+function parseTab(rows, partNum) {
   if (rows.length < 2) return [];
   const h = rows[0].map((c) => c?.toString().toLowerCase().trim() || '');
   const textIdx = h.findIndex((c) => c.includes('text') || c.includes('question'));
   const idIdx = h.indexOf('id');
-  const imgIdx = hasImage ? h.findIndex((c) => c.includes('image')) : -1;
+  const imgIdx = h.findIndex((c) => c.includes('image'));
+  const themeIdx = h.findIndex((c) => c.includes('theme'));
+  const kwIdx = h.findIndex((c) => c.includes('keyword'));
   if (textIdx < 0) return [];
 
   const out = [];
@@ -38,11 +49,14 @@ function parseTab(rows, partNum, hasImage) {
     if (row.length <= textIdx) continue;
     const text = (row[textIdx] || '').toString().trim();
     if (!text) continue;
-    const id = idIdx >= 0 && row.length > idIdx && row[idIdx]
-      ? row[idIdx].toString()
-      : `t${partNum}_${i}`;
-    const img = imgIdx >= 0 && row.length > imgIdx ? row[imgIdx] : '';
-    out.push({ id, part: partNum, text, imageUrl: hasImage ? imageUrl(img) : null });
+    const id = idIdx >= 0 && row[idIdx] ? row[idIdx].toString() : `t${partNum}_${i}`;
+    const img = IMAGE_PARTS.has(partNum) && imgIdx >= 0 ? row[imgIdx] : '';
+    const q = { id, part: partNum, text, imageUrl: imageUrl(img) };
+    if (themeIdx >= 0 && row[themeIdx]) q.theme = row[themeIdx].toString().trim();
+    if (kwIdx >= 0 && row[kwIdx]) {
+      q.keywords = row[kwIdx].toString().split(/[,，、·]/).map((s) => s.trim()).filter(Boolean);
+    }
+    out.push(q);
   }
   return out;
 }
@@ -55,18 +69,15 @@ export default async function handler(req, res) {
   if (!apiKey) return res.status(500).json({ ok: false, error: { message: 'Sheets 키 미설정' } });
 
   try {
+    const partNums = [2, 3, 4, 5, 6, 7];
     const results = await Promise.all(
-      TABS.map((tab, i) => {
-        const partNum = i + 1;
-        const hasImage = IMAGE_PARTS.has(partNum);
-        const range = hasImage ? `${tab}!A:D` : `${tab}!A:C`;
-        return fetchSheet(range, apiKey).then((rows) => parseTab(rows, partNum, hasImage));
-      }),
+      partNums.map((p) => fetchSheet(`${TABS[p]}!A:E`, apiKey).then((rows) => parseTab(rows, p))),
     );
 
-    const parts = results
-      .map((questions, i) => ({ part: i + 1, questions }))
-      .filter((p) => p.questions.length > 0);
+    const parts = [{ part: 1, questions: PART1_FIXED }];
+    results.forEach((questions, i) => {
+      if (questions.length > 0) parts.push({ part: partNums[i], questions });
+    });
 
     res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
     return res.status(200).json({ ok: true, parts });
