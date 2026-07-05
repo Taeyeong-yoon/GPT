@@ -1,0 +1,69 @@
+name: tsc_baoya
+description: "TSC 중국어 말하기 연습 - 바오야"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+
+  # Firebase
+  firebase_core: ^3.6.0
+  firebase_auth: ^5.3.0
+  cloud_firestore: ^5.4.0
+
+  # State management
+  flutter_riverpod: ^2.5.1
+
+  # Navigation
+  go_router: ^14.2.0
+
+  # UI
+  flutter_screenutil: ^5.9.3
+  google_fonts: ^6.2.1
+  http: ^1.2.2
+  audioplayers: ^6.1.0
+  path_provider: ^2.1.4
+
+  # 마이크 녹음
+  record: ^6.0.0
+  permission_handler: ^11.3.1
+
+  # Google 로그인
+  google_sign_in: ^6.2.2
+
+  # 인앱결제
+  in_app_purchase: ^3.2.0
+  in_app_purchase_android: ^0.4.0
+
+  # 로컬 저장 (진행 스냅샷 · 결과 기록)
+  shared_preferences: ^2.3.0
+
+  # PDF 리포트 생성·저장·공유(시트) + QR
+  pdf: ^3.11.1
+  printing: ^5.13.2
+  barcode: ^2.2.9
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.14.3
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/pandas/bao_home.png"
+  min_sdk_android: 21
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/pandas/
+    - assets/config/

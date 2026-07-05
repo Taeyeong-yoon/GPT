@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "498949682642",
+    "project_id": "baoya-tsc",
+    "storage_bucket": "baoya-tsc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:498949682642:android:cf0be51dc81331a95e440b",
+        "android_client_info": {
+          "package_name": "com.baoya.tsc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "498949682642-gisg27ueaa2l8f87d28p7t2kpjtkccrl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.baoya.tsc",
+            "certificate_hash": "d8b643d19e98de171926562044df6a4553d03c06"
+          }
+        },
+        {
+          "client_id": "498949682642-2v92ih46029s86dfv8asru57mldglbsa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFd1oCjFjjvOn6x8RNxr8cpo5mO4kv1GY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "498949682642-2v92ih46029s86dfv8asru57mldglbsa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
