@@ -22,10 +22,15 @@ function sjptApp() {
   );
 }
 
-export async function verifySjptToken(req) {
+// 토큰 전체(uid·email 등)가 필요한 곳용. verifySjptToken은 uid만 돌려주는 얇은 래퍼.
+export async function verifySjptTokenDecoded(req) {
   const token = req.headers.authorization?.replace('Bearer ', '');
   if (!token) throw new Error('401');
-  const decoded = await getAuth(sjptApp()).verifyIdToken(token);
+  return getAuth(sjptApp()).verifyIdToken(token);
+}
+
+export async function verifySjptToken(req) {
+  const decoded = await verifySjptTokenDecoded(req);
   return decoded.uid;
 }
 
