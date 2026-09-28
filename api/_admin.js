@@ -4,7 +4,10 @@ import { getAuth } from 'firebase-admin/auth';
 import { getFirestore } from 'firebase-admin/firestore';
 
 export function getAdminApp() {
-  if (getApps().length > 0) return getApps()[0];
+  // getApps()[0] 이 아니라 기본 앱을 이름으로 찾는다 — 같은 인스턴스에 SJPT·바오야
+  // 이름 붙은 앱이 먼저 초기화돼 있으면 [0]이 엉뚱한 프로젝트가 될 수 있다.
+  const existing = getApps().find((a) => a.name === '[DEFAULT]');
+  if (existing) return existing;
   return initializeApp({
     credential: cert({
       projectId:   process.env.FIREBASE_PROJECT_ID,

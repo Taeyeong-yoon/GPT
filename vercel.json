@@ -2,10 +2,21 @@
   "outputDirectory": "build",
   "buildCommand": "node_modules/.bin/vite build",
   "functions": {
-    "api/gpt-feedback.js": { "maxDuration": 60 }
+    "api/gpt-feedback.js": {
+      "maxDuration": 60
+    },
+    "api/app.js": {
+      "maxDuration": 30
+    }
   },
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ]
 }

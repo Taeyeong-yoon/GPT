@@ -1,28 +1,10 @@
-// POST /api/sso — 네코짱 JLPT 앱 SSO: Firebase ID Token → Custom Token 교환
-import { initializeApp, cert, getApps } from 'firebase-admin/app';
+// action:'sso' — 네코짱 JLPT 앱 SSO: Firebase ID Token → Custom Token 교환. (라우트: /api/app)
 import { getAuth } from 'firebase-admin/auth';
+// 공용 헬퍼 사용 — 같은 인스턴스에 SJPT·바오야 앱이 함께 초기화돼 있어도
+// getApps()[0] 처럼 엉뚱한 프로젝트를 집지 않도록 JLPT 기본 앱을 명시적으로 쓴다.
+import { getAdminApp } from './_admin.js';
 
-function getAdminApp() {
-  if (getApps().length > 0) return getApps()[0];
-  return initializeApp({
-    credential: cert({
-      projectId:   process.env.FIREBASE_PROJECT_ID,
-      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-      privateKey:  process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-    }),
-  });
-}
-
-export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin',  '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  if (req.method === 'OPTIONS') return res.status(204).end();
-
-  if (req.method !== 'POST') {
-    return res.status(405).json({ ok: false, error: 'Method not allowed' });
-  }
-
+export async function handleSso(req, res) {
   const { idToken } = req.body || {};
   if (!idToken) {
     return res.status(400).json({ ok: false, error: 'idToken이 필요합니다.' });

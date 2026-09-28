@@ -24,10 +24,11 @@ export function AuthProvider({ children }) {
       // 보안을 위해 URL에서 즉시 제거
       window.history.replaceState({}, '', window.location.pathname);
 
-      fetch('/api/sso', {
+      // /api/sso 는 함수 개수 제한(12개) 때문에 /api/app 의 action:'sso' 로 합쳐졌다.
+      fetch('/api/app', {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify({ idToken }),
+        body:    JSON.stringify({ action: 'sso', idToken }),
       })
         .then(r => r.json())
         .then(data => {
