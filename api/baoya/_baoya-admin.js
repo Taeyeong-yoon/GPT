@@ -22,6 +22,11 @@ function baoyaApp() {
   );
 }
 
+// 공용 인증 헬퍼(_auth.js)가 다중 발급자 검증에 쓰는 Auth 인스턴스.
+export function baoyaAuth() {
+  return getAuth(baoyaApp());
+}
+
 export async function verifyBaoyaToken(req) {
   const token = req.headers.authorization?.replace('Bearer ', '');
   if (!token) throw new Error('401');

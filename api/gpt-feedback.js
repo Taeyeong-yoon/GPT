@@ -1,4 +1,6 @@
 // POST /api/gpt-feedback  — GPT-4o SJPT 채점 (1회 호출, JSON 강제)
+import { requireAuth } from './_auth.js';
+import { enforceDailyLimit } from './_ratelimit.js';
 const SYSTEM_PROMPT = `당신은 일본어 SJPT(Spoken Japanese Proficiency Test) 공인 채점관입니다.
 
 평가 기준 (각 0~25점, 합계 100점):
@@ -103,7 +105,16 @@ async function callGpt(messages, apiKey, model = 'gpt-4o') {
 }
 
 export default async function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return res.status(405).json({ ok: false, error: { code: 405, message: 'Method not allowed' } });
+  // 유료 API 보호: 인증된 사용자만 호출 가능(무인증 크레딧 소모 차단).
+  const caller = await requireAuth(req, res);
+  if (!caller) return;
+  if (!(await enforceDailyLimit(caller, 'feedback', res))) return;
+
 
   const { parts, level, mini = false } = req.body || {};
   if (!Array.isArray(parts) || parts.length === 0) {

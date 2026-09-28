@@ -1,7 +1,18 @@
 // POST /api/stt — OpenAI Whisper STT (직접 fetch 방식)
+import { requireAuth } from './_auth.js';
+import { enforceDailyLimit } from './_ratelimit.js';
 export default async function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST')
     return res.status(405).json({ ok: false, error: { message: 'Method not allowed' } });
+  // 유료 API 보호: 인증된 사용자만 호출 가능(무인증 크레딧 소모 차단).
+  const caller = await requireAuth(req, res);
+  if (!caller) return;
+  if (!(await enforceDailyLimit(caller, 'stt', res))) return;
+
 
   const { audio, mimeType = 'audio/webm' } = req.body || {};
   if (!audio)

@@ -22,6 +22,11 @@ function sjptApp() {
   );
 }
 
+// 공용 인증 헬퍼(_auth.js)가 다중 발급자 검증에 쓰는 Auth 인스턴스.
+export function sjptAuth() {
+  return getAuth(sjptApp());
+}
+
 // 토큰 전체(uid·email 등)가 필요한 곳용. verifySjptToken은 uid만 돌려주는 얇은 래퍼.
 export async function verifySjptTokenDecoded(req) {
   const token = req.headers.authorization?.replace('Bearer ', '');
