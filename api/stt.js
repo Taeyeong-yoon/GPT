@@ -15,7 +15,10 @@ export default async function handler(req, res) {
 
 
   // verbose:true → 이누짱 앱용. 세그먼트별 no_speech_prob 등을 그대로 돌려줘 앱이 환각을 걸러낸다.
-  const { audio, mimeType = 'audio/webm', verbose = false } = req.body || {};
+  const { audio, mimeType = 'audio/webm', verbose = false, language = 'ja' } = req.body || {};
+  // 일본어(웹·이누짱)·중국어(바오야)만 허용
+  if (!['ja', 'zh'].includes(language))
+    return res.status(400).json({ ok: false, error: { message: 'language는 ja 또는 zh' } });
   if (!audio)
     return res.status(400).json({ ok: false, error: { message: 'audio 필요' } });
 
@@ -33,7 +36,7 @@ export default async function handler(req, res) {
     const formData = new FormData();
     formData.append('file', new Blob([buffer], { type: mimeType }), `audio.${ext}`);
     formData.append('model', 'whisper-1');
-    formData.append('language', 'ja');
+    formData.append('language', language);
     if (verbose) {
       formData.append('temperature', '0');                 // 없는 말 지어내기 억제
       formData.append('response_format', 'verbose_json');

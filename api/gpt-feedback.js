@@ -2,6 +2,15 @@
 import { requireAuth } from './_auth.js';
 import { enforceDailyLimit } from './_ratelimit.js';
 import { INUCHAN_SYSTEM_PROMPT } from './_inuchan-grading-prompt.js';
+import { BAOYA_SYSTEM_PROMPT } from './_baoya-grading-prompt.js';
+
+// profile별 채점 지침. 앱에 있던 프롬프트를 서버로 옮겨 앱에서 OpenAI 키를 뺐다.
+//   pic: 7부 그림 명칭, lang: 7부 tip 예시 언어 — 각 앱이 쓰던 문구 그대로.
+const PROFILES = {
+  web:     { prompt: null, pic: '만화', lang: '일본어' },   // prompt=null → 아래 SYSTEM_PROMPT
+  inuchan: { prompt: INUCHAN_SYSTEM_PROMPT, pic: '만화', lang: '일본어' },
+  baoya:   { prompt: BAOYA_SYSTEM_PROMPT,   pic: '그림', lang: '중국어' },
+};
 const SYSTEM_PROMPT = `당신은 일본어 SJPT(Spoken Japanese Proficiency Test) 공인 채점관입니다.
 
 평가 기준 (각 0~25점, 합계 100점):
@@ -70,11 +79,11 @@ STT 변환 오인식에 대해 과도하게 감점하지 마세요.
 }`;
 }
 
-function buildUserMessage(parts, level) {
+function buildUserMessage(parts, level, pic = '만화') {
   const lines = [`응시 정보: 목표 레벨 - ${level || 'N3'}, 총 ${parts.length}문항\n`];
   for (const p of parts) {
     if (p.partNum === 7) {
-      lines.push(`[Part 7 — 4컷 만화 스토리 묘사]\n테마: ${p.theme || ''}\n핵심 키워드: ${(p.keywords || []).join(', ')}\nQ: ${p.question}\nA: ${p.answer?.trim() || '(무응답)'}\n`);
+      lines.push(`[Part 7 — 4컷 ${pic} 스토리 묘사]\n테마: ${p.theme || ''}\n핵심 키워드: ${(p.keywords || []).join(', ')}\nQ: ${p.question}\nA: ${p.answer?.trim() || '(무응답)'}\n`);
     } else {
       lines.push(`[Part ${p.partNum}]\nQ: ${p.question}\nA: ${p.answer?.trim() || '(무응답)'}\n`);
     }
@@ -117,7 +126,7 @@ export default async function handler(req, res) {
   if (!(await enforceDailyLimit(caller, 'feedback', res))) return;
 
 
-  // profile:'inuchan' -> 이누짱 앱 전용 지침(적합성 판정·한국어 강제). 기본은 웹(네코짱) 지침.
+  // profile: 'inuchan'(이누짱 앱) / 'baoya'(바오야 앱) / 없음(웹·네코짱).
   const { parts, level, mini = false, profile } = req.body || {};
   if (!Array.isArray(parts) || parts.length === 0) {
     return res.status(400).json({ ok: false, error: { code: 400, message: 'parts 배열이 필요합니다.' } });
@@ -126,7 +135,8 @@ export default async function handler(req, res) {
   if (parts.length > 80 || JSON.stringify(parts).length > 60000) {
     return res.status(413).json({ ok: false, error: { code: 413, message: '답변 데이터가 너무 큽니다.' } });
   }
-  const basePrompt = profile === 'inuchan' ? INUCHAN_SYSTEM_PROMPT : SYSTEM_PROMPT;
+  const prof = Object.hasOwn(PROFILES, profile ?? '') ? PROFILES[profile] : PROFILES.web;
+  const basePrompt = prof.prompt || SYSTEM_PROMPT;
 
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) return res.status(500).json({ ok: false, error: { code: 500, message: 'OpenAI 키 미설정' } });
@@ -137,12 +147,12 @@ export default async function handler(req, res) {
   // Part 7가 포함된 경우 표준 프롬프트에 보조 지침만 추가 (전체 부분 평가 기준은 유지)
   const part7 = parts.find(p => p.partNum === 7);
   const systemPrompt = part7
-    ? basePrompt + `\n\n【7부 추가 지침】7부는 4컷 만화 스토리 묘사 문제입니다.\n테마: ${part7.theme || ''}\n핵심 키워드: ${(part7.keywords || []).join('·')}\n- fluency: 4컷 전체 커버 여부를 최우선 평가 — 언급된 컷 수를 weakness 또는 strength에 명시\n- vocabulary: 위 핵심 키워드 활용도 반영 (동의어·유의어 인정)\n- part 7의 tip에는 반드시 더 자연스러운 일본어 서술 예시 1문장을 포함하세요`
+    ? basePrompt + `\n\n【7부 추가 지침】7부는 4컷 ${prof.pic} 스토리 묘사 문제입니다.\n테마: ${part7.theme || ''}\n핵심 키워드: ${(part7.keywords || []).join('·')}\n- fluency: 4컷 전체 커버 여부를 최우선 평가 — 언급된 컷 수를 weakness 또는 strength에 명시\n- vocabulary: 위 핵심 키워드 활용도 반영 (동의어·유의어 인정)\n- part 7의 tip에는 반드시 더 자연스러운 ${prof.lang} 서술 예시 1문장을 포함하세요`
     : basePrompt;
 
   const messages = [
     { role: 'system', content: systemPrompt },
-    { role: 'user',   content: buildUserMessage(parts, level) },
+    { role: 'user',   content: buildUserMessage(parts, level, prof.pic) },
   ];
 
   let raw = '';
