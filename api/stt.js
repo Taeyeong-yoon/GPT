@@ -14,7 +14,8 @@ export default async function handler(req, res) {
   if (!(await enforceDailyLimit(caller, 'stt', res))) return;
 
 
-  const { audio, mimeType = 'audio/webm' } = req.body || {};
+  // verbose:true → 이누짱 앱용. 세그먼트별 no_speech_prob 등을 그대로 돌려줘 앱이 환각을 걸러낸다.
+  const { audio, mimeType = 'audio/webm', verbose = false } = req.body || {};
   if (!audio)
     return res.status(400).json({ ok: false, error: { message: 'audio 필요' } });
 
@@ -24,7 +25,8 @@ export default async function handler(req, res) {
 
   try {
     const buffer = Buffer.from(audio, 'base64');
-    const ext    = mimeType.includes('mp4') ? 'mp4'
+    const ext    = mimeType.includes('m4a') ? 'm4a'
+                 : mimeType.includes('mp4') ? 'mp4'
                  : mimeType.includes('ogg') ? 'ogg'
                  : 'webm';
 
@@ -32,6 +34,10 @@ export default async function handler(req, res) {
     formData.append('file', new Blob([buffer], { type: mimeType }), `audio.${ext}`);
     formData.append('model', 'whisper-1');
     formData.append('language', 'ja');
+    if (verbose) {
+      formData.append('temperature', '0');                 // 없는 말 지어내기 억제
+      formData.append('response_format', 'verbose_json');
+    }
 
     const response = await fetch('https://api.openai.com/v1/audio/transcriptions', {
       method:  'POST',
@@ -45,7 +51,11 @@ export default async function handler(req, res) {
     }
 
     const data = await response.json();
-    return res.status(200).json({ ok: true, transcript: data.text || '' });
+    return res.status(200).json({
+      ok: true,
+      transcript: data.text || '',
+      ...(verbose ? { segments: data.segments || [] } : {}),
+    });
   } catch (e) {
     return res.status(502).json({ ok: false, error: { message: e.message } });
   }

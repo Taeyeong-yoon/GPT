@@ -1,6 +1,7 @@
 // POST /api/gpt-feedback  — GPT-4o SJPT 채점 (1회 호출, JSON 강제)
 import { requireAuth } from './_auth.js';
 import { enforceDailyLimit } from './_ratelimit.js';
+import { INUCHAN_SYSTEM_PROMPT } from './_inuchan-grading-prompt.js';
 const SYSTEM_PROMPT = `당신은 일본어 SJPT(Spoken Japanese Proficiency Test) 공인 채점관입니다.
 
 평가 기준 (각 0~25점, 합계 100점):
@@ -116,10 +117,16 @@ export default async function handler(req, res) {
   if (!(await enforceDailyLimit(caller, 'feedback', res))) return;
 
 
-  const { parts, level, mini = false } = req.body || {};
+  // profile:'inuchan' -> 이누짱 앱 전용 지침(적합성 판정·한국어 강제). 기본은 웹(네코짱) 지침.
+  const { parts, level, mini = false, profile } = req.body || {};
   if (!Array.isArray(parts) || parts.length === 0) {
     return res.status(400).json({ ok: false, error: { code: 400, message: 'parts 배열이 필요합니다.' } });
   }
+  // 채점과 무관한 대량 텍스트로 GPT를 돌리는 것 방지(정상 시험은 수십 문항·답변 수백 자).
+  if (parts.length > 80 || JSON.stringify(parts).length > 60000) {
+    return res.status(413).json({ ok: false, error: { code: 413, message: '답변 데이터가 너무 큽니다.' } });
+  }
+  const basePrompt = profile === 'inuchan' ? INUCHAN_SYSTEM_PROMPT : SYSTEM_PROMPT;
 
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) return res.status(500).json({ ok: false, error: { code: 500, message: 'OpenAI 키 미설정' } });
@@ -130,8 +137,8 @@ export default async function handler(req, res) {
   // Part 7가 포함된 경우 표준 프롬프트에 보조 지침만 추가 (전체 부분 평가 기준은 유지)
   const part7 = parts.find(p => p.partNum === 7);
   const systemPrompt = part7
-    ? SYSTEM_PROMPT + `\n\n【7부 추가 지침】7부는 4컷 만화 스토리 묘사 문제입니다.\n테마: ${part7.theme || ''}\n핵심 키워드: ${(part7.keywords || []).join('·')}\n- fluency: 4컷 전체 커버 여부를 최우선 평가 — 언급된 컷 수를 weakness 또는 strength에 명시\n- vocabulary: 위 핵심 키워드 활용도 반영 (동의어·유의어 인정)\n- part 7의 tip에는 반드시 더 자연스러운 일본어 서술 예시 1문장을 포함하세요`
-    : SYSTEM_PROMPT;
+    ? basePrompt + `\n\n【7부 추가 지침】7부는 4컷 만화 스토리 묘사 문제입니다.\n테마: ${part7.theme || ''}\n핵심 키워드: ${(part7.keywords || []).join('·')}\n- fluency: 4컷 전체 커버 여부를 최우선 평가 — 언급된 컷 수를 weakness 또는 strength에 명시\n- vocabulary: 위 핵심 키워드 활용도 반영 (동의어·유의어 인정)\n- part 7의 tip에는 반드시 더 자연스러운 일본어 서술 예시 1문장을 포함하세요`
+    : basePrompt;
 
   const messages = [
     { role: 'system', content: systemPrompt },
