@@ -1,5 +1,6 @@
 // Google TTS — /api/tts 경유, 버튼 클릭(user gesture) 시에만 호출
 
+import { authFetch } from './authFetch';
 const FEMALE_VOICE = 'ja-JP-Neural2-B';
 const MALE_VOICE   = 'ja-JP-Neural2-C';
 
@@ -14,7 +15,7 @@ const FEMALE_SPEAKERS = new Set([
 ]);
 
 async function fetchAudio(text, voice) {
-  const res = await fetch('/api/tts', {
+  const res = await authFetch('/api/tts', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ text, voice }),
